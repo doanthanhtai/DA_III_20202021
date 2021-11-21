@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/layout_height_180dp"
+    android:background="@color/teal_700"
+    android:padding="@dimen/pading_20dp"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/navigation_image_avatar"
+        android:layout_width="@dimen/layout_width_80dp"
+        android:layout_height="@dimen/layout_height_80dp"
+        android:src="@drawable/ic_user_120px"
+        android:scaleType="centerCrop"/>
+    <TextView
+        android:id="@+id/navigation_tv_email"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_18sp"
+        android:text="@string/all_email_example"/>
+</LinearLayout>

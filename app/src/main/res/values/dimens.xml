@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  pading for layout  -->
+    <dimen name="pading_10dp" >10dp</dimen>
+    <dimen name="pading_20dp" >20dp</dimen>
+    <dimen name="pading_25dp" >25dp</dimen>
+    <dimen name="pading_5dp" >5dp</dimen>
+
+    <!--  margin for view  -->
+    <dimen name="margin_5dp">5dp</dimen>
+    <dimen name="margin_10dp" >10dp</dimen>
+    <dimen name="margin_20dp" >20dp</dimen>
+    <dimen name="margin_30dp" >30dp</dimen>
+
+    <!--  text size  -->
+    <dimen name="text_size_8sp">8sp</dimen>
+    <dimen name="text_size_14sp">14sp</dimen>
+    <dimen name="text_size_16sp">16sp</dimen>
+    <dimen name="text_size_18sp">18sp</dimen>
+    <dimen name="text_size_24sp">24sp</dimen>
+    <dimen name="text_size_26sp">26sp</dimen>
+
+    <!--  radius background  -->
+    <dimen name="radius_50dp">50dp</dimen>
+    <dimen name="radius_10dp">10dp</dimen>
+    <dimen name="radius_5dp">5dp</dimen>
+
+    <!--  with-height -->
+    <dimen name="width_1dp">1dp</dimen>
+    <dimen name="height_1dp">1dp</dimen>
+    <dimen name="width_80dp">80dp</dimen>
+    <dimen name="height_30dp">30dp</dimen>
+    <dimen name="min_height_48dp">48dp</dimen>
+    <dimen name="layout_width_80dp">80dp</dimen>
+    <dimen name="layout_height_80dp">80dp</dimen>
+    <dimen name="layout_height_180dp">180dp</dimen>
+    <dimen name="width_200dp">200dp</dimen>
+    <dimen name="height_200dp">200dp</dimen>
+
+</resources>

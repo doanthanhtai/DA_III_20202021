@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/bnav_lake"
+        android:title="@string/bnavigation_menu_lake"
+        android:icon="@drawable/ic_lake_64px"/>
+    <item android:id="@+id/bnav_diet"
+        android:title="@string/bnavigation_menu_diet"
+        android:icon="@drawable/ic_diet_64px"/>
+    <item android:id="@+id/bnav_product"
+        android:title="@string/bnavigation_menu_product"
+        android:icon="@drawable/ic_product_64px"/>
+    <item android:id="@+id/bnav_statistics"
+        android:title="@string/bnavigation_menu_statistics"
+        android:icon="@drawable/ic_chart_64px"/>
+
+</menu>

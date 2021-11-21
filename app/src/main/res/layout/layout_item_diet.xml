@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_diet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/itemdiet_layout_ma"
+        android:layout_width="@dimen/width_80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/margin_10dp"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/itemdiet_tv_ma"
+            android:layout_width="@dimen/width_80dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/teal_700"
+            android:textSize="@dimen/text_size_26sp"
+            android:gravity="center"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/itemdiet_tv_trangthai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/itemdiet_layout_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/itemdiet_tv_time"
+        android:layout_toEndOf="@+id/itemdiet_layout_ma"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/itemdiet_tv_tensanpham"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/itemdiet_tv_khunggioan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/itemdiet_tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/itemdiet_switch_feed"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/margin_10dp" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/itemdiet_switch_feed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:paddingStart="@dimen/pading_20dp"
+        android:paddingEnd="@dimen/margin_10dp"/>
+</RelativeLayout>

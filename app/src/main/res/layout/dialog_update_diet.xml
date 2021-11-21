@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="?dialogPreferredPadding"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="?dialogPreferredPadding">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/dialogupdatediet_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_24sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/dialogupdatediet_spr_sanpham"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:padding="@dimen/pading_5dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/pading_5dp"
+            android:text="@string/dialogupdatediet_quantity"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18sp" />
+
+        <EditText
+            android:id="@+id/dialognewlake_edt_luong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@null"
+            android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+            android:hint="@null"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/pading_10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/pading_5dp"
+            android:text="@string/dialogupdatediet_longtime"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18sp" />
+
+        <EditText
+            android:id="@+id/dialognewlake_edt_longtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@null"
+            android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+            android:hint="@null"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/pading_10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialogupdatediet_layout_itemtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dialogupdatediet_rcv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/dialogapdatediet_img_timepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@color/white"
+            android:contentDescription="@string/signin_image_description"
+            android:src="@drawable/ic_add_48px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialogupdatediet_btn_cancel"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@color/teal_700"
+            android:text="@string/all_button_cancel_text"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/dialogupdatediet_btn_save"
+            style="?android:attr/buttonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/pading_10dp"
+            android:layout_weight="2"
+            android:background="@color/teal_700"
+            android:text="@string/all_button_save_text"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

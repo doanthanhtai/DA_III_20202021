@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/product_enterquantity"
+        android:title="@string/producttoolbar_menu_new"
+        android:icon="@drawable/ic_enter_48px"
+        app:showAsAction="always"/>
+    <item android:id="@+id/product_new"
+        android:title="@string/producttoolbar_menu_new"
+        android:icon="@drawable/ic_new_product_48px"
+        app:showAsAction="always"/>
+</menu>

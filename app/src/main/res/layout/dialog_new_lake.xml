@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="?dialogPreferredPadding"
+    android:layout_margin="?dialogPreferredPadding"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/dialognewlake_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/dialognewlake_edt_ma_ao"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:padding="@dimen/pading_10dp"
+        android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+        android:inputType="text"
+        android:autofillHints="@null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/all_maao_hint" />
+
+    <EditText
+        android:id="@+id/dialognewlake_edt_ten_ao"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:padding="@dimen/pading_10dp"
+        android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+        android:inputType="text"
+        android:autofillHints="@null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/all_tenao_hint" />
+
+    <EditText
+        android:id="@+id/dialognewlake_edt_mota"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:padding="@dimen/pading_10dp"
+        android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+        android:inputType="textMultiLine"
+        android:autofillHints="@null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/all_mota_hint"
+        android:lines="10"
+        android:minLines="5"
+        android:gravity="top|start"
+        android:maxLines="15"/>
+
+    <LinearLayout
+        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/all_ngaytao_text"/>
+        <TextView
+            android:id="@+id/dialognewlake_tv_ngaytao"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/dialognewlake_btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:background="@color/teal_700"
+            style="?android:attr/buttonBarStyle"
+            android:text="@string/all_button_cancel_text"/>
+        <Button
+            android:id="@+id/dialognewlake_btn_add"
+            android:layout_marginStart="@dimen/pading_10dp"
+            android:background="@color/teal_700"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonStyle"
+            android:text="@string/all_button_add_text"/>
+    </LinearLayout>
+</LinearLayout>

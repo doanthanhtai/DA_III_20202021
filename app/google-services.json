@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "955933707956",
+    "project_id": "tomtep-d2007",
+    "storage_bucket": "tomtep-d2007.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955933707956:android:0179703b947f609f9291e1",
+        "android_client_info": {
+          "package_name": "com.example.tomtep"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "955933707956-kj4s7ht04cmfaimlmrcuu5hp0ae7imvt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tomtep",
+            "certificate_hash": "e9e88f2f2c27daa0559a1e3d6fe63de001724e2b"
+          }
+        },
+        {
+          "client_id": "955933707956-8go0lmca3nf0gt75um9sell6r34rktvl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEFkwOGj71SpUitkeNzCwb7SsioUVR07c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "955933707956-8go0lmca3nf0gt75um9sell6r34rktvl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

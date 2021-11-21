@@ -1,0 +1,108 @@
+<resources>
+
+    <string name="all_error_emailinvalid">Email sai định dạng!</string>
+    <string name="all_error_passwordinvalid">Mật khẩu quá ngắn!</string>
+    <string name="all_error_emailempty">Vui lòng nhập Email!</string>
+    <string name="all_error_passwordempty">Vui lòng nhập mật khẩu!</string>
+    <string name="all_error_confirmpasswordempty">Vui lòng nhập lại mật khẩu!</string>
+    <string name="all_error_confirmpasswordinvalid">Không trùng khớp!</string>
+
+    <string name="all_email_hint">Email</string>
+    <string name="all_email_announcement">Địa chỉ email không tồn tại!</string>
+    <string name="all_password_hint">Mật khẩu</string>
+    <string name="all_confirm_password_hint">Nhập lại mật khẩu</string>
+    <string name="all_password_announcement">Mật khẩu không chính xác!</string>
+    <string name="all_email_example">dttai1800732@student.ctuet.edu.vn</string>
+
+    <string name="all_maao_hint">Mã ao</string>
+    <string name="all_tenao_hint">Tên ao</string>
+    <string name="all_mota_hint">Mô tả ao</string>
+    <string name="all_ngaytao_text">Ngày tạo: </string>
+
+    <string name="all_message_confirmresetpassword">Bạn có muốn đặt lại mật khẩu!</string>
+    <string name="all_button_agree_text">Đồng ý</string>
+    <string name="all_button_cancel_text">Đóng</string>
+    <string name="all_toast_sentpasswordresetemail">Vui lòng kiểm tra hộp thư của email!</string>
+    <string name="all_toast_invaled">Thông tin không hợp lệ!</string>
+    <string name="all_toast_lackofinformation">Vui lòng nhập đầy đủ thông tin!</string>
+
+    <string name="all_title_dialogconfirmdelete">Xác nhận xóa</string>
+
+
+    <string name="app_name">TOMTEP</string>
+    <string name="signin_image_description">Logo app</string>
+    <string name="signin_button_signin_text">Đăng nhập</string>
+    <string name="signin_textview_reset_password">Đặt lại mật khẩu?</string>
+    <string name="signin_textview_notaccount">Bạn chưa có tài khoản?</string>
+    <string name="signin_textview_signup">Đăng ký</string>
+
+    <string name="signup_button_signup_text">Đăng ký</string>
+    <string name="signup_textview_hadaccount">Bạn đã có tài khoản?</string>
+    <string name="signup_textview_signin">Đăng nhập</string>
+    <string name="signup_textview_title">ĐĂNG KÝ</string>
+<!--    <string name="signup_toast_fail">Email đã tồn tại!.</string>-->
+    <string name="signup_toast_successful">Tạo tài khoản thành công!</string>
+    <string name="signup_title_dialogcomfirmresetpassword">Email đã tồn tại.</string>
+
+
+    <string name="resetpassword_button_reset_text">Đặt lại mật khẩu</string>
+    <string name="resetpassword_textview_note">\tChú ý!\nHãy nhập địa chỉ Email tài khoản của bạn và nhấn nút ĐẶT LẠI MẬT KHẨU.\nĐường dẫn đặt lại mật khẩu sẽ được gửi đến địa chỉ Email được cung cấp ở trên.\nHãy mở hộp thư đến của Email trên và truy cập vào đường dẫn trong hộp thư để đặt lại mật khẩu.\nSau đó hãy quay lại ứng dụng này và Đăng nhập với mật khẩu mới.</string>
+    <string name="resetpassword_textview_title">ĐẶT LẠI MẬT KHẨU</string>
+    <string name="resetpassword_button_back_text">Quay lại Đăng nhập</string>
+    <string name="resetpassword_toast_sendemailcomplete">Đường dẫn đặt lại mật khẩu mới đã được gửi đến địa chỉ Email trên,vui lòng kiểm tra hộp thư đến của Emai!</string>
+    <string name="all_toast_emailinexist">Địa chỉ email không tồn tại!</string>
+    <string name="signin_toast_fail">Email hoặc mật khẩu không chính xác!</string>
+
+    <string name="main_navigation_drawer_open">Open navigation drawer</string>
+    <string name="main_navigation_drawer_close">Close navigation drawer</string>
+    <string name="resetpassword_toast_emailinexist">Email không tồn tại!</string>
+
+    <string name="changepassword_textview_title">ĐỔI MẬT KHẨU</string>
+    <string name="changepassword_button_change_text">ĐỔI MẬT KHẨU MỚI</string>
+    <string name="changepassword_toast_successful">Cập nhật mật khẩu thành công!</string>
+    <string name="changepassword_toast_fail">Cập nhật mật khẩu thất bại!</string>
+    <string name="main_message_confirmdeleteaccount">"Bạn chắc chắn rằng muốn xóa tài khoản "</string>
+    <string name="main_toast_deleteaccountsuccess">Tài khoan đã được xóa thành công!</string>
+    <string name="main_toast_deleteaccountfail">Xóa tài khoản thất bại!</string>
+
+    <string name="navigation_menu_deleteaccount">Xóa tài khoản</string>
+    <string name="navigation_menu_changepassword">Đổi mật khẩu</string>
+    <string name="navigation_menu_signuot">Đăng xuất</string>
+
+    <string name="bnavigation_menu_lake">Ao</string>
+    <string name="bnavigation_menu_diet">Chế độ ăn</string>
+    <string name="bnavigation_menu_product">Sản phẩm</string>
+    <string name="bnavigation_menu_statistics">Thống kê</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="laketoolbar_menu_new">Ao mới</string>
+    <string name="producttoolbar_menu_new">Sản phẩm mới</string>
+    <string name="itemlake_imagechange_description">Icon change lake</string>
+
+
+    <string name="dialognewlake_title">THÊM AO MỚI</string>
+    <string name="all_button_add_text">Thêm</string>
+    <string name="all_title_confirmaction">Xác nhận thao tác</string>
+    <string name="all_message_confirmactioncancel">Hãy chắc rằng mọi thông tin mà bạn đã nhập sẽ bị hủy bỏ.</string>
+    <string name="newlake_toast_canceled">Bạn đã hủy bỏ thao tác thêm Ao mới</string>
+    <string name="newlake_toast_successful">Thêm ao thành công.</string>
+    <string name="lakefragment_message_confirmdelete">"Đồng ý xóa "</string>
+    <string name="lakefragment_toast_deletesucces">Xóa ao nuôi thành công!</string>
+
+    <string name="dialogupdatelake_title">CẬP NHẬT THÔNG TIN AO</string>
+    <string name="all_button_update_text">Cập nhật</string>
+    <string name="all_toast_updateinfomationsuccess">Cập thông tin thành công</string>
+    <string name="updatelake_toast_canceled">Bạn đã hủy thao tác cập nhật thông tin ao</string>
+    <string name="dialogupdatediet_title">CẬP NHẬT CHẾ ĐỘ ĂN</string>
+    <string name="dialogupdatediet_quantity">Khối lượng cho ăn</string>
+    <string name="all_button_save_text">Lưu lại</string>
+    <string name="all_title_annoucement">Thông báo</string>
+    <string name="updatedietdialog_message_notfoundproduct">Bạn chưa có sản phẩm nào trong kho.\nHãy thêm sản phẩm mới vào kho để có thể cập nhật cho Chế độ ăn.</string>
+    <string name="itemtime_image_description">Image remove time</string>
+    <string name="dialogupdatediet_toast_quantityempty">Vui lòng nhập lượng cho cho ăn.</string>
+    <string name="dialogupdatediet_longtime">Thời gian cho ăn(phút)</string>
+    <string name="dialogupdatediet_toast_longtimeempty">Vui lòng nhập thời gian cho ăn.</string>
+
+
+</resources>

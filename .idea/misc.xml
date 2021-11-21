@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/drawable/all_custom_email_icon_24.xml" value="0.22205128205128205" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/drawable/all_custom_lock_icon_24.xml" value="0.22205128205128205" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/drawable/bc_rectangle_cyan_radius10dp_1dp_black.xml" value="0.1675925925925926" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/drawable/bc_rectangle_cyan_radius5dp_1dp_black.xml" value="0.1675925925925926" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/drawable/bc_rectangle_teal700_radius50dp_1dp_teal700.xml" value="0.22205128205128205" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/drawable/bc_rectangle_white_1dp_black_orange_focused.xml" value="0.22552083333333334" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/drawable/bc_rectangle_white_radius10dp_1dp_black.xml" value="0.22205128205128205" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/drawable/bc_rectangle_white_radius50dp_1dp_black_orange_focused.xml" value="0.17407407407407408" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/drawable/ic_lock_24.xml" value="0.22205128205128205" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/drawable/ic_lock_focused_24.xml" value="0.1" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/activity_change_password.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/activity_expand_lake.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/activity_sign_in.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/activity_sign_up.xml" value="0.18" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/activity_splash.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/all_layout_header_navigation.xml" value="0.25" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/all_layout_headernavigation.xml" value="0.22" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/dialog_new_lake.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/dialog_update_lake.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/fragment_diet.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/fragment_lake.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/fragment_product.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/fragment_statistics.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/layout_item_diet.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/layout/layout_item_lake.xml" value="0.33" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/menu/diet_toolbar_menu.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/menu/lake_toolbar_menu.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/menu/navigation_menu.xml" value="0.209375" />
+        <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/menu/product_toolbar_menu.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/dialog_new_lake.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/dialog_update_diet.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/item_time.xml" value="0.5" />
+        <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/layout_item_diet.xml" value="0.209375" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
