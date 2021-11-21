@@ -52,7 +52,9 @@ public class LakeFragment extends Fragment implements IClickItemLakeListener {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Ao ao = snapshot.getValue(Ao.class);
-                assert ao != null;
+                if (ao == null){
+                    return;
+                }
                 if (!ao.isDaXoa()) {
                     aos.add(snapshot.getValue(Ao.class));
                     lakeAdapter.notifyItemChanged(aos.size() - 1);

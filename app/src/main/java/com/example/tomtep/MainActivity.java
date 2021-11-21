@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,10 +19,14 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.tomtep.adapter.MainViewPagerAdapter;
 import com.example.tomtep.dialog.NewLakeDialog;
+import com.example.tomtep.dialog.NewProductDailog;
 import com.example.tomtep.model.Ao;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -119,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.lake_new) {
             new NewLakeDialog(this).show();
         } else if (id == R.id.product_new) {
-
+            new NewProductDailog(this).show();
         } else if (id == R.id.product_enterquantity) {
 
         }

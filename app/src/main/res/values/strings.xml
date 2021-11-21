@@ -100,9 +100,19 @@
     <string name="all_title_annoucement">Thông báo</string>
     <string name="updatedietdialog_message_notfoundproduct">Bạn chưa có sản phẩm nào trong kho.\nHãy thêm sản phẩm mới vào kho để có thể cập nhật cho Chế độ ăn.</string>
     <string name="itemtime_image_description">Image remove time</string>
-    <string name="dialogupdatediet_toast_quantityempty">Vui lòng nhập lượng cho cho ăn.</string>
+    <string name="dialogupdatediet_toast_quantityempty">Vui lòng nhập lượng cho ăn.</string>
     <string name="dialogupdatediet_longtime">Thời gian cho ăn(phút)</string>
     <string name="dialogupdatediet_toast_longtimeempty">Vui lòng nhập thời gian cho ăn.</string>
+    <string name="dialognewproduct_title">THÊM SẢN PHẨM MỚI</string>
+    <string name="all_masanpham_hint">Mã sản phẩm</string>
+    <string name="all_tensanpham_hint">Tên sản phẩm</string>
+    <string name="all_tenncc_hint">Tên nhà cung cấp</string>
+    <string name="all_gianhap_hint">Giá nhập(VND),tính trên đơn vị dùng</string>
+    <string name="updatedietdialog_message_notfounddonvi">Không tìm thấy Đơn vị tính cho sản phẩm.\nHãy liên hệ : dttai1800732@student.ctuet.edu.vn để đươc hỗ trợ.</string>
+    <string name="dialognewproduct_text_donvidung">Chọn vị dùng cho sản phẩm.</string>
+    <string name="dialognewproduct_toast_donvidunginvalid">Đơn vị dùng không hợp lệ</string>
+    <string name="dialognewproduct_toast_gianhapinvalid">Vui lòng nhập giá nhập của sản phẩm hợp lệ</string>
+    <string name="newproduct_succesful">Thêm sản phẩm thành công</string>
 
 
 </resources>

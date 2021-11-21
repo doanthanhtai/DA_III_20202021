@@ -35,9 +35,14 @@
         <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/menu/navigation_menu.xml" value="0.209375" />
         <entry key="..\:/OneDrive/Can Tho University Of Technology/HK_7/DA_III_20212022/TOMTEP/app/src/main/res/menu/product_toolbar_menu.xml" value="0.209375" />
         <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/dialog_new_lake.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/dialog_new_product.xml" value="0.209375" />
         <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/dialog_update_diet.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/fragment_diet.xml" value="0.20615384615384616" />
+        <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/fragment_product.xml" value="0.209375" />
         <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/item_time.xml" value="0.5" />
         <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/layout_item_diet.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/layout_item_lake.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/layout_item_product.xml" value="0.33" />
       </map>
     </option>
   </component>

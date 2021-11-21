@@ -1,73 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/item_lake"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/itemlake_layout_ma"
-        android:layout_width="@dimen/width_80dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:gravity="center"
-        android:layout_marginStart="@dimen/margin_10dp"
-        android:layout_centerVertical="true"
-        android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/item_lake"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/itemlake_tv_ma"
+        <LinearLayout
+            android:id="@+id/itemlake_layout_ma"
             android:layout_width="@dimen/width_80dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/teal_700"
-            android:textSize="@dimen/text_size_26sp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_10dp"
             android:gravity="center"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/itemlake_tv_trangthai"
+            <TextView
+                android:id="@+id/itemlake_tv_ma"
+                android:layout_width="@dimen/width_80dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/teal_700"
+                android:textSize="@dimen/text_size_26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/itemlake_tv_trangthai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/itemlake_tv_enviromentdetail"
+            android:layout_toEndOf="@+id/itemlake_layout_ma"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/itemlake_tv_ten"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/itemlake_tv_ngaytao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14sp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/itemlake_tv_enviromentdetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:background="@color/white"
+            android:textColor="@color/orange"
             android:textSize="@dimen/text_size_14sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/itemlake_tv_enviromentdetail"
-        android:layout_toEndOf="@+id/itemlake_layout_ma"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/itemlake_tv_ten"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_10dp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/itemlake_tv_ngaytao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_10dp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_14sp"
-            android:textStyle="italic" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/itemlake_tv_enviromentdetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:background="@color/white"
-        android:layout_marginEnd="@dimen/margin_10dp"
-        android:textColor="@color/orange"
-        android:textSize="@dimen/text_size_14sp"/>
-</RelativeLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

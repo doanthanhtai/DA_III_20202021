@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="?dialogPreferredPadding"
+    android:layout_margin="?dialogPreferredPadding"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/dialognewproduct_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/dialognewproduct_edt_masanpham"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:padding="@dimen/pading_10dp"
+        android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+        android:inputType="text"
+        android:autofillHints="@null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/all_masanpham_hint" />
+
+    <EditText
+        android:id="@+id/dialognewproduct_edt_tensanpham"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:padding="@dimen/pading_10dp"
+        android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+        android:inputType="text"
+        android:autofillHints="@null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/all_tensanpham_hint" />
+    <EditText
+        android:id="@+id/dialognewproduct_edt_tenncc"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:padding="@dimen/pading_10dp"
+        android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+        android:inputType="text"
+        android:autofillHints="@null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/all_tenncc_hint" />
+
+    <Spinner
+        android:id="@+id/dialognewproduct_spr_donvi"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:padding="@dimen/pading_5dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <EditText
+        android:id="@+id/dialognewproduct_edt_gianhap"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:padding="@dimen/pading_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="@null"
+        android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+        android:hint="@string/all_gianhap_hint"
+        android:inputType="numberDecimal"/>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/dialognewproduct_btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:background="@color/teal_700"
+            style="?android:attr/buttonBarStyle"
+            android:text="@string/all_button_cancel_text"/>
+        <Button
+            android:id="@+id/dialognewproduct_btn_add"
+            android:layout_marginStart="@dimen/pading_10dp"
+            android:background="@color/teal_700"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonStyle"
+            android:text="@string/all_button_add_text"/>
+    </LinearLayout>
+</LinearLayout>

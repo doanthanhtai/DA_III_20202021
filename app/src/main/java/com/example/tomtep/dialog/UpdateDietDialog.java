@@ -162,7 +162,7 @@ public class UpdateDietDialog extends Dialog {
         layoutParams.gravity = Gravity.CENTER;
         window.setAttributes(layoutParams);
 
-        edtSoLuong = findViewById(R.id.dialognewlake_edt_luong);
+        edtSoLuong = findViewById(R.id.dialogupdatediet_edt_luong);
         edtLongTime = findViewById(R.id.dialognewlake_edt_longtime);
         sprSanPham = findViewById(R.id.dialogupdatediet_spr_sanpham);
         imgThemGio = findViewById(R.id.dialogapdatediet_img_timepicker);

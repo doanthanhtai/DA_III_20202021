@@ -52,7 +52,7 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder
             holder.tvKhungGioAn.setText("[....]");
         }
 
-        setCheckedSwitch(holder.switchFeed, cheDoAn.isTrangThai());
+        holder.switchFeed.setChecked(cheDoAn.isTrangThai());
         holder.relativeLayout.setOnClickListener(v -> iClickItemDietListener.onClick(cheDoAn));
         holder.relativeLayout.setOnLongClickListener(v -> {
             iClickItemDietListener.onLongClick(ao);
@@ -65,10 +65,6 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder
         String idCurrentUser = FirebaseAuth.getInstance().getUid();
         assert idCurrentUser != null;
         FirebaseDatabase.getInstance().getReference("TaiKhoan").child(idCurrentUser).child("aos").child(ao.getId()).child("cheDoAn").child("trangThai").setValue(trangThai);
-    }
-
-    private void setCheckedSwitch(SwitchCompat switchCompat, boolean trangThai) {
-        switchCompat.setChecked(trangThai);
     }
 
     private String getTrangThaiCheDoAn(boolean trangThai) {

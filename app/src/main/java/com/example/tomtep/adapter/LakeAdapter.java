@@ -53,7 +53,7 @@ public class LakeAdapter extends RecyclerView.Adapter<LakeAdapter.LakeViewHolder
 
     private String getChiSoMoiTruongMoiNhat(Ao ao) {
         List<LichSuMoiTruong> lichSuMoiTruongs = ao.getLichSuMoiTruongs();
-        if (lichSuMoiTruongs == null){
+        if (lichSuMoiTruongs == null) {
             return "pH:7 Độ mặn:2/1000 oXy:3mlg";
         }
         LichSuMoiTruong lichSuMoiTruong = lichSuMoiTruongs.get(lichSuMoiTruongs.size() - 1);
@@ -64,9 +64,9 @@ public class LakeAdapter extends RecyclerView.Adapter<LakeAdapter.LakeViewHolder
     //Nếu ao có trạng thái là true thì ao hiện tại đang còn nuôi và ngược lại thì đã thu hoạch
     private String getTrangThaiAo(boolean trangThai) {
         if (trangThai) {
-            return "Đang nuôi";
+            return "Đã thu hoạch";
         }
-        return "Đã thu hoạch";
+        return "Đang nuôi";
     }
 
     @Override
