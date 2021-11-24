@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class LichSuNhapHang implements Serializable {
     private String id;
-    private SanPham sanPham;
     private int soLuong;
     private String thoiGianNhap;
     private String thoiGianCapNhat;
@@ -16,14 +15,6 @@ public class LichSuNhapHang implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public SanPham getSanPham() {
-        return sanPham;
-    }
-
-    public void setSanPham(SanPham sanPham) {
-        this.sanPham = sanPham;
     }
 
     public int getSoLuong() {
@@ -61,9 +52,8 @@ public class LichSuNhapHang implements Serializable {
     public LichSuNhapHang() {
     }
 
-    public LichSuNhapHang(String id, SanPham sanPham, int soLuong, String thoiGianNhap, String thoiGianCapNhat, boolean daXoa) {
+    public LichSuNhapHang(String id, int soLuong, String thoiGianNhap, String thoiGianCapNhat, boolean daXoa) {
         this.id = id;
-        this.sanPham = sanPham;
         this.soLuong = soLuong;
         this.thoiGianNhap = thoiGianNhap;
         this.thoiGianCapNhat = thoiGianCapNhat;

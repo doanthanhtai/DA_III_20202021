@@ -119,6 +119,7 @@ public class SignUpAcitivity extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference("TaiKhoan").child(idTaiKhoan).setValue(TaiKhoan.getInstance());
                     Toast.makeText(SignUpAcitivity.this, R.string.signup_toast_successful, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SignUpAcitivity.this, MainActivity.class));
+                    finishAffinity();
                 } else {
                     alertToResetPassword();
                 }

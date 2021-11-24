@@ -173,6 +173,7 @@ public class NewProductDailog extends Dialog {
         WindowManager.LayoutParams layoutParams = window.getAttributes();
         layoutParams.gravity = Gravity.CENTER;
         window.setAttributes(layoutParams);
+        setCancelable(false);
 
         edtMaSP = findViewById(R.id.dialognewproduct_edt_masanpham);
         edtTenSP = findViewById(R.id.dialognewproduct_edt_tensanpham);

@@ -4,7 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,6 +43,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.tvTonKho.setText(String.valueOf(sanPham.getSoLuong()));
         holder.imgEnterQuantity.setOnClickListener(view -> iClickItemProductListener.onClickEnterQuatity(sanPham));
         holder.itemProdcut.setOnClickListener(view -> iClickItemProductListener.onClickItemProduct(sanPham));
+        holder.itemProdcut.setOnLongClickListener(view -> iClickItemProductListener.onLongClickItemProduct(sanPham));
     }
 
     @Override
@@ -54,7 +55,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         private final TextView tvMaSP, tvTenSP, tvNCC, tvGiaNhap, tvTonKho;
         private final ImageButton imgEnterQuantity;
-        private final RelativeLayout itemProdcut;
+        private final LinearLayout itemProdcut;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -62,7 +62,7 @@
     <string name="changepassword_toast_successful">Cập nhật mật khẩu thành công!</string>
     <string name="changepassword_toast_fail">Cập nhật mật khẩu thất bại!</string>
     <string name="main_message_confirmdeleteaccount">"Bạn chắc chắn rằng muốn xóa tài khoản "</string>
-    <string name="main_toast_deleteaccountsuccess">Tài khoan đã được xóa thành công!</string>
+    <string name="main_toast_deleteaccountsuccess">Tài khoản đã được xóa thành công!</string>
     <string name="main_toast_deleteaccountfail">Xóa tài khoản thất bại!</string>
 
     <string name="navigation_menu_deleteaccount">Xóa tài khoản</string>
@@ -113,6 +113,12 @@
     <string name="dialognewproduct_toast_donvidunginvalid">Đơn vị dùng không hợp lệ</string>
     <string name="dialognewproduct_toast_gianhapinvalid">Vui lòng nhập giá nhập của sản phẩm hợp lệ</string>
     <string name="newproduct_succesful">Thêm sản phẩm thành công</string>
+    <string name="dialogenterquatity_title">NHẬP HÀNG</string>
+    <string name="dialogenterquantity_tv_quantity">Số lượng nhập: </string>
+    <string name="dialogenterquatity_btn_enter">Nhập vào</string>
+    <string name="updatediet_toast_canceled">Bạn đã hủy bỏ thao tác cập nhật chê độ ăn.</string>
+    <string name="enterquantityproduct_toast_succesful">Đã nhập hàng thành công.</string>
+    <string name="enterquantityproduct_toast_quantityinvalid">Số lượng nhập không hợp lệ.Vui lòng kiểm tra lại.</string>
 
 
 </resources>

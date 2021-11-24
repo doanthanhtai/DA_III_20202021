@@ -19,7 +19,6 @@ import com.example.tomtep.dialog.UpdateDietDialog;
 import com.example.tomtep.model.Ao;
 import com.example.tomtep.model.CheDoAn;
 import com.example.tomtep.model.SanPham;
-import com.example.tomtep.model.TaiKhoan;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DietFragment extends Fragment implements IClickItemDietListener {
@@ -111,8 +111,10 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
     }
 
     private void getDanhSachSanPham() {
+        String idCurrentUser = FirebaseAuth.getInstance().getUid();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("TaiKhoan");
-        databaseReference.child(TaiKhoan.getInstance().getId()).child("sanPhams").addChildEventListener(new ChildEventListener() {
+        assert idCurrentUser != null;
+        databaseReference.child(idCurrentUser).child("sanPhams").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 SanPham sanPham = snapshot.getValue(SanPham.class);

@@ -143,7 +143,7 @@ public class UpdateDietDialog extends Dialog {
                 .setMessage(R.string.all_message_confirmactioncancel)
                 .setPositiveButton(R.string.all_button_agree_text, (dialogInterface, i) -> {
                     dialogInterface.dismiss();
-                    Toast.makeText(context, R.string.updatelake_toast_canceled, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.updatediet_toast_canceled, Toast.LENGTH_SHORT).show();
                     this.dismiss();
                 })
                 .setNegativeButton(R.string.all_button_cancel_text, (dialogInterface, i) -> dialogInterface.dismiss());
@@ -161,6 +161,7 @@ public class UpdateDietDialog extends Dialog {
         WindowManager.LayoutParams layoutParams = window.getAttributes();
         layoutParams.gravity = Gravity.CENTER;
         window.setAttributes(layoutParams);
+        setCancelable(false);
 
         edtSoLuong = findViewById(R.id.dialogupdatediet_edt_luong);
         edtLongTime = findViewById(R.id.dialognewlake_edt_longtime);

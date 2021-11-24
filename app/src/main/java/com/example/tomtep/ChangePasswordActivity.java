@@ -1,18 +1,15 @@
 package com.example.tomtep;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.tomtep.model.TaiKhoan;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
@@ -79,14 +76,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
             }
         });
-        btnChangePassword.setOnClickListener(v->onClickChangePassword());
+        btnChangePassword.setOnClickListener(v -> onClickChangePassword());
     }
 
     private void onClickChangePassword() {
         String strNewPassword = String.valueOf(edtPassword.getText()).trim();
-        if (tilPassword.getError() == null && tilConfirmPassword.getError() == null && !strNewPassword.isEmpty()){
-//            TaiKhoan.doiMatKhau(ChangePasswordActivity.this,strNewPassword);
-        }else{
+        if (tilPassword.getError() == null && tilConfirmPassword.getError() == null && !strNewPassword.isEmpty()) {
+//            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance().pas
+        } else {
             Toast.makeText(ChangePasswordActivity.this, getResources().getText(R.string.all_toast_invaled), Toast.LENGTH_SHORT).show();
         }
     }

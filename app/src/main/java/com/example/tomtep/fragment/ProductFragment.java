@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tomtep.Interface.IClickItemProductListener;
 import com.example.tomtep.R;
 import com.example.tomtep.adapter.ProductAdapter;
+import com.example.tomtep.dialog.EnterQuantityProductDialog;
+import com.example.tomtep.dialog.NewProductDailog;
 import com.example.tomtep.model.SanPham;
 import com.example.tomtep.model.TaiKhoan;
 import com.google.firebase.database.ChildEventListener;
@@ -26,9 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductFragment extends Fragment implements IClickItemProductListener {
-    private RecyclerView rcvProduct;
     private ProductAdapter productAdapter;
-    private List<SanPham> sanPhams;
+    public static List<SanPham> sanPhams;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,22 +107,28 @@ public class ProductFragment extends Fragment implements IClickItemProductListen
     }
 
     private void initView(View view) {
-        rcvProduct = view.findViewById(R.id.product_rcv);
+        RecyclerView rcvProduct = view.findViewById(R.id.product_rcv);
         productAdapter = new ProductAdapter(sanPhams, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcvProduct.setLayoutManager(linearLayoutManager);
-        RecyclerView.ItemDecoration decoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        RecyclerView.ItemDecoration decoration = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
         rcvProduct.addItemDecoration(decoration);
         rcvProduct.setAdapter(productAdapter);
     }
 
     @Override
     public void onClickEnterQuatity(SanPham sanPham) {
-
+        new EnterQuantityProductDialog(requireContext(), sanPham, sanPhams).show();
     }
 
     @Override
     public void onClickItemProduct(SanPham sanPham) {
 
+    }
+
+    @Override
+    public boolean onLongClickItemProduct(SanPham sanPham) {
+        new NewProductDailog(requireContext()).show();
+        return false;
     }
 }

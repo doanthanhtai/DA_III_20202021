@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,19 +17,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.tomtep.adapter.MainViewPagerAdapter;
+import com.example.tomtep.dialog.EnterQuantityProductDialog;
 import com.example.tomtep.dialog.NewLakeDialog;
 import com.example.tomtep.dialog.NewProductDailog;
-import com.example.tomtep.model.Ao;
+import com.example.tomtep.fragment.ProductFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -126,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.product_new) {
             new NewProductDailog(this).show();
         } else if (id == R.id.product_enterquantity) {
-
+            new EnterQuantityProductDialog(this, null, ProductFragment.sanPhams).show();
         }
         return true;
     }
@@ -173,13 +170,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void deleteAccount() {
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser == null) {
+            Toast.makeText(MainActivity.this, getResources().getText(R.string.main_toast_deleteaccountsuccess), Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            finishAffinity();
+            return;
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle(R.string.all_title_dialogconfirmdelete)
-                .setMessage(getResources().getText(R.string.main_message_confirmdeleteaccount) + firebaseAuth.getCurrentUser().getEmail())
+                .setMessage(getResources().getText(R.string.main_message_confirmdeleteaccount) + firebaseUser.getEmail())
                 .setPositiveButton(getResources().getText(R.string.all_button_agree_text), (dialogInterface, i) -> {
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("TaiKhoan/" + firebaseAuth.getCurrentUser().getUid());
-                    firebaseAuth.getCurrentUser().delete().addOnCompleteListener(task -> {
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("TaiKhoan/" + firebaseUser.getUid());
+                    firebaseUser.delete().addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             databaseReference.child("daXoa").setValue(true);
                             Toast.makeText(MainActivity.this, getResources().getText(R.string.main_toast_deleteaccountsuccess), Toast.LENGTH_SHORT).show();
