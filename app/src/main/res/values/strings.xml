@@ -40,7 +40,7 @@
     <string name="signup_textview_hadaccount">Bạn đã có tài khoản?</string>
     <string name="signup_textview_signin">Đăng nhập</string>
     <string name="signup_textview_title">ĐĂNG KÝ</string>
-<!--    <string name="signup_toast_fail">Email đã tồn tại!.</string>-->
+    <!--    <string name="signup_toast_fail">Email đã tồn tại!.</string>-->
     <string name="signup_toast_successful">Tạo tài khoản thành công!</string>
     <string name="signup_title_dialogcomfirmresetpassword">Email đã tồn tại.</string>
 
@@ -119,6 +119,17 @@
     <string name="updatediet_toast_canceled">Bạn đã hủy bỏ thao tác cập nhật chê độ ăn.</string>
     <string name="enterquantityproduct_toast_succesful">Đã nhập hàng thành công.</string>
     <string name="enterquantityproduct_toast_quantityinvalid">Số lượng nhập không hợp lệ.Vui lòng kiểm tra lại.</string>
+    <string name="dialogupdateproduct_title">CẬP NHẬT SẢN PHẨM</string>
+    <string name="updateproduct_succesful">Cập nhật sản phẩm thành công.</string>
+    <string name="itemproduct_tv_deleted">Sẩn phẩm sẽ được xóa</string>
+    <string name="all_message_confirmactiondeleteproduct">\nSẽ bị xóa khỏi danh sách sản phẩm của bạn. </string>
+    <string name="productfragmemt_toast_deletesuccess">Sản phẩm đã được xóa thành công!</string>
+    <string name="dialogupdateimporthistory_title">CẬP NHẬT LỊCH SỬ NHẬP HÀNG</string>
+    <string name="all_ngaycapnhat_text">Ngày cập nhật</string>
+    <string name="updateimporthistory_toast_canceled">Bạn đã hủy thao tác cập nhật lịch sử nhập hàng.</string>
+    <string name="updateimporthistory_toast_succesful">Cập nhật lịch sử thành công</string>
+    <string name="itemimporthistory_tv_deleted">Lịch sử nhập hàng sẽ được xóa</string>
+    <string name="expandproduct_toast_deletesuccess">Đã xóa lịch sử nhập hàng thành công</string>
 
 
 </resources>

@@ -42,8 +42,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.tvGiaNhap.setText(String.valueOf(sanPham.getGiaNhap()));
         holder.tvTonKho.setText(String.valueOf(sanPham.getSoLuong()));
         holder.imgEnterQuantity.setOnClickListener(view -> iClickItemProductListener.onClickEnterQuatity(sanPham));
-        holder.itemProdcut.setOnClickListener(view -> iClickItemProductListener.onClickItemProduct(sanPham));
-        holder.itemProdcut.setOnLongClickListener(view -> iClickItemProductListener.onLongClickItemProduct(sanPham));
+        holder.itemProdcutForeGround.setOnClickListener(view -> iClickItemProductListener.onClickItemProduct(sanPham));
+        holder.itemProdcutForeGround.setOnLongClickListener(view -> iClickItemProductListener.onLongClickItemProduct(sanPham));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         private final TextView tvMaSP, tvTenSP, tvNCC, tvGiaNhap, tvTonKho;
         private final ImageButton imgEnterQuantity;
-        private final LinearLayout itemProdcut;
+        public final LinearLayout itemProdcutForeGround,itemProductBackground;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,7 +65,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             tvGiaNhap = itemView.findViewById(R.id.itemproduct_tv_gianhap);
             tvTonKho = itemView.findViewById(R.id.itemproduct_tv_tonkho);
             imgEnterQuantity = itemView.findViewById(R.id.itemproduct_img_enter);
-            itemProdcut = itemView.findViewById(R.id.item_product);
+            itemProdcutForeGround = itemView.findViewById(R.id.item_product_foreground);
+            itemProductBackground = itemView.findViewById(R.id.item_product_background);
         }
     }
 }

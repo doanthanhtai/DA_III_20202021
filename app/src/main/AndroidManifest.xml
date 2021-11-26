@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".ExpandProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".ExpandLakeActivity"
             android:exported="false" />
         <activity

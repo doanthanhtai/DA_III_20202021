@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/pading_5dp"
+    android:paddingTop="@dimen/pading_10dp"
+    android:paddingBottom="@dimen/pading_10dp">
+    <LinearLayout
+        android:id="@+id/item_importhistory_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/red"
+        android:gravity="end">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            android:drawablePadding="@dimen/pading_10dp"
+            android:gravity="center"
+            android:text="@string/itemimporthistory_tv_deleted"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/ic_trash_24px" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/item_importhistory_foreground"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/itemimporthistory_tv_thoigiannhap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_5dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18sp"
+            app:drawableStartCompat="@drawable/ic_create_24px" />
+
+        <TextView
+            android:id="@+id/itemimporthistory_tv_thoigiancapnhat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_5dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18sp"
+            app:drawableStartCompat="@drawable/ic_process_24px" />
+
+        <TextView
+            android:id="@+id/itemimporthistory_tv_soluong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_5dp"
+            android:padding="@dimen/pading_5dp"
+            android:layout_weight="2.5"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_size_18sp"
+            android:drawablePadding="@dimen/pading_5dp"
+            app:drawableStartCompat="@drawable/ic_chart_24px" />
+    </LinearLayout>
+</FrameLayout>
