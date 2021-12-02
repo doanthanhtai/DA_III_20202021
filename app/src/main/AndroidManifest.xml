@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tomtep">
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@drawable/logo_127px"
@@ -10,6 +14,15 @@
         android:roundIcon="@drawable/logo_127px"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".ExpandDietActivity"
+            android:exported="false" />
+
+        <receiver
+            android:name=".service.DietReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity
             android:name=".ExpandProductActivity"
             android:exported="false" />

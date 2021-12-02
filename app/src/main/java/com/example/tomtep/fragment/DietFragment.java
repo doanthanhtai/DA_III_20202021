@@ -1,9 +1,16 @@
 package com.example.tomtep.fragment;
 
+import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,13 +19,17 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tomtep.ExpandDietActivity;
 import com.example.tomtep.Interface.IClickItemDietListener;
 import com.example.tomtep.R;
 import com.example.tomtep.adapter.DietAdapter;
 import com.example.tomtep.dialog.UpdateDietDialog;
 import com.example.tomtep.model.Ao;
-import com.example.tomtep.model.CheDoAn;
+import com.example.tomtep.model.LichSuChoAn;
+import com.example.tomtep.model.LichSuSuDungSanPham;
 import com.example.tomtep.model.SanPham;
+import com.example.tomtep.model.TaiKhoan;
+import com.example.tomtep.service.DietReceiver;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -26,8 +37,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Calendar;
 import java.util.List;
 
 public class DietFragment extends Fragment implements IClickItemDietListener {
@@ -35,6 +47,13 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
     private List<Ao> aos;
     private List<SanPham> sanPhams;
     private DietAdapter dietAdapter;
+    private Context context;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -132,11 +151,11 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
                 }
                 for (int i = sanPhams.size() - 1; i >= 0; i--) {
                     if (sanPhams.get(i).getId().equals(sanPham.getId())) {
-                        sanPhams.set(i, sanPham);
                         if (sanPham.isDaXoa()) {
                             sanPhams.remove(i);
                             return;
                         }
+                        sanPhams.set(i, sanPham);
                         return;
                     }
                 }
@@ -179,12 +198,111 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
     }
 
     @Override
-    public void onClick(CheDoAn cheDoAn) {
+    public void onClick(Ao ao) {
+        Intent intent = new Intent(context, ExpandDietActivity.class);
+        intent.setAction(ao.getId());
+        startActivity(intent);
+    }
 
+    @Override
+    public void onChoAn(Ao ao, boolean isChecked) {
+
+        if (ao.getCheDoAn().getSanPhamChoAn().getId().equals("product_default")) {
+            Toast.makeText(context, getText(R.string.dietfragment_toast_dietinvalid), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        AlertDialog.Builder builder;
+        if (isChecked) {
+            builder = new AlertDialog.Builder(context)
+                    .setTitle("Xác nhận bật cho ăn")
+                    .setMessage(ao.getMaAo() + ao.getTenAo())
+                    .setPositiveButton(R.string.all_button_agree_text, (dialogInterface, i) -> {
+                        FirebaseDatabase.getInstance().getReference("TaiKhoan")
+                                .child(TaiKhoan.getInstance().getId())
+                                .child("aos")
+                                .child(ao.getId())
+                                .child("cheDoAn")
+                                .child("trangThai")
+                                .setValue(true);
+                        createLichSuSuDungSanPham(ao);
+                        createAlarm(ao, true);
+                    })
+                    .setNegativeButton(R.string.all_button_cancel_text, (dialogInterface, i) -> dialogInterface.dismiss());
+        } else {
+            builder = new AlertDialog.Builder(context)
+                    .setTitle("Xác nhận kết thúc cho ăn")
+                    .setMessage(ao.getMaAo() + ao.getTenAo())
+                    .setPositiveButton(R.string.all_button_agree_text, (dialogInterface, i) -> {
+                        FirebaseDatabase.getInstance().getReference("TaiKhoan")
+                                .child(TaiKhoan.getInstance().getId())
+                                .child("aos")
+                                .child(ao.getId())
+                                .child("cheDoAn")
+                                .child("trangThai")
+                                .setValue(false);
+                        createAlarm(ao, false);
+                    })
+                    .setNegativeButton(R.string.all_button_cancel_text, (dialogInterface, i) -> dialogInterface.dismiss());
+        }
+        builder.create().show();
+
+    }
+
+    private void createLichSuSuDungSanPham(Ao ao) {
+        LichSuChoAn lichSuChoAn = new LichSuChoAn();
+        LichSuSuDungSanPham lichSuSuDungSanPham = new LichSuSuDungSanPham();
+        if (ao.getLichSuSuDungSanPhams() == null) {
+            ao.setLichSuSuDungSanPhams(new ArrayList<>());
+        }
+        lichSuChoAn.setTonTai(true);
+        lichSuChoAn.setKetQua((String) getResources().getText(R.string.dietfragment_kqchoan_default));
+
+        List<LichSuChoAn> lichSuChoAns = new ArrayList<>();
+        lichSuChoAns.add(lichSuChoAn);
+
+        String thoiGian = DateFormat.getInstance().format(Calendar.getInstance().getTime());
+
+        lichSuSuDungSanPham.setId(String.valueOf(ao.getLichSuSuDungSanPhams().size()));
+        lichSuSuDungSanPham.setSanPham(ao.getCheDoAn().getSanPhamChoAn());
+        lichSuSuDungSanPham.setSoLuong(ao.getCheDoAn().getLuongChoAn());
+        lichSuSuDungSanPham.setThoiGianDung(thoiGian);
+        lichSuSuDungSanPham.setThoiGianCapNhat(thoiGian);
+        lichSuSuDungSanPham.setLichSuChoAns(lichSuChoAns);
+        lichSuSuDungSanPham.setDaXoa(false);
+
+        FirebaseDatabase.getInstance().getReference("TaiKhoan").child(TaiKhoan.getInstance().getId())
+                .child("aos")
+                .child(ao.getId())
+                .child("lichSuSuDungSanPhams")
+                .child(lichSuSuDungSanPham.getId())
+                .setValue(lichSuSuDungSanPham).addOnCompleteListener(task -> Log.e("TOMTEP", "Tạo lịch sử cho ăn thành công!"));
     }
 
     @Override
     public void onLongClick(Ao ao) {
         new UpdateDietDialog(requireContext(), ao, sanPhams).show();
+    }
+
+    private void createAlarm(Ao ao, boolean trangThai) {
+        Intent intent = new Intent(context, DietReceiver.class);
+        String strTitle = (String) getText(R.string.dietfagment_notification_titile);
+        String strContent = ao.getMaAo() + "-" + ao.getTenAo() + "\n" + ao.getCheDoAn().getSanPhamChoAn().getTenSP() + ": " + ao.getCheDoAn().getLuongChoAn() + ao.getCheDoAn().getSanPhamChoAn().getDonViDung();
+        intent.putExtra("ao_id", ao.getId());
+        intent.putExtra("title", strTitle);
+        intent.putExtra("content", strContent);
+        intent.setAction("EATED");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, aos.indexOf(ao), intent, PendingIntent.FLAG_IMMUTABLE);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (trangThai) {
+            Toast.makeText(context, getText(R.string.dietfragment_toast_turnonsuccess), Toast.LENGTH_SHORT).show();
+            long thoiGianAn = System.currentTimeMillis() + Integer.parseInt(ao.getCheDoAn().getThoiGianChoAn()) * 60 * 1000L;
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, thoiGianAn, pendingIntent);
+        } else {
+            Toast.makeText(context, getText(R.string.dietfragment_toast_turnoffsuccess), Toast.LENGTH_SHORT).show();
+            alarmManager.cancel(pendingIntent);
+            Intent i = new Intent(context, ExpandDietActivity.class);
+            i.setAction(ao.getId());
+            startActivity(i);
+        }
     }
 }

@@ -41,10 +41,7 @@ public class ImportHistoryAdapter extends RecyclerView.Adapter<ImportHistoryAdap
         holder.tvNgayNhap.setText(lichSuNhapHang.getThoiGianNhap());
         holder.tvNgayCapNhat.setText(lichSuNhapHang.getThoiGianCapNhat());
         holder.tvSoLuong.setText(String.valueOf(lichSuNhapHang.getSoLuong()));
-        holder.itemImportHistoryForeground.setOnLongClickListener(view -> {
-            iClickItemImportHistoryListener.onLongClickItemImportHistory(lichSuNhapHang);
-            return false;
-        });
+        holder.itemImportHistoryForeground.setOnLongClickListener(view -> iClickItemImportHistoryListener.onLongClickItemImportHistory(lichSuNhapHang));
     }
 
     @Override

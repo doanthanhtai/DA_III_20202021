@@ -38,5 +38,8 @@
     <dimen name="layout_height_180dp">180dp</dimen>
     <dimen name="width_200dp">200dp</dimen>
     <dimen name="height_200dp">200dp</dimen>
+    <dimen name="height_64dp">64dp</dimen>
+    <dimen name="width_64dp">64dp</dimen>
+    <dimen name="width_100dp">100dp</dimen>
 
 </resources>

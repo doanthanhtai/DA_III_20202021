@@ -52,12 +52,22 @@ public class UpdateDietDialog extends Dialog {
         this.ao = ao;
         this.cheDoAn = ao.getCheDoAn();
         this.sanPhams = sanPhams;
-        listTime = new ArrayList<>();
-        if (cheDoAn.getKhungGioChoAn() != null) listTime = cheDoAn.getKhungGioChoAn();
+        listTime = cheDoAn.getKhungGioChoAn();
         timeAdapter = new TimeAdapter(listTime);
         initView();
+        setDataOld();
         setDataForSpiner();
+        setDataOld();
         setEvent();
+    }
+
+    private void setDataOld() {
+        if (cheDoAn == null) {
+            return;
+        }
+        edtSoLuong.setText(String.valueOf(cheDoAn.getLuongChoAn()));
+        edtLongTime.setText(String.valueOf(cheDoAn.getThoiGianChoAn()));
+        if (cheDoAn.getKhungGioChoAn() != null) listTime = cheDoAn.getKhungGioChoAn();
     }
 
     private void setDataForSpiner() {
@@ -91,6 +101,8 @@ public class UpdateDietDialog extends Dialog {
 
             }
         });
+
+        sprSanPham.setSelection(spinerAdapter.getPosition(cheDoAn.getSanPhamChoAn().getMaSP() + " - " + cheDoAn.getSanPhamChoAn().getTenSP()));
     }
 
     private void setEvent() {
@@ -118,12 +130,16 @@ public class UpdateDietDialog extends Dialog {
             Toast.makeText(getContext(), R.string.dialogupdatediet_toast_quantityempty, Toast.LENGTH_SHORT).show();
             return;
         }
-        String strThoiGianAn = String.valueOf(edtLongTime.getText());
+        String strThoiGianAn = String.valueOf((int)Float.parseFloat(String.valueOf(edtLongTime.getText())));
         if (strThoiGianAn.isEmpty()) {
             Toast.makeText(getContext(), R.string.dialogupdatediet_toast_longtimeempty, Toast.LENGTH_SHORT).show();
             return;
         }
         float soLuong = Float.parseFloat(strSoLuong.trim());
+        if (soLuong == 0.0){
+            Toast.makeText(getContext(), R.string.dialogupdatediet_toast_quantityempty, Toast.LENGTH_SHORT).show();
+            return;
+        }
         cheDoAn.setLuongChoAn(soLuong);
         cheDoAn.setKhungGioChoAn(listTime);
         cheDoAn.setThoiGianChoAn(strThoiGianAn);

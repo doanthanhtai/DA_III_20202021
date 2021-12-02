@@ -1,6 +1,9 @@
 package com.example.tomtep;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,7 +23,9 @@ import com.example.tomtep.adapter.MainViewPagerAdapter;
 import com.example.tomtep.dialog.EnterQuantityProductDialog;
 import com.example.tomtep.dialog.NewLakeDialog;
 import com.example.tomtep.dialog.NewProductDailog;
+import com.example.tomtep.dialog.UpdateDietDialog;
 import com.example.tomtep.fragment.ProductFragment;
+import com.example.tomtep.service.DietReceiver;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;

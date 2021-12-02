@@ -6,7 +6,7 @@ import java.util.List;
 public class LichSuSuDungSanPham implements Serializable {
     private String id;
     private SanPham sanPham;
-    private int soLuong;
+    private float soLuong;
     private String thoiGianDung;
     private String thoiGianCapNhat;
     private List<LichSuChoAn> lichSuChoAns;
@@ -28,11 +28,11 @@ public class LichSuSuDungSanPham implements Serializable {
         this.sanPham = sanPham;
     }
 
-    public int getSoLuong() {
+    public float getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(int soLuong) {
+    public void setSoLuong(float soLuong) {
         this.soLuong = soLuong;
     }
 
@@ -71,7 +71,7 @@ public class LichSuSuDungSanPham implements Serializable {
     public LichSuSuDungSanPham() {
     }
 
-    public LichSuSuDungSanPham(String id, SanPham sanPham, int soLuong, String thoiGianDung, String thoiGianCapNhat, List<LichSuChoAn> lichSuChoAns, boolean daXoa) {
+    public LichSuSuDungSanPham(String id, SanPham sanPham, float soLuong, String thoiGianDung, String thoiGianCapNhat, List<LichSuChoAn> lichSuChoAns, boolean daXoa) {
         this.id = id;
         this.sanPham = sanPham;
         this.soLuong = soLuong;

@@ -130,6 +130,13 @@
     <string name="updateimporthistory_toast_succesful">Cập nhật lịch sử thành công</string>
     <string name="itemimporthistory_tv_deleted">Lịch sử nhập hàng sẽ được xóa</string>
     <string name="expandproduct_toast_deletesuccess">Đã xóa lịch sử nhập hàng thành công</string>
+    <string name="channelname_diet">Thông báo thăm nhá</string>
+    <string name="dietfragment_toast_dietinvalid">Vui lòng cập nhật sản phẩm cho chế độ an.</string>
+    <string name="dietfagment_notification_titile">Tôm đã ăn xong</string>
+    <string name="dietfragment_toast_turnonsuccess">Đã bật cho ăn trên ao</string>
+    <string name="dietfragment_toast_turnoffsuccess">Đã tắt cho ăn trên ao</string>
+    <string name="dietfragment_kqchoan_default">Chưa cập nhật</string>
+    <string name="itemeatinghistory_tv_deleted">Lịch sử sẽ bị xóa!</string>
 
 
 </resources>

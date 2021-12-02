@@ -21,8 +21,6 @@ import com.example.tomtep.R;
 import com.example.tomtep.model.LichSuNhapHang;
 import com.example.tomtep.model.SanPham;
 import com.example.tomtep.model.TaiKhoan;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,7 +28,6 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.ListResourceBundle;
 
 public class EnterQuantityProductDialog extends Dialog {
 
@@ -104,7 +101,7 @@ public class EnterQuantityProductDialog extends Dialog {
             databaseReference.setValue(sanPham).addOnCompleteListener(task -> {
                 String thoiGianTao = DateFormat.getInstance().format(Calendar.getInstance().getTime());
                 List<LichSuNhapHang> lichSuNhapHangs = new ArrayList<>();
-                if (sanPham.getLichSuNhapHangs() != null){
+                if (sanPham.getLichSuNhapHangs() != null) {
                     lichSuNhapHangs = sanPham.getLichSuNhapHangs();
                 }
                 LichSuNhapHang lichSuNhapHang = new LichSuNhapHang(String.valueOf(lichSuNhapHangs.size()), quantity, thoiGianTao, thoiGianTao, false);

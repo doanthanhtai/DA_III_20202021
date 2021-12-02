@@ -14,15 +14,12 @@ import com.example.tomtep.Interface.IClickItemDietListener;
 import com.example.tomtep.R;
 import com.example.tomtep.model.Ao;
 import com.example.tomtep.model.CheDoAn;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder> {
     private final List<Ao> aos;
     private final IClickItemDietListener iClickItemDietListener;
-
 
     public DietAdapter(List<Ao> aos, IClickItemDietListener iClickItemDietListener) {
         this.aos = aos;
@@ -46,6 +43,7 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder
         holder.tvMaAo.setText(ao.getMaAo());
         holder.tvTrangThai.setText(getTrangThaiCheDoAn(cheDoAn.isTrangThai()));
         holder.tvTenSanPham.setText(cheDoAn.getSanPhamChoAn().getTenSP());
+        holder.tvDemThoiGian.setText(cheDoAn.getThoiGianChoAn());
         if (cheDoAn.getKhungGioChoAn() != null) {
             holder.tvKhungGioAn.setText(cheDoAn.getKhungGioChoAn().toString());
         } else {
@@ -53,27 +51,13 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder
         }
 
         holder.switchFeed.setChecked(cheDoAn.isTrangThai());
-        holder.relativeLayout.setOnClickListener(v -> iClickItemDietListener.onClick(cheDoAn));
+        holder.relativeLayout.setOnClickListener(v -> iClickItemDietListener.onClick(ao));
         holder.relativeLayout.setOnLongClickListener(v -> {
             iClickItemDietListener.onLongClick(ao);
             return false;
         });
-        holder.switchFeed.setOnCheckedChangeListener((compoundButton, b) -> choAn(ao, b));
+        holder.switchFeed.setOnClickListener(view -> iClickItemDietListener.onChoAn(ao,holder.switchFeed.isChecked()));
     }
-
-    public void choAn(Ao ao, boolean trangThai) {
-        String idCurrentUser = FirebaseAuth.getInstance().getUid();
-        assert idCurrentUser != null;
-        FirebaseDatabase.getInstance().getReference("TaiKhoan").child(idCurrentUser).child("aos").child(ao.getId()).child("cheDoAn").child("trangThai").setValue(trangThai);
-    }
-
-    private String getTrangThaiCheDoAn(boolean trangThai) {
-        if (trangThai) {
-            return "Đ.Cho ăn";
-        }
-        return "Đ.Ko ăn";
-    }
-
 
     @Override
     public int getItemCount() {
@@ -102,5 +86,12 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder
             tvDemThoiGian = itemView.findViewById(R.id.itemdiet_tv_time);
             switchFeed = itemView.findViewById(R.id.itemdiet_switch_feed);
         }
+    }
+
+    private String getTrangThaiCheDoAn(boolean trangThai) {
+        if (trangThai) {
+            return "Đang cho ăn";
+        }
+        return "Đang không ăn";
     }
 }

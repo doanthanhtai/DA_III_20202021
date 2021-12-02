@@ -75,7 +75,7 @@ public class NewLakeDialog extends Dialog {
     }
 
     private CheDoAn intitDeitForLake() {
-        return new CheDoAn(initDefaultProductForDiet(), 0, initDefaultTimeFrameForDiet(), "7200000", false);
+        return new CheDoAn(initDefaultProductForDiet(), 0, initDefaultTimeFrameForDiet(), "90", false);
     }
 
     private List<String> initDefaultTimeFrameForDiet() {
