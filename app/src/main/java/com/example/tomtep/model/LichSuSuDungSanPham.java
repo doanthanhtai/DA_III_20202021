@@ -1,7 +1,6 @@
 package com.example.tomtep.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class LichSuSuDungSanPham implements Serializable {
     private String id;
@@ -9,7 +8,7 @@ public class LichSuSuDungSanPham implements Serializable {
     private float soLuong;
     private String thoiGianDung;
     private String thoiGianCapNhat;
-    private List<LichSuChoAn> lichSuChoAns;
+    private LichSuChoAn lichSuChoAns;
     private boolean daXoa;
 
     public String getId() {
@@ -52,11 +51,11 @@ public class LichSuSuDungSanPham implements Serializable {
         this.thoiGianCapNhat = thoiGianCapNhat;
     }
 
-    public List<LichSuChoAn> getLichSuChoAns() {
+    public LichSuChoAn getLichSuChoAns() {
         return lichSuChoAns;
     }
 
-    public void setLichSuChoAns(List<LichSuChoAn> lichSuChoAns) {
+    public void setLichSuChoAns(LichSuChoAn lichSuChoAns) {
         this.lichSuChoAns = lichSuChoAns;
     }
 
@@ -71,7 +70,7 @@ public class LichSuSuDungSanPham implements Serializable {
     public LichSuSuDungSanPham() {
     }
 
-    public LichSuSuDungSanPham(String id, SanPham sanPham, float soLuong, String thoiGianDung, String thoiGianCapNhat, List<LichSuChoAn> lichSuChoAns, boolean daXoa) {
+    public LichSuSuDungSanPham(String id, SanPham sanPham, float soLuong, String thoiGianDung, String thoiGianCapNhat, LichSuChoAn lichSuChoAns, boolean daXoa) {
         this.id = id;
         this.sanPham = sanPham;
         this.soLuong = soLuong;

@@ -10,7 +10,7 @@ public class SanPham implements Serializable {
     private String tenNCC;
     private float giaNhap;
     private String donViDung;
-    private int soLuong;
+    private float soLuong;
     private List<LichSuNhapHang> lichSuNhapHangs;
     private boolean daXoa;
 
@@ -62,11 +62,11 @@ public class SanPham implements Serializable {
         this.donViDung = donViDung;
     }
 
-    public int getSoLuong() {
+    public float getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(int soLuong) {
+    public void setSoLuong(float soLuong) {
         this.soLuong = soLuong;
     }
 

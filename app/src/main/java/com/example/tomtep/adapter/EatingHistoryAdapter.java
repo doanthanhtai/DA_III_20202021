@@ -34,14 +34,14 @@ public class EatingHistoryAdapter extends RecyclerView.Adapter<EatingHistoryAdap
     @Override
     public void onBindViewHolder(@NonNull EatingHisoryViewHolder holder, int position) {
         LichSuSuDungSanPham lichSuSuDungSanPham = lichSuSuDungSanPhams.get(position);
-        if (lichSuSuDungSanPham == null || !lichSuSuDungSanPham.getLichSuChoAns().get(0).isTonTai())
+        if (lichSuSuDungSanPham == null || !lichSuSuDungSanPham.getLichSuChoAns().isTonTai())
             return;
         String textProduct = lichSuSuDungSanPham.getSanPham().getMaSP() + "-" + lichSuSuDungSanPham.getSanPham().getTenSP();
         String strSoLuong = lichSuSuDungSanPham.getSoLuong() + " " + lichSuSuDungSanPham.getSanPham().getDonViDung();
         holder.tvProduct.setText(textProduct);
         holder.tvSoLuong.setText(strSoLuong);
         holder.tvTime.setText(lichSuSuDungSanPham.getThoiGianDung());
-        holder.tvResult.setText(lichSuSuDungSanPham.getLichSuChoAns().get(0).getKetQua());
+        holder.tvResult.setText(lichSuSuDungSanPham.getLichSuChoAns().getKetQua());
         holder.itemEatingHostoryForeground.setOnLongClickListener(v -> iClickItemEatingHistoryListener.onLongClickItemEatingHistory(lichSuSuDungSanPham));
     }
 

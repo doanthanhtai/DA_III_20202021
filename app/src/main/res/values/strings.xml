@@ -137,6 +137,9 @@
     <string name="dietfragment_toast_turnoffsuccess">Đã tắt cho ăn trên ao</string>
     <string name="dietfragment_kqchoan_default">Chưa cập nhật</string>
     <string name="itemeatinghistory_tv_deleted">Lịch sử sẽ bị xóa!</string>
+    <string name="dietfragment_toast_lackproduct">Sản phẩm hiện không còn đủ số lượng</string>
+    <string name="dialogupdateeatinghistory_title">TÌNH TRẠNG TÔM</string>
+    <string name="updateeatinghistory_toast_success">Cập nhật thành công</string>
 
 
 </resources>

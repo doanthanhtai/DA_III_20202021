@@ -18,11 +18,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tomtep.Interface.IClickItemEatingHistoryListener;
 import com.example.tomtep.adapter.EatingHistoryAdapter;
+import com.example.tomtep.dialog.UpdateEatingHistoryDialog;
+import com.example.tomtep.fragment.ProductFragment;
 import com.example.tomtep.model.LichSuSuDungSanPham;
+import com.example.tomtep.model.SanPham;
 import com.example.tomtep.model.TaiKhoan;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -36,6 +40,7 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemE
     private RecyclerView rcvEatingHistory;
     private Toolbar toolbar;
     private Context context;
+    private DatabaseReference databaseReference;
 
 
     @Override
@@ -43,11 +48,14 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemE
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expand_diet);
 
-        this.context = this;
         Intent intent = getIntent();
-        if (intent != null) {
-            strAoId = intent.getAction();
+        if (intent == null) {
+            return;
         }
+
+        strAoId = intent.getAction();
+        this.context = this;
+        databaseReference = FirebaseDatabase.getInstance().getReference("TaiKhoan/" + TaiKhoan.getInstance().getId() + "/aos/" + strAoId + "/lichSuSuDungSanPhams");
 
         initView();
         setEvent();
@@ -65,23 +73,36 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemE
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-//                int position = viewHolder.getAdapterPosition();
-//                LichSuSuDungSanPham lichSuSuDungSanPham = lichSuSuDungSanPhams.get(position)
-//                AlertDialog.Builder builder = new AlertDialog.Builder(context)
-//                        .setTitle(R.string.all_title_dialogconfirmdelete)
-//                        .setMessage(lichSuSuDungSanPham.getSanPham().getTenSP() + "\n" + lichSuSuDungSanPham.getSoLuong() + " - " + lichSuSuDungSanPham.getThoiGianDung())
-//                        .setNegativeButton(R.string.all_button_agree_text, (dialogInterface, i) -> databaseReference.child("lichSuNhapHangs").child(lichSuNhapHang.getId()).child("daXoa").setValue(true).addOnCompleteListener(task -> {
-//                            sanPham.setSoLuong(sanPham.getSoLuong() - lichSuNhapHang.getSoLuong());
-//                            databaseReference.child("soLuong").setValue(sanPham.getSoLuong()).addOnCompleteListener(v -> {
-//                                Toast.makeText(context, R.string.expandproduct_toast_deletesuccess, Toast.LENGTH_SHORT).show();
-//                                dialogInterface.dismiss();
-//                            });
-//                        }))
-//                        .setPositiveButton(R.string.all_button_cancel_text, (dialogInterface, i) -> {
-//                            importHistoryAdapter.notifyItemChanged(position);
-//                            dialogInterface.dismiss();
-//                        });
-//                builder.create().show();
+                int position = viewHolder.getAdapterPosition();
+                LichSuSuDungSanPham lichSuSuDungSanPham = lichSuSuDungSanPhams.get(position);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                        .setTitle(R.string.all_title_dialogconfirmdelete)
+                        .setMessage(lichSuSuDungSanPham.getSanPham().getTenSP() + "\n" + lichSuSuDungSanPham.getSoLuong() + " - " + lichSuSuDungSanPham.getThoiGianDung())
+                        .setNegativeButton(R.string.all_button_agree_text, (dialogInterface, i) -> {
+                            databaseReference.child(lichSuSuDungSanPham.getId()).child("daXoa").setValue(true).addOnCompleteListener(task -> {
+                                Toast.makeText(context, R.string.expandproduct_toast_deletesuccess, Toast.LENGTH_SHORT).show();
+                                eatingHistoryAdapter.notifyItemChanged(position);
+                                dialogInterface.dismiss();
+                            });
+                            updateQuantityProduct(lichSuSuDungSanPham.getSanPham().getId(), lichSuSuDungSanPham.getSoLuong());
+                        })
+                        .setPositiveButton(R.string.all_button_cancel_text, (dialogInterface, i) -> {
+                            eatingHistoryAdapter.notifyItemChanged(position);
+                            dialogInterface.dismiss();
+                        })
+                        .setCancelable(false);
+                builder.create().show();
+            }
+
+            private void updateQuantityProduct(String id, float soLuong) {
+                for (int i = ProductFragment.sanPhams.size() - 1; i >= 0; i--) {
+                    if (ProductFragment.sanPhams.get(i).getId().equals(id)) {
+                        SanPham sanPham = ProductFragment.sanPhams.get(i);
+                        FirebaseDatabase.getInstance().getReference("TaiKhoan").child(TaiKhoan.getInstance().getId())
+                                .child("sanPhams").child(id).child("soLuong").setValue(sanPham.getSoLuong() + soLuong);
+                        return;
+                    }
+                }
             }
 
             @Override
@@ -184,6 +205,7 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemE
 
     @Override
     public boolean onLongClickItemEatingHistory(LichSuSuDungSanPham lichSuSuDungSanPham) {
+        new UpdateEatingHistoryDialog(context,strAoId,lichSuSuDungSanPham).show();
         return true;
     }
 }

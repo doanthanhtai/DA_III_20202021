@@ -12,6 +12,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.example.tomtep.ExpandDietActivity;
 import com.example.tomtep.R;
+import com.example.tomtep.dialog.UpdateEatingHistoryDialog;
 import com.example.tomtep.model.TaiKhoan;
 import com.google.firebase.database.FirebaseDatabase;
 

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_gravity="center"
+    android:padding="?dialogPreferredPadding"
+    android:layout_margin="?dialogPreferredPadding"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/dialogupdateeatinghistory_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_24sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/dialogupdateeatinghistory_spr_ketqua"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:padding="@dimen/pading_5dp"
+        android:layout_gravity="center"
+        android:entries="@array/spinnerItems"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/dialogupdateeatinghistory_btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_weight="3"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:background="@color/teal_700"
+            style="?android:attr/buttonBarStyle"
+            android:text="@string/all_button_cancel_text"/>
+        <Button
+            android:id="@+id/dialogupdateeatinghistory_btn_update"
+            android:layout_marginStart="@dimen/pading_10dp"
+            android:background="@color/teal_700"
+            android:layout_weight="2"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonStyle"
+            android:text="@string/all_button_update_text"/>
+    </LinearLayout>
+</LinearLayout>
