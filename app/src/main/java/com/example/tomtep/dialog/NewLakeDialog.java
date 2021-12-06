@@ -67,7 +67,7 @@ public class NewLakeDialog extends Dialog {
             lake.setId(lakeId);
             lake.setKey(strMaAo);
             lake.setName(strTenAo);
-            lake.setAccountId(MainActivity.account.getId());
+            lake.setAccountId(MainActivity.MY_ACCOUNT.getId());
             lake.setDescription(strMoTa);
             lake.setCreationTime(strNgayTao);
             lake.setHarvestTime(strNgayThu);

@@ -27,7 +27,7 @@ public class DietReceiver extends BroadcastReceiver {
             String strContent = intent.getStringExtra("content");
             Intent i = new Intent(context, ExpandDietActivity.class);
             i.setAction(lakeId);
-            i.putExtra("accountId", MainActivity.account.getId());
+            i.putExtra("accountId", MainActivity.MY_ACCOUNT.getId());
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_IMMUTABLE);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID_1)

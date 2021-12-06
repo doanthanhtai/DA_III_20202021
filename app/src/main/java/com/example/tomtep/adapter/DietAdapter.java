@@ -54,7 +54,10 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder
             iClickItemDietListener.onLongClick(diet);
             return false;
         });
-        holder.switchFeed.setOnClickListener(view -> iClickItemDietListener.onClickFeeding(diet, holder.switchFeed.isChecked()));
+        holder.switchFeed.setOnClickListener(view -> {
+            iClickItemDietListener.onClickFeeding(diet, holder.switchFeed.isChecked());
+            notifyItemChanged(position);
+        });
     }
 
     @Override

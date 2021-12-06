@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="?dialogPreferredPadding"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="?dialogPreferredPadding">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/dialogupdateproducthistory_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dialogupdate_producthistory_tv_productinfo"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_18sp" />
+
+    <TextView
+        android:id="@+id/dialogupdate_producthistory_tv_time"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="italic"
+        android:textSize="@dimen/text_size_14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/pading_5dp"
+            android:text="@string/all_amount_usingproduct"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18sp" />
+
+        <EditText
+            android:id="@+id/dialogupdate_producthistory_edt_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@null"
+            android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+            android:hint="@null"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/pading_10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialogupdate_producthistory_btn_cancel"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@color/teal_700"
+            android:text="@string/all_button_cancel_text"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/dialogupdate_producthistory_btn_save"
+            style="?android:attr/buttonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/pading_10dp"
+            android:layout_weight="2"
+            android:background="@color/teal_700"
+            android:text="@string/all_button_save_text"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

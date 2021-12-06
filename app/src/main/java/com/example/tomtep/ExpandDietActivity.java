@@ -21,7 +21,6 @@ import com.example.tomtep.adapter.FeedingHistoryAdapter;
 import com.example.tomtep.dialog.UpdateFeedingHistoryDialog;
 import com.example.tomtep.model.FeedingHistory;
 import com.example.tomtep.model.Product;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ExpandDietActivity extends AppCompatActivity implements IClickItemFeedingHistoryListener {
 
@@ -63,10 +63,10 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemF
 
     }
 
-    private String getProductKeyById(String productId) {
+    private Product getProductKeyById(String productId) {
         for (int i = products.size() - 1; i >= 0; i--) {
             if (productId.equals(products.get(i).getId())) {
-                return products.get(i).getKey();
+                return products.get(i);
             }
         }
         return null;
@@ -85,16 +85,14 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemF
                 FeedingHistory feedingHistory = feedingHistories.get(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context)
                         .setTitle(R.string.all_title_dialogconfirmdelete)
-                        .setMessage(getProductKeyById(feedingHistory.getProductId()) + "\n" + feedingHistory.getAmount() + " - " + feedingHistory.getTime())
-                        .setNegativeButton(R.string.all_button_agree_text, (dialogInterface, i) -> {
-                            FirebaseDatabase.getInstance().getReference("FeedingHistory").child(feedingHistory.getId()).child("deleted")
-                                    .setValue(true).addOnCompleteListener(task -> {
-                                Toast.makeText(context, R.string.expandproduct_toast_deletesuccess, Toast.LENGTH_SHORT).show();
-                                feedingHistoryAdapter.notifyItemChanged(position);
-                                dialogInterface.dismiss();
-                            });
+                        .setMessage(Objects.requireNonNull(getProductKeyById(feedingHistory.getProductId())).getName() + ": " + feedingHistory.getAmount() + "\n" + feedingHistory.getTime())
+                        .setNegativeButton(R.string.all_button_agree_text, (dialogInterface, i) -> FirebaseDatabase.getInstance().getReference("FeedingHistory").child(feedingHistory.getId()).child("deleted").setValue(true).addOnCompleteListener(task -> {
+                            Toast.makeText(context, R.string.expandproduct_toast_deletesuccess, Toast.LENGTH_SHORT).show();
                             updateProductAmount(feedingHistory.getProductId(), feedingHistory.getAmount());
-                        })
+                            deleteProductHistory(feedingHistory);
+                            feedingHistoryAdapter.notifyItemChanged(position);
+                            dialogInterface.dismiss();
+                        }))
                         .setPositiveButton(R.string.all_button_cancel_text, (dialogInterface, i) -> {
                             feedingHistoryAdapter.notifyItemChanged(position);
                             dialogInterface.dismiss();
@@ -113,6 +111,10 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemF
                         return;
                     }
                 }
+            }
+
+            private void deleteProductHistory(FeedingHistory feedingHistory) {
+                FirebaseDatabase.getInstance().getReference("ProductHistory").child(feedingHistory.getProductHistoryId()).child("deleted").setValue(true);
             }
 
             @Override

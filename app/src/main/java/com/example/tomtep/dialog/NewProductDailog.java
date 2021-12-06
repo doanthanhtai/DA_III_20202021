@@ -130,7 +130,7 @@ public class NewProductDailog extends Dialog {
             return;
         }
         product.setId(productId);
-        product.setAccountId(MainActivity.account.getId());
+        product.setAccountId(MainActivity.MY_ACCOUNT.getId());
         product.setKey(maSP);
         product.setName(tenSP);
         product.setSupplier(tenNCC);

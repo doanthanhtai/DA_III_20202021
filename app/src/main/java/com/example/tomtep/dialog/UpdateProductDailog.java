@@ -124,11 +124,11 @@ public class UpdateProductDailog extends Dialog {
         window.setAttributes(layoutParams);
         setCancelable(false);
 
-        edtMaSP = findViewById(R.id.dialogupdateproduct_edt_masanpham);
-        edtTenSP = findViewById(R.id.dialogupdateproduct_edt_tensanpham);
-        edtTenNCC = findViewById(R.id.dialogupdateproduct_edt_tenncc);
-        edtGiaNhap = findViewById(R.id.dialogupdateproduct_edt_gianhap);
-        sprDonVi = findViewById(R.id.dialogupdateproduct_spr_donvi);
+        edtMaSP = findViewById(R.id.dialogupdate_product_edt_masanpham);
+        edtTenSP = findViewById(R.id.dialogupdate_product_edt_tensanpham);
+        edtTenNCC = findViewById(R.id.dialogupdate_product_edt_tenncc);
+        edtGiaNhap = findViewById(R.id.dialogupdate_product_edt_gianhap);
+        sprDonVi = findViewById(R.id.dialogupdate_product_spr_donvi);
         btnDong = findViewById(R.id.dialogupdateproduct_btn_cancel);
         btnCapNhat = findViewById(R.id.dialogupdateproduct_btn_update);
     }

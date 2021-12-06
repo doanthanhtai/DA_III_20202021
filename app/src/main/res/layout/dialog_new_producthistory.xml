@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="?dialogPreferredPadding"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="?dialogPreferredPadding">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/dialognewproducthistory_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dialognew_producthistory_tv_lakeinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:autofillHints="@null"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_18sp"
+        android:textColor="@color/black"
+        android:padding="@dimen/pading_10dp" />
+
+    <TextView
+        android:id="@+id/dialognew_producthistory_tv_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:autofillHints="@null"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_14sp"
+        android:textColor="@color/black"
+        android:padding="@dimen/pading_10dp" />
+
+    <Spinner
+        android:id="@+id/dialognew_producthistory_spr_product"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_30dp"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:drawSelectorOnTop="true"
+        android:padding="@dimen/pading_5dp" />
+
+    <EditText
+        android:id="@+id/dialognew_producthistory_edt_amount"
+        android:layout_width="@dimen/width_100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:autofillHints="@null"
+        android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+        android:inputType="numberDecimal"
+        android:padding="@dimen/pading_10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialognew_producthistory_btn_cancel"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@color/teal_700"
+            android:text="@string/all_button_cancel_text"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/dialognew_producthistory_btn_insert"
+            style="?android:attr/buttonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/pading_10dp"
+            android:layout_weight="2"
+            android:background="@color/teal_700"
+            android:text="@string/all_button_add_text"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

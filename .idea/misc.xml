@@ -57,19 +57,32 @@
         <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/layout_notification_eating.xml" value="0.209375" />
         <entry key="..\:/PROJECT_COPY/TOMTEP/app/src/main/res/layout/layout_notification_eatting.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/drawable/abc.xml" value="0.22552083333333334" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/drawable/bc_rectangle_white_radius10dp_1dp_black.xml" value="0.15555555555555556" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/drawable/bc_rectangle_white_radius5dp.xml" value="0.15555555555555556" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/activity_expand_diet.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/activity_expand_lake.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/activity_expanded_product.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/activity_main.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/dialog_new_product.xml" value="0.25" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/dialog_new_producthistory.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/dialog_update_diet.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/dialog_update_product.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/dialog_update_producthistory.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_diet.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_environment_history.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_lake.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_otherusehistory.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_product.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_producthistory.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_statistics.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_diet.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_eatinghistory.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_feetinghistory.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_lake.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_product.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_producthistory.xml" value="0.25" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/menu/expandlake_toolbar_menu.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/menu/lake_toolbar_menu.xml" value="0.209375" />
       </map>
     </option>
   </component>

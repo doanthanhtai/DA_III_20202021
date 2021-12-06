@@ -167,7 +167,7 @@ public class ProductFragment extends Fragment implements IClickItemProductListen
 
             }
         });
-        FirebaseDatabase.getInstance().getReference("Product").orderByChild("accountId").equalTo(MainActivity.account.getId())
+        FirebaseDatabase.getInstance().getReference("Product").orderByChild("accountId").equalTo(MainActivity.MY_ACCOUNT.getId())
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @com.google.firebase.database.annotations.Nullable String previousChildName) {

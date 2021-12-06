@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
     private Toolbar toolbar;
-    public static Account account;
+    public static Account MY_ACCOUNT;
     private List<Product> products;
 
     @Override
@@ -60,12 +60,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initAccount() {
-        account = new Account();
+        MY_ACCOUNT = new Account();
         if (FirebaseAuth.getInstance().getCurrentUser() == null)
             startActivity(new Intent(this, SignUpAcitivity.class));
-        account.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        account.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        account.setDeleted(false);
+        MY_ACCOUNT.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        MY_ACCOUNT.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        MY_ACCOUNT.setDeleted(false);
     }
 
     private void settupToolbar() {
@@ -193,11 +193,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setTitle(R.string.all_title_dialogconfirmdelete)
                 .setMessage(getResources().getText(R.string.main_message_confirmdeleteaccount) + firebaseUser.getEmail())
                 .setPositiveButton(getResources().getText(R.string.all_button_agree_text), (dialogInterface, i) -> {
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Account/" + account.getId());
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Account/" + MY_ACCOUNT.getId());
                     firebaseUser.delete().addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            account.setDeleted(true);
-                            databaseReference.child("deleted").setValue(account.isDeleted());
+                            MY_ACCOUNT.setDeleted(true);
+                            databaseReference.child("deleted").setValue(MY_ACCOUNT.isDeleted());
                             Toast.makeText(MainActivity.this, getResources().getText(R.string.main_toast_deleteaccountsuccess), Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(MainActivity.this, SignInActivity.class));
                             finishAffinity();
@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void addChildEventListener() {
-        FirebaseDatabase.getInstance().getReference("Product").orderByChild("accountId").equalTo(MainActivity.account.getId())
+        FirebaseDatabase.getInstance().getReference("Product").orderByChild("accountId").equalTo(MainActivity.MY_ACCOUNT.getId())
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @com.google.firebase.database.annotations.Nullable String previousChildName) {

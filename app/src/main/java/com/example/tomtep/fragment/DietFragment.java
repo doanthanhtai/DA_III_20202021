@@ -47,7 +47,6 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
     private List<Lake> lakes;
     private List<Product> products;
     private Context context;
-    private int position;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -69,23 +68,17 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
     public void onClick(Diet diet) {
         Intent intent = new Intent(context, ExpandDietActivity.class);
         intent.setAction(diet.getLakeId());
-        intent.putExtra("accountId",MainActivity.account.getId());
+        intent.putExtra("accountId", MainActivity.MY_ACCOUNT.getId());
         startActivity(intent);
-    }
-
-    private void notifyItemDiet() {
-        dietAdapter.notifyItemChanged(position);
     }
 
     @Override
     public void onClickFeeding(Diet diet, boolean isChecked) {
 
         Product product = null;
-
         for (int i = products.size() - 1; i >= 0; i--) {
             if (products.get(i).getId().equals(diet.getProductId())) {
                 product = products.get(i);
-                position = i;
                 break;
             }
         }
@@ -95,13 +88,11 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
         }
         if (product.getAmount() < diet.getAmount()) {
             Toast.makeText(context, "Sản phẩm hiện tại không còn đủ cho một lần ăn.", Toast.LENGTH_SHORT).show();
-            notifyItemDiet();
             return;
         }
 
         if (diet.getProductId().equals("default_product")) {
             Toast.makeText(context, getText(R.string.dietfragment_toast_dietinvalid), Toast.LENGTH_SHORT).show();
-            dietAdapter.notifyItemChanged(position);
             return;
         }
 
@@ -128,10 +119,7 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
                         createProductHistory(diet);
                         createAlarm(diet, true);
                     })
-                    .setNegativeButton(R.string.all_button_cancel_text, (dialogInterface, i) -> {
-                        dialogInterface.dismiss();
-                        notifyItemDiet();
-                    });
+                    .setNegativeButton(R.string.all_button_cancel_text, (dialogInterface, i) -> dialogInterface.dismiss());
         } else {
             builder = new AlertDialog.Builder(context)
                     .setTitle(R.string.all_title_dialogconfirm)
@@ -144,10 +132,7 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
                                 .setValue(false);
                         createAlarm(diet, false);
                     })
-                    .setNegativeButton(R.string.all_button_cancel_text, (dialogInterface, i) -> {
-                        dialogInterface.dismiss();
-                        notifyItemDiet();
-                    });
+                    .setNegativeButton(R.string.all_button_cancel_text, (dialogInterface, i) -> dialogInterface.dismiss());
         }
         builder.create().show();
     }
@@ -255,7 +240,7 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
     }
 
     private void addChildEventListener() {
-        FirebaseDatabase.getInstance().getReference("Lake").orderByChild("accountId").equalTo(MainActivity.account.getId())
+        FirebaseDatabase.getInstance().getReference("Lake").orderByChild("accountId").equalTo(MainActivity.MY_ACCOUNT.getId())
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -304,7 +289,7 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
 
                     }
                 });
-        FirebaseDatabase.getInstance().getReference("Product").orderByChild("accountId").equalTo(MainActivity.account.getId())
+        FirebaseDatabase.getInstance().getReference("Product").orderByChild("accountId").equalTo(MainActivity.MY_ACCOUNT.getId())
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @com.google.firebase.database.annotations.Nullable String previousChildName) {
