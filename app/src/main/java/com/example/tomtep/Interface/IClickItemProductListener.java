@@ -1,13 +1,11 @@
 package com.example.tomtep.Interface;
 
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.tomtep.model.SanPham;
+import com.example.tomtep.model.Product;
 
 public interface IClickItemProductListener {
-    void onClickEnterQuatity(SanPham sanPham);
+    void onClickEnterQuatity(Product product);
 
-    void onClickItemProduct(SanPham sanPham);
+    void onClickItemProduct(Product product);
 
-    boolean onLongClickItemProduct(SanPham sanPham);
+    boolean onLongClickItemProduct(Product product);
 }

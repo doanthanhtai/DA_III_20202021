@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tomtep.Interface.IClickItemImportHistoryListener;
 import com.example.tomtep.R;
-import com.example.tomtep.model.LichSuNhapHang;
+import com.example.tomtep.model.ImportHistory;
 
 import java.util.List;
 
 public class ImportHistoryAdapter extends RecyclerView.Adapter<ImportHistoryAdapter.ImportHistoryViewHolder> {
 
-    private final List<LichSuNhapHang> lichSuNhapHangs;
+    private final List<ImportHistory> importHistories;
     private final IClickItemImportHistoryListener iClickItemImportHistoryListener;
 
-    public ImportHistoryAdapter(List<LichSuNhapHang> lichSuNhapHangs, IClickItemImportHistoryListener iClickItemImportHistoryListener) {
-        this.lichSuNhapHangs = lichSuNhapHangs;
+    public ImportHistoryAdapter(List<ImportHistory> importHistories, IClickItemImportHistoryListener iClickItemImportHistoryListener) {
+        this.importHistories = importHistories;
         this.iClickItemImportHistoryListener = iClickItemImportHistoryListener;
     }
 
@@ -34,19 +34,17 @@ public class ImportHistoryAdapter extends RecyclerView.Adapter<ImportHistoryAdap
 
     @Override
     public void onBindViewHolder(@NonNull ImportHistoryViewHolder holder, int position) {
-        LichSuNhapHang lichSuNhapHang = lichSuNhapHangs.get(position);
-        if (lichSuNhapHang == null) {
-            return;
-        }
-        holder.tvNgayNhap.setText(lichSuNhapHang.getThoiGianNhap());
-        holder.tvNgayCapNhat.setText(lichSuNhapHang.getThoiGianCapNhat());
-        holder.tvSoLuong.setText(String.valueOf(lichSuNhapHang.getSoLuong()));
-        holder.itemImportHistoryForeground.setOnLongClickListener(view -> iClickItemImportHistoryListener.onLongClickItemImportHistory(lichSuNhapHang));
+        ImportHistory importHistory = importHistories.get(position);
+        if (importHistory == null) return;
+        holder.tvNgayNhap.setText(importHistory.getImportTime());
+        holder.tvNgayCapNhat.setText(importHistory.getUpdateTime());
+        holder.tvSoLuong.setText(String.valueOf(importHistory.getAmount()));
+        holder.itemImportHistoryForeground.setOnLongClickListener(view -> iClickItemImportHistoryListener.onLongClickItemImportHistory(importHistory));
     }
 
     @Override
     public int getItemCount() {
-        return lichSuNhapHangs.size();
+        return importHistories.size();
     }
 
     public static class ImportHistoryViewHolder extends RecyclerView.ViewHolder {

@@ -41,23 +41,28 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/itemeatinghistory_tv_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:drawablePadding="@dimen/margin_5dp"
+                android:gravity="center_vertical"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14sp"
+                app:drawableStartCompat="@drawable/ic_final_state_24px" />
+
+            <TextView
                 android:id="@+id/itemeatinghistory_tv_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center_vertical"
                 android:layout_marginStart="@dimen/margin_5dp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_18sp" />
-
-            <TextView
-                android:id="@+id/itemeatinghistory_tv_result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_20dp"
-                android:drawablePadding="@dimen/margin_5dp"
+                android:drawablePadding="@dimen/margin_10dp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_18sp"
-                app:drawableStartCompat="@drawable/ic_final_state_24px" />
+                app:drawableStartCompat="@drawable/ic_flour_24px"/>
 
         </LinearLayout>
 
@@ -74,8 +79,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_5dp"
                 android:drawablePadding="@dimen/pading_5dp"
+                android:gravity="center_vertical"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_14sp"
                 app:drawableStartCompat="@drawable/ic_chart_24px" />
 
             <TextView
@@ -83,9 +89,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_5dp"
+                android:gravity="center_vertical"
                 android:drawablePadding="@dimen/pading_5dp"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_14sp"
                 app:drawableStartCompat="@drawable/ic_create_24px" />
         </LinearLayout>
     </LinearLayout>

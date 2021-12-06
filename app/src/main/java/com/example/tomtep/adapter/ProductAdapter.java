@@ -12,16 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tomtep.Interface.IClickItemProductListener;
 import com.example.tomtep.R;
-import com.example.tomtep.model.SanPham;
+import com.example.tomtep.model.Product;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
-    private final List<SanPham> sanPhams;
+    private final List<Product> products;
     private final IClickItemProductListener iClickItemProductListener;
 
-    public ProductAdapter(List<SanPham> sanPhams, IClickItemProductListener iClickItemProductListener) {
-        this.sanPhams = sanPhams;
+    public ProductAdapter(List<Product> products, IClickItemProductListener iClickItemProductListener) {
+        this.products = products;
         this.iClickItemProductListener = iClickItemProductListener;
     }
 
@@ -34,28 +34,31 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        SanPham sanPham = sanPhams.get(position);
-        if (sanPham == null) return;
-        holder.tvMaSP.setText(sanPham.getMaSP());
-        holder.tvTenSP.setText(sanPham.getTenSP());
-        holder.tvNCC.setText(sanPham.getTenNCC());
-        holder.tvGiaNhap.setText(String.valueOf(sanPham.getGiaNhap()));
-        holder.tvTonKho.setText(String.valueOf(sanPham.getSoLuong()));
-        holder.imgEnterQuantity.setOnClickListener(view -> iClickItemProductListener.onClickEnterQuatity(sanPham));
-        holder.itemProdcutForeGround.setOnClickListener(view -> iClickItemProductListener.onClickItemProduct(sanPham));
-        holder.itemProdcutForeGround.setOnLongClickListener(view -> iClickItemProductListener.onLongClickItemProduct(sanPham));
+        Product product = products.get(position);
+        if (product == null) return;
+        holder.tvMaSP.setText(product.getKey());
+        holder.tvTenSP.setText(product.getName());
+        holder.tvNCC.setText(product.getSupplier());
+        holder.tvGiaNhap.setText(String.valueOf(product.getImportPrice()));
+        holder.tvTonKho.setText(String.valueOf(product.getAmount()));
+        holder.imgEnterQuantity.setOnClickListener(view -> iClickItemProductListener.onClickEnterQuatity(product));
+        holder.itemProdcutForeGround.setOnClickListener(view -> iClickItemProductListener.onClickItemProduct(product));
+        holder.itemProdcutForeGround.setOnLongClickListener(view -> iClickItemProductListener.onLongClickItemProduct(product));
     }
 
     @Override
     public int getItemCount() {
-        return sanPhams.size();
+        if (products != null) {
+            return products.size();
+        }
+        return 0;
     }
 
     public static final class ProductViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView tvMaSP, tvTenSP, tvNCC, tvGiaNhap, tvTonKho;
         private final ImageButton imgEnterQuantity;
-        public final LinearLayout itemProdcutForeGround,itemProductBackground;
+        public final LinearLayout itemProdcutForeGround, itemProductBackground;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);

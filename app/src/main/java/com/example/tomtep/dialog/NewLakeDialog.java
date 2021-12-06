@@ -15,11 +15,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.tomtep.MainActivity;
 import com.example.tomtep.R;
-import com.example.tomtep.model.Ao;
-import com.example.tomtep.model.CheDoAn;
-import com.example.tomtep.model.SanPham;
-import com.example.tomtep.model.TaiKhoan;
+import com.example.tomtep.model.Diet;
+import com.example.tomtep.model.Lake;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -62,20 +61,36 @@ public class NewLakeDialog extends Dialog {
         if (strMoTa.isEmpty() || strTenAo.isEmpty() || strMaAo.isEmpty()) {
             Toast.makeText(context, R.string.all_toast_lackofinformation, Toast.LENGTH_SHORT).show();
         } else {
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("TaiKhoan");
-            String id = databaseReference.child(TaiKhoan.getInstance().getId()).child("aos").push().getKey();
-            CheDoAn cheDoAn = intitDeitForLake();
-            Ao ao = new Ao(id, strMaAo, strTenAo, strMoTa, strNgayTao, strNgayThu, cheDoAn, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, false);
-            assert id != null;
-            databaseReference.child(TaiKhoan.getInstance().getId()).child("aos").child(id).setValue(ao);
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Lake");
+            String lakeId = databaseReference.push().getKey();
+            Lake lake = new Lake();
+            lake.setId(lakeId);
+            lake.setKey(strMaAo);
+            lake.setName(strTenAo);
+            lake.setAccountId(MainActivity.account.getId());
+            lake.setDescription(strMoTa);
+            lake.setCreationTime(strNgayTao);
+            lake.setHarvestTime(strNgayThu);
+            lake.setCondition(false);
+            lake.setDiet(createDietForLake(lake));
+            lake.setDeleted(false);
+            databaseReference.child(lake.getId()).setValue(lake);
             this.dismiss();
         }
 
 
     }
 
-    private CheDoAn intitDeitForLake() {
-        return new CheDoAn(initDefaultProductForDiet(), 0, initDefaultTimeFrameForDiet(), "90", false);
+    private Diet createDietForLake(Lake lake) {
+        Diet diet = new Diet();
+        diet.setLakeId(lake.getId());
+        diet.setFrame(initDefaultTimeFrameForDiet());
+        diet.setTime(0);
+        diet.setAmount(-1);
+        diet.setProductId("default_product");
+        diet.setProductName("Sản phẩm cho ăn mặt định");
+        diet.setCondition(false);
+        return diet;
     }
 
     private List<String> initDefaultTimeFrameForDiet() {
@@ -85,10 +100,6 @@ public class NewLakeDialog extends Dialog {
         listTimFrame.add("13:00");
         listTimFrame.add("14:00");
         return listTimFrame;
-    }
-
-    private SanPham initDefaultProductForDiet() {
-        return new SanPham("default_product", "DP", "Sản phẩm cho ăn mặc định", "TOMTEP", 0, "", 0, new ArrayList<>(), false);
     }
 
     private void onClickCancelDialog() {

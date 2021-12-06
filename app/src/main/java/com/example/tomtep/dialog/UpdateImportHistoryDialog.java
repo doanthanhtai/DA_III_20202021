@@ -16,40 +16,42 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.tomtep.R;
-import com.example.tomtep.model.LichSuNhapHang;
-import com.example.tomtep.model.SanPham;
-import com.example.tomtep.model.TaiKhoan;
+import com.example.tomtep.model.ImportHistory;
+import com.example.tomtep.model.Product;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UpdateImportHistoryDialog extends Dialog {
     private TextView tvMaSPM, tvTenSP, tvNgayTao, tvNgayCapNhat;
     private EditText edtSoLuong;
     private Button btnLuu, btnDong;
     private final Context context;
-    private final SanPham sanPham;
-    private final LichSuNhapHang lichSuNhapHang;
-
-    public UpdateImportHistoryDialog(@NonNull Context context, SanPham sanPham, LichSuNhapHang lichSuNhapHang) {
+    private final ImportHistory importHistory;
+    private final Product product;
+    public UpdateImportHistoryDialog(@NonNull Context context, Product product, ImportHistory importHistory) {
         super(context);
         this.context = context;
-        this.sanPham = sanPham;
-        this.lichSuNhapHang = lichSuNhapHang;
+        this.importHistory = importHistory;
+        this.product = product;
         initView();
         setDefaultData();
         setEvent();
     }
 
     private void setDefaultData() {
-        tvMaSPM.setText(sanPham.getMaSP());
-        tvTenSP.setText(sanPham.getTenSP());
-        tvNgayTao.setText(lichSuNhapHang.getThoiGianNhap());
-        getTimeUpdate();
-        edtSoLuong.setHint(sanPham.getDonViDung());
-        edtSoLuong.setText(String.valueOf(lichSuNhapHang.getSoLuong()));
+        tvMaSPM.setText(product.getKey());
+        tvTenSP.setText(product.getName());
+        tvNgayTao.setText(importHistory.getImportTime());
+        tvNgayCapNhat.setText(getTimeUpdate());
+        edtSoLuong.setHint(product.getMeasure());
+        edtSoLuong.setText(String.valueOf(importHistory.getAmount()));
     }
 
     private void setEvent() {
@@ -57,9 +59,8 @@ public class UpdateImportHistoryDialog extends Dialog {
         btnLuu.setOnClickListener(v -> onClickUpdateImportHistory());
     }
 
-    private void getTimeUpdate() {
-        String data = DateFormat.getInstance().format(Calendar.getInstance().getTime());
-        tvNgayCapNhat.setText(data);
+    private String getTimeUpdate() {
+        return DateFormat.getInstance().format(Calendar.getInstance().getTime());
     }
 
     private void onClickUpdateImportHistory() {
@@ -69,22 +70,24 @@ public class UpdateImportHistoryDialog extends Dialog {
         }
         int quantity = Integer.parseInt(edtSoLuong.getText().toString().trim());
         if (quantity > 0) {
-            sanPham.setSoLuong(sanPham.getSoLuong() + quantity - lichSuNhapHang.getSoLuong());
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("TaiKhoan/" + TaiKhoan.getInstance().getId() + "/sanPhams/" + sanPham.getId());
-            databaseReference.child("soLuong").setValue(sanPham.getSoLuong()).addOnCompleteListener(task -> {
-                String thoiGianCapNhat = DateFormat.getInstance().format(Calendar.getInstance().getTime());
-                lichSuNhapHang.setThoiGianCapNhat(thoiGianCapNhat);
-                lichSuNhapHang.setSoLuong(quantity);
-                databaseReference.child("lichSuNhapHangs").child(lichSuNhapHang.getId()).setValue(lichSuNhapHang).addOnCompleteListener(task1 -> {
-                    Toast.makeText(context, R.string.updateimporthistory_toast_succesful, Toast.LENGTH_SHORT).show();
-                    dismiss();
-                });
-            });
+
+            product.setAmount(product.getAmount() + quantity - importHistory.getAmount());
+            importHistory.setAmount(quantity);
+
+            Map<String,Object> map = new HashMap<>();
+            map.put("amount",importHistory.getAmount());
+            map.put("updateTime",DateFormat.getInstance().format(Calendar.getInstance().getTime()));
+
+            FirebaseDatabase.getInstance().getReference("ImportHistory").child(importHistory.getId()).updateChildren(map)
+                    .addOnCompleteListener(task -> FirebaseDatabase.getInstance().getReference("Product").child(product.getId()).child("amount").setValue(product.getAmount())
+                            .addOnCompleteListener(task1 -> {
+                Toast.makeText(context, R.string.updateimporthistory_toast_succesful, Toast.LENGTH_SHORT).show();
+                dismiss();
+            }));
         } else {
             Toast.makeText(context, R.string.enterquantityproduct_toast_quantityinvalid, Toast.LENGTH_SHORT).show();
         }
     }
-
 
     private void onClickCancelDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context)

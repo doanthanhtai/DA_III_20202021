@@ -135,11 +135,17 @@
     <string name="dietfagment_notification_titile">Tôm đã ăn xong</string>
     <string name="dietfragment_toast_turnonsuccess">Đã bật cho ăn trên ao</string>
     <string name="dietfragment_toast_turnoffsuccess">Đã tắt cho ăn trên ao</string>
-    <string name="dietfragment_kqchoan_default">Chưa cập nhật</string>
+    <string name="dietfragment_result_default">Chưa cập nhật</string>
     <string name="itemeatinghistory_tv_deleted">Lịch sử sẽ bị xóa!</string>
     <string name="dietfragment_toast_lackproduct">Sản phẩm hiện không còn đủ số lượng</string>
     <string name="dialogupdateeatinghistory_title">TÌNH TRẠNG TÔM</string>
     <string name="updateeatinghistory_toast_success">Cập nhật thành công</string>
+    <string name="dietfragment_toast_nonproduct">Sản phẩm cho ăn không còn tồn tại\nVui lòng cập nhật sản phẩm mới.</string>
+    <string name="all_title_dialogconfirm">Xác nhận</string>
+    <string name="dietfragment_message_confirm_turnoff">"Kết thúc cho ăn trên ao: "</string>
+    <string name="dietfragment_message_confirm_turnon">"Bật cho ăn trên ao: "</string>
+    <string name="unit_spinner_title">Chọn đơn vị dùng cho sản phẩm</string>
+    <string name="dialognewproduct_toast_unitinvalid">Vui lòng chọn đơn vị dùng hợp lệ</string>
 
 
 </resources>

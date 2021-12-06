@@ -11,9 +11,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.tomtep.ExpandDietActivity;
+import com.example.tomtep.MainActivity;
 import com.example.tomtep.R;
-import com.example.tomtep.dialog.UpdateEatingHistoryDialog;
-import com.example.tomtep.model.TaiKhoan;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
@@ -23,11 +22,12 @@ public class DietReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("EATED")) {
-            String aoId = intent.getStringExtra("ao_id");
+            String lakeId = intent.getStringExtra("lake_id");
             String strTitle = intent.getStringExtra("title");
             String strContent = intent.getStringExtra("content");
             Intent i = new Intent(context, ExpandDietActivity.class);
-            i.setAction(aoId);
+            i.setAction(lakeId);
+            i.putExtra("accountId", MainActivity.account.getId());
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_IMMUTABLE);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID_1)
@@ -41,17 +41,16 @@ public class DietReceiver extends BroadcastReceiver {
 
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
             notificationManagerCompat.notify(getNotificaitonId(), builder.build());
-            turnOffDiet(aoId);
+            turnOffDiet(lakeId);
         }
     }
 
-    private void turnOffDiet(String aoId) {
-        FirebaseDatabase.getInstance().getReference("TaiKhoan").child(TaiKhoan.getInstance().getId())
-                .child("aos")
-                .child(aoId)
-                .child("cheDoAn")
-                .child("trangThai")
+    private void turnOffDiet(String lakeId) {
+        FirebaseDatabase.getInstance().getReference("Lake").child(lakeId)
+                .child("diet")
+                .child("condition")
                 .setValue(false).addOnCompleteListener(task -> {
+
         });
     }
 

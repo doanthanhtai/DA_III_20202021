@@ -18,10 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.tomtep.R;
-import com.example.tomtep.model.LichSuNhapHang;
-import com.example.tomtep.model.SanPham;
-import com.example.tomtep.model.TaiKhoan;
-import com.google.firebase.database.DatabaseReference;
+import com.example.tomtep.model.ImportHistory;
+import com.example.tomtep.model.Product;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
@@ -35,22 +33,22 @@ public class EnterQuantityProductDialog extends Dialog {
     private EditText edtSoLuong;
     private Button btnDong, btnNhap;
     private final Context context;
-    private SanPham sanPham;
-    private final List<SanPham> sanPhams;
+    private Product product;
+    private final List<Product> products;
 
-    public EnterQuantityProductDialog(@NonNull Context context, SanPham sanPham, List<SanPham> sanPhams) {
+    public EnterQuantityProductDialog(@NonNull Context context, Product product, List<Product> products) {
         super(context);
         this.context = context;
-        this.sanPham = sanPham;
-        this.sanPhams = sanPhams;
+        this.product = product;
+        this.products = products;
         initView();
         setDataForSpiner();
         setEvent();
     }
 
     private void setDataForSpiner() {
-        List<String> tenSanPhams = new ArrayList<>();
-        if (sanPhams == null) {
+        List<String> productNames = new ArrayList<>();
+        if (products == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context)
                     .setTitle(R.string.all_title_annoucement)
                     .setMessage(R.string.updatedietdialog_message_notfoundproduct)
@@ -60,18 +58,18 @@ public class EnterQuantityProductDialog extends Dialog {
         }
 
         //Tạo mảng string từ mảng sản phẩm
-        for (SanPham sanPham : sanPhams) {
-            tenSanPhams.add(sanPham.getMaSP() + " - " + sanPham.getTenSP());
+        for (Product product : products) {
+            productNames.add(product.getKey() + " - " + product.getName());
         }
         //Cài đặt và đổ dữ liệu cho spiner
-        ArrayAdapter<String> spinerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, tenSanPhams);
+        ArrayAdapter<String> spinerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, productNames);
         spinerAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         sprSanPham.setAdapter(spinerAdapter);
         sprSanPham.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                sanPham = sanPhams.get(i);
-                edtSoLuong.setHint(sanPhams.get(i).getDonViDung());
+                product = products.get(i);
+                edtSoLuong.setHint(products.get(i).getMeasure());
             }
 
             @Override
@@ -79,9 +77,8 @@ public class EnterQuantityProductDialog extends Dialog {
 
             }
         });
-        if (sanPham != null) {
-            sprSanPham.setSelection(sanPhams.indexOf(sanPham));
-        }
+
+        sprSanPham.setSelection(products.indexOf(product));
     }
 
     private void setEvent() {
@@ -96,21 +93,21 @@ public class EnterQuantityProductDialog extends Dialog {
         }
         int quantity = Integer.parseInt(edtSoLuong.getText().toString().trim());
         if (quantity > 0) {
-            sanPham.setSoLuong(sanPham.getSoLuong() + quantity);
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("TaiKhoan/" + TaiKhoan.getInstance().getId() + "/sanPhams/" + sanPham.getId());
-            databaseReference.setValue(sanPham).addOnCompleteListener(task -> {
-                String thoiGianTao = DateFormat.getInstance().format(Calendar.getInstance().getTime());
-                List<LichSuNhapHang> lichSuNhapHangs = new ArrayList<>();
-                if (sanPham.getLichSuNhapHangs() != null) {
-                    lichSuNhapHangs = sanPham.getLichSuNhapHangs();
-                }
-                LichSuNhapHang lichSuNhapHang = new LichSuNhapHang(String.valueOf(lichSuNhapHangs.size()), quantity, thoiGianTao, thoiGianTao, false);
-                lichSuNhapHangs.add(lichSuNhapHang);
+            String importTime = DateFormat.getInstance().format(Calendar.getInstance().getTime());
+            product.setAmount(product.getAmount() + quantity);
+            FirebaseDatabase.getInstance().getReference("Product").child(product.getId()).child("amount").setValue(product.getAmount());
 
-                databaseReference.child("lichSuNhapHangs").child(lichSuNhapHang.getId()).setValue(lichSuNhapHang).addOnCompleteListener(task1 -> {
-                    Toast.makeText(context, R.string.enterquantityproduct_toast_succesful, Toast.LENGTH_SHORT).show();
-                    dismiss();
-                });
+            ImportHistory importHistory = new ImportHistory();
+            importHistory.setId(FirebaseDatabase.getInstance().getReference("ImportHistory").push().getKey());
+            importHistory.setProductId(product.getId());
+            importHistory.setAmount(quantity);
+            importHistory.setImportTime(importTime);
+            importHistory.setUpdateTime(importTime);
+            importHistory.setDeleted(false);
+
+            FirebaseDatabase.getInstance().getReference("ImportHistory").child(importHistory.getId()).setValue(importHistory).addOnCompleteListener(task -> {
+                Toast.makeText(context, R.string.enterquantityproduct_toast_succesful, Toast.LENGTH_SHORT).show();
+                dismiss();
             });
         } else {
             Toast.makeText(context, R.string.enterquantityproduct_toast_quantityinvalid, Toast.LENGTH_SHORT).show();

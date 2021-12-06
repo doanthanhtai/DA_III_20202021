@@ -11,18 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tomtep.Interface.IClickItemLakeListener;
 import com.example.tomtep.R;
-import com.example.tomtep.model.Ao;
-import com.example.tomtep.model.LichSuMoiTruong;
+import com.example.tomtep.model.Lake;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LakeAdapter extends RecyclerView.Adapter<LakeAdapter.LakeViewHolder> {
-    private final List<Ao> aos;
+    private final List<Lake> lakes;
     private final IClickItemLakeListener iClickItemLakeListener;
+    private final String[] listCS = new String[3];
 
-    public LakeAdapter(List<Ao> aos, IClickItemLakeListener iClickItemLakeListener) {
-        this.aos = aos;
+    public LakeAdapter(List<Lake> lakes, IClickItemLakeListener iClickItemLakeListener) {
+        this.lakes = lakes;
         this.iClickItemLakeListener = iClickItemLakeListener;
     }
 
@@ -30,50 +29,57 @@ public class LakeAdapter extends RecyclerView.Adapter<LakeAdapter.LakeViewHolder
     @NonNull
     @Override
     public LakeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new LakeViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_lake, parent, false));
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_lake, parent, false);
+        return new LakeViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull LakeViewHolder holder, int position) {
-        Ao ao = aos.get(position);
-        if (ao == null) {
-            return;
-        }
+        Lake lake = lakes.get(position);
+        if (lake == null) return;
 
-        holder.tvMaAo.setText(ao.getMaAo());
-        holder.tvTenAo.setText(ao.getTenAo());
-        holder.tvNgayTao.setText(ao.getNgayTao());
-        holder.tvTrangThai.setText(getTrangThaiAo(ao.isTrangThai()));
-        holder.tvChiPhi.setText(getChiPhiCuaAo(ao));
-        holder.tvPH.setText(getChiSoMoiTruongMoiNhat(ao).get(0));
-        holder.tvOxy.setText(getChiSoMoiTruongMoiNhat(ao).get(1));
-        holder.tvDoMan.setText(getChiSoMoiTruongMoiNhat(ao).get(2));
-        holder.relativeLayout.setOnClickListener(v -> iClickItemLakeListener.onClick(ao));
-        holder.relativeLayout.setOnLongClickListener(view -> {
-            iClickItemLakeListener.onLongClick(ao);
-            return false;
-        });
+        listCS[0] = "7";
+        listCS[1] = "2 mg/l";
+        listCS[2] = "2 ‰";
+        holder.tvMaAo.setText(lake.getKey());
+        holder.tvTenAo.setText(lake.getName());
+        holder.tvNgayTao.setText(lake.getCreationTime());
+        holder.tvTrangThai.setText(getTrangThaiAo(lake.isCondition()));
+        holder.tvChiPhi.setText(getChiPhiCuaAo(lake));
+        holder.tvPH.setText(listCS[0]);
+        holder.tvOxy.setText(listCS[1]);
+        holder.tvDoMan.setText(listCS[2]);
+        holder.relativeLayout.setOnClickListener(v -> iClickItemLakeListener.onClick(lake));
+        holder.relativeLayout.setOnLongClickListener(view -> iClickItemLakeListener.onLongClick(lake));
     }
 
-    private String getChiPhiCuaAo(Ao ao) {
+    private String getChiPhiCuaAo(Lake lake) {
         return "120000000 đ";
     }
 
-    private List<String> getChiSoMoiTruongMoiNhat(Ao ao) {
-        List<String> listChiSo = new ArrayList<>();
-        List<LichSuMoiTruong> lichSuMoiTruongs = ao.getLichSuMoiTruongs();
-        if (lichSuMoiTruongs == null) {
-            listChiSo.add(0, "7");
-            listChiSo.add(1, "2 mg/l");
-            listChiSo.add(2, "2 ‰");
-            return listChiSo;
-        }
-        LichSuMoiTruong lichSuMoiTruong = lichSuMoiTruongs.get(lichSuMoiTruongs.size() - 1);
-        listChiSo.add(0, String.valueOf(lichSuMoiTruong.getpH()));
-        listChiSo.add(1, lichSuMoiTruong.getoXy() + " mg/l");
-        listChiSo.add(2, lichSuMoiTruong.getDoMan() + " ‰");
-        return listChiSo;
-    }
+//    private void getCurrentEnvironment(Lake lake) {
+//        FirebaseDatabase.getInstance().getReference("EnvironmentHistory").orderByChild("lakeId").equalTo(lake.getId()).limitToLast(1)
+//                .addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        EnvironmentHistory environmentHistory = snapshot.getValue(EnvironmentHistory.class);
+//                        if (environmentHistory == null) {
+//                            listCS[0] = "7";
+//                            listCS[1] = "2 mg/l";
+//                            listCS[2] = "2 ‰";
+//                        } else {
+//                            listCS[0] = String.valueOf(environmentHistory.getpH());
+//                            listCS[1] = environmentHistory.getoXy() + " mg/l";
+//                            listCS[2] = environmentHistory.getSalinity() + " ‰";
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+//    }
 
 
     //Nếu ao có trạng thái là true thì ao hiện tại đang còn nuôi và ngược lại thì đã thu hoạch
@@ -86,8 +92,8 @@ public class LakeAdapter extends RecyclerView.Adapter<LakeAdapter.LakeViewHolder
 
     @Override
     public int getItemCount() {
-        if (aos != null) {
-            return aos.size();
+        if (lakes != null) {
+            return lakes.size();
         }
         return 0;
     }

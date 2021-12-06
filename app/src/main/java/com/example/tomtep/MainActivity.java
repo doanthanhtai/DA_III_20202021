@@ -1,9 +1,6 @@
 package com.example.tomtep;
 
-import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,16 +20,20 @@ import com.example.tomtep.adapter.MainViewPagerAdapter;
 import com.example.tomtep.dialog.EnterQuantityProductDialog;
 import com.example.tomtep.dialog.NewLakeDialog;
 import com.example.tomtep.dialog.NewProductDailog;
-import com.example.tomtep.dialog.UpdateDietDialog;
-import com.example.tomtep.fragment.ProductFragment;
-import com.example.tomtep.service.DietReceiver;
+import com.example.tomtep.model.Account;
+import com.example.tomtep.model.Product;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,19 +43,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
     private Toolbar toolbar;
+    public static Account account;
+    private List<Product> products;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        initAccount();
+        products = new ArrayList<>();
+        addChildEventListener();
         initView();
         settupToolbar();
         setEvent();
 
     }
 
-    //    //Cài đặt hiển thị toolbar
+    private void initAccount() {
+        account = new Account();
+        if (FirebaseAuth.getInstance().getCurrentUser() == null)
+            startActivity(new Intent(this, SignUpAcitivity.class));
+        account.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        account.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        account.setDeleted(false);
+    }
+
     private void settupToolbar() {
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.main_navigation_drawer_open, R.string.main_navigation_drawer_close);
@@ -66,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setEvent() {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-
             if (id == R.id.bnav_lake) {
                 viewPager2.setCurrentItem(0);
             } else if (id == R.id.bnav_diet) {
@@ -82,23 +94,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                switch (position) {
-                    default:
-                        bottomNavigationView.getMenu().findItem(R.id.bnav_lake).setChecked(true);
-                        onCreateOptionsMenu(toolbar.getMenu());
-                        break;
-                    case 1:
-                        bottomNavigationView.getMenu().findItem(R.id.bnav_diet).setChecked(true);
-                        onCreateOptionsMenu(toolbar.getMenu());
-                        break;
-                    case 2:
-                        bottomNavigationView.getMenu().findItem(R.id.bnav_product).setChecked(true);
-                        onCreateOptionsMenu(toolbar.getMenu());
-                        break;
-                    case 3:
-                        bottomNavigationView.getMenu().findItem(R.id.bnav_statistics).setChecked(true);
-                        onCreateOptionsMenu(toolbar.getMenu());
-                        break;
+                if (position == 0) {
+                    bottomNavigationView.getMenu().findItem(R.id.bnav_lake).setChecked(true);
+                    onCreateOptionsMenu(toolbar.getMenu());
+                } else if (position == 1) {
+                    bottomNavigationView.getMenu().findItem(R.id.bnav_diet).setChecked(true);
+                    onCreateOptionsMenu(toolbar.getMenu());
+                } else if (position == 2) {
+                    bottomNavigationView.getMenu().findItem(R.id.bnav_product).setChecked(true);
+                    onCreateOptionsMenu(toolbar.getMenu());
+                } else {
+                    bottomNavigationView.getMenu().findItem(R.id.bnav_statistics).setChecked(true);
+                    onCreateOptionsMenu(toolbar.getMenu());
                 }
             }
         });
@@ -128,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.product_new) {
             new NewProductDailog(this).show();
         } else if (id == R.id.product_enterquantity) {
-            new EnterQuantityProductDialog(this, null, ProductFragment.sanPhams).show();
+            new EnterQuantityProductDialog(this, null, products).show();
         }
         return true;
     }
@@ -186,10 +193,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setTitle(R.string.all_title_dialogconfirmdelete)
                 .setMessage(getResources().getText(R.string.main_message_confirmdeleteaccount) + firebaseUser.getEmail())
                 .setPositiveButton(getResources().getText(R.string.all_button_agree_text), (dialogInterface, i) -> {
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("TaiKhoan/" + firebaseUser.getUid());
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Account/" + account.getId());
                     firebaseUser.delete().addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            databaseReference.child("daXoa").setValue(true);
+                            account.setDeleted(true);
+                            databaseReference.child("deleted").setValue(account.isDeleted());
                             Toast.makeText(MainActivity.this, getResources().getText(R.string.main_toast_deleteaccountsuccess), Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(MainActivity.this, SignInActivity.class));
                             finishAffinity();
@@ -212,4 +220,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    private void addChildEventListener() {
+        FirebaseDatabase.getInstance().getReference("Product").orderByChild("accountId").equalTo(MainActivity.account.getId())
+                .addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot snapshot, @com.google.firebase.database.annotations.Nullable String previousChildName) {
+                        Product product = snapshot.getValue(Product.class);
+                        if (product == null || product.isDeleted()) return;
+                        products.add(product);
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot snapshot, @com.google.firebase.database.annotations.Nullable String previousChildName) {
+                        Product product = snapshot.getValue(Product.class);
+                        if (product == null) return;
+                        for (int i = products.size() - 1; i >= 0; i--) {
+                            if (products.get(i).getId().equals(product.getId())) {
+                                if (product.isDeleted()) {
+                                    products.remove(i);
+                                    return;
+                                }
+                                products.set(i, product);
+                                return;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                        Product product = snapshot.getValue(Product.class);
+                        if (product == null) return;
+                        for (int i = products.size() - 1; i >= 0; i--) {
+                            if (products.get(i).getId().equals(product.getId())) {
+                                products.remove(i);
+                                return;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot snapshot, @com.google.firebase.database.annotations.Nullable String previousChildName) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
 }

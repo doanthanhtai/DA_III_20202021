@@ -19,10 +19,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.tomtep.MainActivity;
 import com.example.tomtep.R;
-import com.example.tomtep.model.SanPham;
-import com.example.tomtep.model.TaiKhoan;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.tomtep.model.Product;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +30,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class NewProductDailog extends Dialog {
 
@@ -39,45 +37,42 @@ public class NewProductDailog extends Dialog {
     private Spinner sprDonVi;
     private Button btnDong, btnThem;
     private final Context context;
-    private final List<String> listDonVi;
-    private final SanPham sanPham;
+    private final List<String> units;
+    private final Product product;
 
     public NewProductDailog(@NonNull Context context) {
         super(context);
         this.context = context;
-        listDonVi = new ArrayList<>();
-        sanPham = new SanPham();
+        units = new ArrayList<>();
+        product = new Product();
+        addChildEventListener();
         initView();
-        getDonVi();
         setDataForSpiner();
         setEvent();
     }
 
-    private void getDonVi() {
-        FirebaseDatabase.getInstance().getReference("DonViDung").addChildEventListener(new ChildEventListener() {
+    private void addChildEventListener() {
+        FirebaseDatabase.getInstance().getReference("Unit").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String newDonVi = snapshot.getValue(String.class);
-                if (newDonVi == null) {
-                    return;
-                }
-                listDonVi.add(newDonVi);
+                String unit = snapshot.getValue(String.class);
+                if (unit == null) return;
+                units.add(unit);
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String donVi = snapshot.getValue(String.class);
-                assert donVi != null;
-                int changeIndex = Integer.parseInt(donVi);
-                listDonVi.set(changeIndex, donVi);
+                if (snapshot.getKey() == null) return;
+                int index = Integer.parseInt(snapshot.getKey());
+                String unit = snapshot.getValue(String.class);
+                units.set(index, unit);
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                String donVi = snapshot.getValue(String.class);
-                assert donVi != null;
-                int changeIndex = Integer.parseInt(donVi);
-                listDonVi.remove(changeIndex);
+                if (snapshot.getKey() == null) return;
+                int index = Integer.parseInt(snapshot.getKey());
+                units.remove(index);
             }
 
             @Override
@@ -118,36 +113,35 @@ public class NewProductDailog extends Dialog {
             edtGiaNhap.setHintTextColor(context.getColor(R.color.red));
             return;
         }
-        if (sanPham.getDonViDung().equals(listDonVi.get(0))) {
-            Toast.makeText(context, R.string.dialognewproduct_toast_donvidunginvalid, Toast.LENGTH_SHORT).show();
-            return;
-        }
+
         float giaNhap = Float.parseFloat(strGiaNhap);
         if (giaNhap < 0) {
             Toast.makeText(context, R.string.dialognewproduct_toast_gianhapinvalid, Toast.LENGTH_SHORT).show();
             return;
         }
-
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("TaiKhoan").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child("sanPhams");
-        String key = databaseReference.push().getKey();
-        if (key == null) {
+        if (sprDonVi.getSelectedItemPosition() == 0) {
+            Toast.makeText(context, R.string.dialognewproduct_toast_unitinvalid, Toast.LENGTH_SHORT).show();
             return;
         }
-        sanPham.setId(key);
-        sanPham.setMaSP(maSP);
-        sanPham.setTenSP(tenSP);
-        sanPham.setTenNCC(tenNCC);
-        sanPham.setGiaNhap(giaNhap);
-        sanPham.setSoLuong(0);
-        sanPham.setLichSuNhapHangs(new ArrayList<>());
-        sanPham.setDaXoa(false);
-        FirebaseDatabase.getInstance().getReference("TaiKhoan")
-                .child(TaiKhoan.getInstance().getId())
-                .child("sanPhams")
-                .child(key)
-                .setValue(sanPham);
-        Toast.makeText(context,R.string.newproduct_succesful,Toast.LENGTH_SHORT).show();
-        this.dismiss();
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Product");
+        String productId = databaseReference.push().getKey();
+        if (productId == null) {
+            return;
+        }
+        product.setId(productId);
+        product.setAccountId(MainActivity.account.getId());
+        product.setKey(maSP);
+        product.setName(tenSP);
+        product.setSupplier(tenNCC);
+        product.setImportPrice(giaNhap);
+        product.setAmount(0);
+        product.setDeleted(false);
+        FirebaseDatabase.getInstance().getReference("Product").child(productId).setValue(product).addOnCompleteListener(task -> {
+            Toast.makeText(context, R.string.newproduct_succesful, Toast.LENGTH_SHORT).show();
+            dismiss();
+        });
+
     }
 
     private void onClickCancelNewProdcut() {
@@ -185,7 +179,7 @@ public class NewProductDailog extends Dialog {
     }
 
     private void setDataForSpiner() {
-        if (listDonVi == null) {
+        if (units == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context)
                     .setTitle(R.string.all_title_annoucement)
                     .setMessage(R.string.updatedietdialog_message_notfounddonvi)
@@ -193,17 +187,16 @@ public class NewProductDailog extends Dialog {
             builder.create().show();
             return;
         }
-
-        listDonVi.add("Chọn đơn vị dùng cho sản phẩm");
+        units.add((String) context.getText(R.string.unit_spinner_title));
 
         //Cài đặt và đổ dữ liệu cho spiner
-        ArrayAdapter<String> spinerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, listDonVi);
+        ArrayAdapter<String> spinerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, units);
         spinerAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         sprDonVi.setAdapter(spinerAdapter);
         sprDonVi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                sanPham.setDonViDung(listDonVi.get(i));
+                product.setMeasure(units.get(i));
             }
 
             @Override

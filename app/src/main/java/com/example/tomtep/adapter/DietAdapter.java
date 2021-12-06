@@ -12,17 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tomtep.Interface.IClickItemDietListener;
 import com.example.tomtep.R;
-import com.example.tomtep.model.Ao;
-import com.example.tomtep.model.CheDoAn;
+import com.example.tomtep.model.Diet;
+import com.example.tomtep.model.Lake;
 
 import java.util.List;
 
 public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder> {
-    private final List<Ao> aos;
+    private final List<Lake> lakes;
     private final IClickItemDietListener iClickItemDietListener;
 
-    public DietAdapter(List<Ao> aos, IClickItemDietListener iClickItemDietListener) {
-        this.aos = aos;
+    public DietAdapter(List<Lake> lakes, IClickItemDietListener iClickItemDietListener) {
+        this.lakes = lakes;
         this.iClickItemDietListener = iClickItemDietListener;
     }
 
@@ -34,35 +34,33 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull DietViewHolder holder, int position) {
-        Ao ao = aos.get(position);
-        if (ao == null) {
-            return;
-        }
-        CheDoAn cheDoAn = ao.getCheDoAn();
+        Lake lake = lakes.get(position);
+        Diet diet = lake.getDiet();
+        if (diet == null) return;
 
-        holder.tvMaAo.setText(ao.getMaAo());
-        holder.tvTrangThai.setText(getTrangThaiCheDoAn(cheDoAn.isTrangThai()));
-        holder.tvTenSanPham.setText(cheDoAn.getSanPhamChoAn().getTenSP());
-        holder.tvDemThoiGian.setText(cheDoAn.getThoiGianChoAn());
-        if (cheDoAn.getKhungGioChoAn() != null) {
-            holder.tvKhungGioAn.setText(cheDoAn.getKhungGioChoAn().toString());
+        holder.tvMaAo.setText(lake.getKey());
+        holder.tvTrangThai.setText(getTrangThaiCheDoAn(diet.isCondition()));
+        holder.tvTenSanPham.setText(diet.getProductName());
+        holder.tvDemThoiGian.setText(String.valueOf(diet.getTime()));
+        if (diet.getFrame() != null) {
+            holder.tvKhungGioAn.setText(diet.getFrame().toString());
         } else {
             holder.tvKhungGioAn.setText("[....]");
         }
 
-        holder.switchFeed.setChecked(cheDoAn.isTrangThai());
-        holder.relativeLayout.setOnClickListener(v -> iClickItemDietListener.onClick(ao));
+        holder.switchFeed.setChecked(diet.isCondition());
+        holder.relativeLayout.setOnClickListener(v -> iClickItemDietListener.onClick(diet));
         holder.relativeLayout.setOnLongClickListener(v -> {
-            iClickItemDietListener.onLongClick(ao);
+            iClickItemDietListener.onLongClick(diet);
             return false;
         });
-        holder.switchFeed.setOnClickListener(view -> iClickItemDietListener.onChoAn(ao,holder.switchFeed.isChecked()));
+        holder.switchFeed.setOnClickListener(view -> iClickItemDietListener.onClickFeeding(diet, holder.switchFeed.isChecked()));
     }
 
     @Override
     public int getItemCount() {
-        if (aos != null) {
-            return aos.size();
+        if (lakes != null) {
+            return lakes.size();
         }
         return 0;
     }

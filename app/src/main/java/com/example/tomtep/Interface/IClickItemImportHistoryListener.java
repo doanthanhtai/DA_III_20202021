@@ -1,7 +1,9 @@
 package com.example.tomtep.Interface;
 
-import com.example.tomtep.model.LichSuNhapHang;
+import android.provider.ContactsContract;
+
+import com.example.tomtep.model.ImportHistory;
 
 public interface IClickItemImportHistoryListener {
-    boolean onLongClickItemImportHistory(LichSuNhapHang lichSuNhapHang);
+    boolean onLongClickItemImportHistory(ImportHistory importHistory);
 }

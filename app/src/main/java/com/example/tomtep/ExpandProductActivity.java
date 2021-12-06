@@ -19,13 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tomtep.Interface.IClickItemImportHistoryListener;
 import com.example.tomtep.adapter.ImportHistoryAdapter;
 import com.example.tomtep.dialog.UpdateImportHistoryDialog;
-import com.example.tomtep.model.LichSuNhapHang;
-import com.example.tomtep.model.SanPham;
-import com.example.tomtep.model.TaiKhoan;
+import com.example.tomtep.model.ImportHistory;
+import com.example.tomtep.model.Product;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -35,21 +33,19 @@ public class ExpandProductActivity extends AppCompatActivity implements IClickIt
 
     private ImportHistoryAdapter importHistoryAdapter;
     private RecyclerView rcvImportHistory;
-    private List<LichSuNhapHang> lichSuNhapHangs;
+    private List<ImportHistory> importHistories;
     private Toolbar toolbar;
-    private SanPham sanPham;
+    private Product product;
     private Context context;
-    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expanded_product);
-        lichSuNhapHangs = new ArrayList<>();
+        importHistories = new ArrayList<>();
         this.context = this;
-        sanPham = (SanPham) getIntent().getSerializableExtra("sanpham_from_productfragment");
-        databaseReference = FirebaseDatabase.getInstance().getReference("TaiKhoan/" + TaiKhoan.getInstance().getId() + "/sanPhams/" + sanPham.getId());
-        getLichSuNhapHang();
+        product = (Product) getIntent().getSerializableExtra("product_from_productfragment");
+        getImportHistory();
         initView();
         setSwipeDeleteImportHistory();
         setEvent();
@@ -69,13 +65,13 @@ public class ExpandProductActivity extends AppCompatActivity implements IClickIt
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                LichSuNhapHang lichSuNhapHang = lichSuNhapHangs.get(position);
+                ImportHistory importHistory = importHistories.get(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context)
                         .setTitle(R.string.all_title_dialogconfirmdelete)
-                        .setMessage(lichSuNhapHang.getThoiGianNhap() + lichSuNhapHang.getThoiGianCapNhat() + lichSuNhapHang.getSoLuong())
-                        .setNegativeButton(R.string.all_button_agree_text, (dialogInterface, i) -> databaseReference.child("lichSuNhapHangs").child(lichSuNhapHang.getId()).child("daXoa").setValue(true).addOnCompleteListener(task -> {
-                            sanPham.setSoLuong(sanPham.getSoLuong() - lichSuNhapHang.getSoLuong());
-                            databaseReference.child("soLuong").setValue(sanPham.getSoLuong()).addOnCompleteListener(v -> {
+                        .setMessage(importHistory.getImportTime() + "-" + importHistory.getUpdateTime() + "\nSố lượng " +importHistory.getAmount())
+                        .setNegativeButton(R.string.all_button_agree_text, (dialogInterface, i) -> FirebaseDatabase.getInstance().getReference("ImportHistory").child(importHistory.getId()).child("deleted").setValue(true).addOnCompleteListener(task -> {
+                            product.setAmount(product.getAmount() - importHistory.getAmount());
+                            FirebaseDatabase.getInstance().getReference("Product").child(product.getId()).child("amount").setValue(product.getAmount()).addOnCompleteListener(v -> {
                                 Toast.makeText(context, R.string.expandproduct_toast_deletesuccess, Toast.LENGTH_SHORT).show();
                                 dialogInterface.dismiss();
                             });
@@ -116,16 +112,16 @@ public class ExpandProductActivity extends AppCompatActivity implements IClickIt
         itemTouchHelper.attachToRecyclerView(rcvImportHistory);
     }
 
-    private void getLichSuNhapHang() {
-        databaseReference.child("lichSuNhapHangs").addChildEventListener(new ChildEventListener() {
+    private void getImportHistory() {
+        FirebaseDatabase.getInstance().getReference("ImportHistory").orderByChild("productId").equalTo(product.getId()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                LichSuNhapHang lichSuNhapHang = snapshot.getValue(LichSuNhapHang.class);
-                if (lichSuNhapHang == null) {
+                ImportHistory importHistory = snapshot.getValue(ImportHistory.class);
+                if (importHistory == null) {
                     return;
                 }
-                if (!lichSuNhapHang.isDaXoa()) {
-                    lichSuNhapHangs.add(0, lichSuNhapHang);
+                if (!importHistory.isDeleted()) {
+                    importHistories.add(0, importHistory);
                     importHistoryAdapter.notifyItemChanged(0);
                 }
 
@@ -133,15 +129,13 @@ public class ExpandProductActivity extends AppCompatActivity implements IClickIt
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                LichSuNhapHang lichSuNhapHang = snapshot.getValue(LichSuNhapHang.class);
-                if (lichSuNhapHang == null) {
-                    return;
-                }
-                for (int i = lichSuNhapHangs.size() - 1; i >= 0; i--) {
-                    if (lichSuNhapHangs.get(i).getId().equals(lichSuNhapHang.getId())) {
-                        lichSuNhapHangs.set(i, lichSuNhapHang);
-                        if (lichSuNhapHang.isDaXoa()) {
-                            lichSuNhapHangs.remove(i);
+                ImportHistory importHistory = snapshot.getValue(ImportHistory.class);
+                if (importHistory == null) return;
+                for (int i = importHistories.size() - 1; i >= 0; i--) {
+                    if (importHistories.get(i).getId().equals(importHistory.getId())) {
+                        importHistories.set(i, importHistory);
+                        if (importHistory.isDeleted()) {
+                            importHistories.remove(i);
                             importHistoryAdapter.notifyItemRemoved(i);
                             return;
                         }
@@ -154,13 +148,11 @@ public class ExpandProductActivity extends AppCompatActivity implements IClickIt
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                LichSuNhapHang lichSuNhapHang = snapshot.getValue(LichSuNhapHang.class);
-                if (lichSuNhapHang == null) {
-                    return;
-                }
-                for (int i = lichSuNhapHangs.size() - 1; i >= 0; i--) {
-                    if (lichSuNhapHangs.get(i).getId().equals(sanPham.getId())) {
-                        lichSuNhapHangs.remove(i);
+                ImportHistory importHistory = snapshot.getValue(ImportHistory.class);
+                if (importHistory == null) return;
+                for (int i = importHistories.size() - 1; i >= 0; i--) {
+                    if (importHistories.get(i).getId().equals(importHistory.getId())) {
+                        importHistories.remove(i);
                         importHistoryAdapter.notifyItemChanged(i);
                         return;
                     }
@@ -182,7 +174,7 @@ public class ExpandProductActivity extends AppCompatActivity implements IClickIt
     private void initView() {
         toolbar = findViewById(R.id.expandproduct_toolbar);
         rcvImportHistory = findViewById(R.id.expandproduct_rcv);
-        importHistoryAdapter = new ImportHistoryAdapter(lichSuNhapHangs, this);
+        importHistoryAdapter = new ImportHistoryAdapter(importHistories, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rcvImportHistory.setLayoutManager(linearLayoutManager);
         RecyclerView.ItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
@@ -192,8 +184,8 @@ public class ExpandProductActivity extends AppCompatActivity implements IClickIt
     }
 
     @Override
-    public boolean onLongClickItemImportHistory(LichSuNhapHang lichSuNhapHang) {
-        new UpdateImportHistoryDialog(this, sanPham, lichSuNhapHang).show();
+    public boolean onLongClickItemImportHistory(ImportHistory importHistory) {
+        new UpdateImportHistoryDialog(this,product, importHistory).show();
         return true;
     }
 }

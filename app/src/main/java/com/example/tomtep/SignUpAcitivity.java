@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tomtep.model.TaiKhoan;
+import com.example.tomtep.model.Account;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -115,8 +115,10 @@ public class SignUpAcitivity extends AppCompatActivity {
         if (tilEmail.getError() == null && tilPassword.getError() == null && tilConfirmPassword.getError() == null && !strEmail.isEmpty() && !strPassword.isEmpty()) {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(strEmail, strPassword).addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
-                    String idTaiKhoan = TaiKhoan.getInstance().getId();
-                    FirebaseDatabase.getInstance().getReference("TaiKhoan").child(idTaiKhoan).setValue(TaiKhoan.getInstance());
+                    if (FirebaseAuth.getInstance().getCurrentUser() == null) return;
+                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    Account account = new Account(userId,strEmail, false);
+                    FirebaseDatabase.getInstance().getReference("Account").child(account.getId()).setValue(account);
                     Toast.makeText(SignUpAcitivity.this, R.string.signup_toast_successful, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SignUpAcitivity.this, MainActivity.class));
                     finishAffinity();

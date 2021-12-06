@@ -19,16 +19,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tomtep.ExpandProductActivity;
 import com.example.tomtep.Interface.IClickItemProductListener;
+import com.example.tomtep.MainActivity;
 import com.example.tomtep.R;
 import com.example.tomtep.adapter.ProductAdapter;
 import com.example.tomtep.dialog.EnterQuantityProductDialog;
 import com.example.tomtep.dialog.UpdateProductDailog;
-import com.example.tomtep.model.SanPham;
-import com.example.tomtep.model.TaiKhoan;
+import com.example.tomtep.model.Product;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -36,18 +35,16 @@ import java.util.List;
 
 public class ProductFragment extends Fragment implements IClickItemProductListener {
     private ProductAdapter productAdapter;
-    public static List<SanPham> sanPhams;
-    public static List<String> donVis;
     private RecyclerView rcvProduct;
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("TaiKhoan/" + TaiKhoan.getInstance().getId() + "/sanPhams");
+    private List<Product> products;
+    private List<String> units;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
-        sanPhams = new ArrayList<>();
-        donVis = new ArrayList<>();
-        getDanhSachSanPham();
-        getDonVis();
+        products = new ArrayList<>();
+        units = new ArrayList<>();
+        addChildEventListener();
         initView(view);
         setSwipeDeleteProduct();
         return view;
@@ -63,12 +60,13 @@ public class ProductFragment extends Fragment implements IClickItemProductListen
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                SanPham sanPham = sanPhams.get(position);
+                Product product = products.get(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
                         .setTitle(R.string.all_title_dialogconfirmdelete)
-                        .setMessage(sanPham.getMaSP() + "-" + sanPham.getTenSP() + getText(R.string.all_message_confirmactiondeleteproduct))
-                        .setNegativeButton(R.string.all_button_agree_text, (dialogInterface, i) -> databaseReference.child(sanPham.getId()).child("daXoa").setValue(true).addOnCompleteListener(task -> {
+                        .setMessage(product.getKey() + "-" + product.getName() + getText(R.string.all_message_confirmactiondeleteproduct))
+                        .setNegativeButton(R.string.all_button_agree_text, (dialogInterface, i) -> FirebaseDatabase.getInstance().getReference("Product").child(product.getId()).child("deleted").setValue(true).addOnCompleteListener(task -> {
                             Toast.makeText(getContext(), R.string.productfragmemt_toast_deletesuccess, Toast.LENGTH_SHORT).show();
+                            productAdapter.notifyItemRemoved(position);
                             dialogInterface.dismiss();
                         }))
                         .setPositiveButton(R.string.all_button_cancel_text, (dialogInterface, i) -> {
@@ -107,113 +105,9 @@ public class ProductFragment extends Fragment implements IClickItemProductListen
         itemTouchHelper.attachToRecyclerView(rcvProduct);
     }
 
-    private void getDonVis() {
-        FirebaseDatabase.getInstance().getReference("DonViDung").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String newDonVi = snapshot.getValue(String.class);
-                if (newDonVi == null) {
-                    return;
-                }
-                donVis.add(newDonVi);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String donVi = snapshot.getValue(String.class);
-                assert donVi != null;
-                int changeIndex = Integer.parseInt(donVi);
-                donVis.set(changeIndex, donVi);
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                String donVi = snapshot.getValue(String.class);
-                assert donVi != null;
-                int changeIndex = Integer.parseInt(donVi);
-                donVis.remove(changeIndex);
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-
-    private void getDanhSachSanPham() {
-
-        databaseReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                SanPham sanPham = snapshot.getValue(SanPham.class);
-                if (sanPham == null) {
-                    return;
-                }
-                if (!sanPham.isDaXoa()) {
-                    sanPhams.add(sanPham);
-                    productAdapter.notifyItemChanged(sanPhams.size() - 1);
-                }
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                SanPham sanPham = snapshot.getValue(SanPham.class);
-                if (sanPham == null) {
-                    return;
-                }
-                for (int i = sanPhams.size() - 1; i >= 0; i--) {
-                    if (sanPhams.get(i).getId().equals(sanPham.getId())) {
-                        sanPhams.set(i, sanPham);
-                        if (sanPham.isDaXoa()) {
-                            sanPhams.remove(i);
-                            productAdapter.notifyItemRemoved(i);
-                            return;
-                        }
-                        productAdapter.notifyItemChanged(i);
-                        return;
-                    }
-                }
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                SanPham sanPham = snapshot.getValue(SanPham.class);
-                if (sanPham == null) {
-                    return;
-                }
-                for (int i = sanPhams.size() - 1; i >= 0; i--) {
-                    if (sanPhams.get(i).getId().equals(sanPham.getId())) {
-                        sanPhams.remove(i);
-                        productAdapter.notifyItemChanged(i);
-                        return;
-                    }
-                }
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
     private void initView(View view) {
         rcvProduct = view.findViewById(R.id.product_rcv);
-        productAdapter = new ProductAdapter(sanPhams, this);
+        productAdapter = new ProductAdapter(products, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcvProduct.setLayoutManager(linearLayoutManager);
         RecyclerView.ItemDecoration decoration = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
@@ -223,19 +117,105 @@ public class ProductFragment extends Fragment implements IClickItemProductListen
     }
 
     @Override
-    public void onClickEnterQuatity(SanPham sanPham) {
-        new EnterQuantityProductDialog(requireContext(), sanPham, sanPhams).show();
+    public void onClickEnterQuatity(Product product) {
+        new EnterQuantityProductDialog(requireContext(), product, products).show();
     }
 
     @Override
-    public void onClickItemProduct(SanPham sanPham) {
-        Intent intent = new Intent(getActivity(), ExpandProductActivity.class).putExtra("sanpham_from_productfragment",sanPham);
+    public void onClickItemProduct(Product product) {
+        Intent intent = new Intent(getActivity(), ExpandProductActivity.class).putExtra("product_from_productfragment", product);
         startActivity(intent);
     }
 
     @Override
-    public boolean onLongClickItemProduct(SanPham sanPham) {
-        new UpdateProductDailog(requireContext(), sanPham, donVis).show();
+    public boolean onLongClickItemProduct(Product product) {
+        new UpdateProductDailog(requireContext(), product, units).show();
         return false;
+    }
+
+    private void addChildEventListener() {
+        FirebaseDatabase.getInstance().getReference("Unit").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String unit = snapshot.getValue(String.class);
+                if (unit == null) return;
+                units.add(unit);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if (snapshot.getKey() == null) return;
+                int index = Integer.parseInt(snapshot.getKey());
+                String unit = snapshot.getValue(String.class);
+                units.set(index, unit);
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getKey() == null) return;
+                int index = Integer.parseInt(snapshot.getKey());
+                units.remove(index);
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        FirebaseDatabase.getInstance().getReference("Product").orderByChild("accountId").equalTo(MainActivity.account.getId())
+                .addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot snapshot, @com.google.firebase.database.annotations.Nullable String previousChildName) {
+                        Product product = snapshot.getValue(Product.class);
+                        if (product == null || product.isDeleted()) return;
+                        products.add(product);
+                        productAdapter.notifyItemChanged(products.size());
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot snapshot, @com.google.firebase.database.annotations.Nullable String previousChildName) {
+                        Product product = snapshot.getValue(Product.class);
+                        if (product == null) return;
+                        for (int i = products.size() - 1; i >= 0; i--) {
+                            if (products.get(i).getId().equals(product.getId())) {
+                                if (product.isDeleted()) {
+                                    products.remove(i);
+                                    return;
+                                }
+                                products.set(i, product);
+                                productAdapter.notifyItemChanged(i);
+                                return;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                        Product product = snapshot.getValue(Product.class);
+                        if (product == null) return;
+                        for (int i = products.size() - 1; i >= 0; i--) {
+                            if (products.get(i).getId().equals(product.getId())) {
+                                products.remove(i);
+                                productAdapter.notifyItemChanged(i);
+                                return;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot snapshot, @com.google.firebase.database.annotations.Nullable String previousChildName) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 }

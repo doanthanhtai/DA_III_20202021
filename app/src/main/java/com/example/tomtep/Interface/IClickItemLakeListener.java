@@ -1,11 +1,9 @@
 package com.example.tomtep.Interface;
 
-import com.example.tomtep.model.Ao;
+import com.example.tomtep.model.Lake;
 
 public interface IClickItemLakeListener {
-    void onClick(Ao ao);
+    void onClick(Lake lake);
 
-    void onLongClick(Ao ao);
-
-    void onDelete(Ao ao);
+    boolean onLongClick(Lake lake);
 }

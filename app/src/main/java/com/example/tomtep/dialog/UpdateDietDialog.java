@@ -24,10 +24,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tomtep.R;
 import com.example.tomtep.adapter.TimeAdapter;
-import com.example.tomtep.model.Ao;
-import com.example.tomtep.model.CheDoAn;
-import com.example.tomtep.model.SanPham;
-import com.example.tomtep.model.TaiKhoan;
+import com.example.tomtep.model.Diet;
+import com.example.tomtep.model.Product;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -40,39 +38,34 @@ public class UpdateDietDialog extends Dialog {
     private Spinner sprSanPham;
     private Button btnLuu, btnDong;
     private final Context context;
-    private final CheDoAn cheDoAn;
-    private final Ao ao;
     private final TimeAdapter timeAdapter;
-    private final List<SanPham> sanPhams;
-    private List<String> listTime;
+    private final List<Product> products;
+    private final Diet diet;
+    private List<String> frameTime;
 
-    public UpdateDietDialog(@NonNull Context context, Ao ao, List<SanPham> sanPhams) {
+    public UpdateDietDialog(@NonNull Context context, Diet diet, List<Product> products) {
         super(context);
         this.context = context;
-        this.ao = ao;
-        this.cheDoAn = ao.getCheDoAn();
-        this.sanPhams = sanPhams;
-        listTime = cheDoAn.getKhungGioChoAn();
-        timeAdapter = new TimeAdapter(listTime);
+        this.diet = diet;
+        this.products = products;
+        frameTime = diet.getFrame();
+        timeAdapter = new TimeAdapter(frameTime);
         initView();
         setDataOld();
         setDataForSpiner();
-        setDataOld();
         setEvent();
     }
 
     private void setDataOld() {
-        if (cheDoAn == null) {
-            return;
-        }
-        edtSoLuong.setText(String.valueOf(cheDoAn.getLuongChoAn()));
-        edtLongTime.setText(String.valueOf(cheDoAn.getThoiGianChoAn()));
-        if (cheDoAn.getKhungGioChoAn() != null) listTime = cheDoAn.getKhungGioChoAn();
+        if (diet == null) return;
+        edtSoLuong.setText(String.valueOf(diet.getAmount()));
+        edtLongTime.setText(String.valueOf(diet.getTime()));
+        if (diet.getFrame() != null) frameTime = diet.getFrame();
     }
 
     private void setDataForSpiner() {
-        List<String> tenSanPhams = new ArrayList<>();
-        if (sanPhams == null) {
+        List<String> productNames = new ArrayList<>();
+        if (products == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context)
                     .setTitle(R.string.all_title_annoucement)
                     .setMessage(R.string.updatedietdialog_message_notfoundproduct)
@@ -82,18 +75,20 @@ public class UpdateDietDialog extends Dialog {
         }
 
         //Tạo mảng string từ mảng sản phẩm
-        for (SanPham sanPham : sanPhams) {
-            tenSanPhams.add(sanPham.getMaSP() + " - " + sanPham.getTenSP());
+        for (Product product : products) {
+            productNames.add(product.getKey() + " - " + product.getName());
         }
+
         //Cài đặt và đổ dữ liệu cho spiner
-        ArrayAdapter<String> spinerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, tenSanPhams);
+        ArrayAdapter<String> spinerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, productNames);
         spinerAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         sprSanPham.setAdapter(spinerAdapter);
         sprSanPham.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                cheDoAn.setSanPhamChoAn(sanPhams.get(i));
-                edtSoLuong.setHint(sanPhams.get(i).getDonViDung());
+                diet.setProductId(products.get(i).getId());
+                diet.setProductName(products.get(i).getName());
+                edtSoLuong.setHint(products.get(i).getMeasure());
             }
 
             @Override
@@ -102,7 +97,12 @@ public class UpdateDietDialog extends Dialog {
             }
         });
 
-        sprSanPham.setSelection(spinerAdapter.getPosition(cheDoAn.getSanPhamChoAn().getMaSP() + " - " + cheDoAn.getSanPhamChoAn().getTenSP()));
+        for (int i = products.size() - 1; i >= 0; i--) {
+            if (products.get(i).getId().equals(diet.getProductId())) {
+                sprSanPham.setSelection(spinerAdapter.getPosition(products.get(i).getKey() + " - " + diet.getProductName()));
+                return;
+            }
+        }
     }
 
     private void setEvent() {
@@ -114,8 +114,8 @@ public class UpdateDietDialog extends Dialog {
     public void showHourPicker() {
         TimePickerDialog.OnTimeSetListener myTimeListener = (view, hourOfDay, minute1) -> {
             if (view.isShown()) {
-                listTime.add(view.getHour() + ":" + view.getMinute());
-                timeAdapter.notifyItemChanged(listTime.size() - 1);
+                frameTime.add(view.getHour() + ":" + view.getMinute());
+                timeAdapter.notifyItemChanged(frameTime.size() - 1);
             }
         };
 
@@ -130,25 +130,22 @@ public class UpdateDietDialog extends Dialog {
             Toast.makeText(getContext(), R.string.dialogupdatediet_toast_quantityempty, Toast.LENGTH_SHORT).show();
             return;
         }
-        String strThoiGianAn = String.valueOf((int)Float.parseFloat(String.valueOf(edtLongTime.getText())));
+        String strThoiGianAn = String.valueOf(edtLongTime.getText());
         if (strThoiGianAn.isEmpty()) {
             Toast.makeText(getContext(), R.string.dialogupdatediet_toast_longtimeempty, Toast.LENGTH_SHORT).show();
             return;
         }
-        float soLuong = Float.parseFloat(strSoLuong.trim());
-        if (soLuong == 0.0){
+        float amount = Float.parseFloat(strSoLuong.trim());
+        if (amount == 0.0 || amount < 0) {
             Toast.makeText(getContext(), R.string.dialogupdatediet_toast_quantityempty, Toast.LENGTH_SHORT).show();
             return;
         }
-        cheDoAn.setLuongChoAn(soLuong);
-        cheDoAn.setKhungGioChoAn(listTime);
-        cheDoAn.setThoiGianChoAn(strThoiGianAn);
 
-        FirebaseDatabase.getInstance().getReference("TaiKhoan").child(TaiKhoan.getInstance().getId())
-                .child("aos")
-                .child(ao.getId())
-                .child("cheDoAn")
-                .setValue(cheDoAn);
+        diet.setAmount(amount);
+        diet.setFrame(frameTime);
+        diet.setTime(Integer.parseInt(strThoiGianAn));
+
+        FirebaseDatabase.getInstance().getReference("Lake").child(diet.getLakeId()).child("diet").setValue(diet);
         Toast.makeText(context, R.string.all_toast_updateinfomationsuccess, Toast.LENGTH_SHORT).show();
         this.dismiss();
     }
@@ -164,7 +161,6 @@ public class UpdateDietDialog extends Dialog {
                 })
                 .setNegativeButton(R.string.all_button_cancel_text, (dialogInterface, i) -> dialogInterface.dismiss());
         builder.create().show();
-
     }
 
     private void initView() {

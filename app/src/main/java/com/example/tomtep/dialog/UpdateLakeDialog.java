@@ -16,8 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.tomtep.R;
-import com.example.tomtep.model.Ao;
-import com.example.tomtep.model.TaiKhoan;
+import com.example.tomtep.model.Lake;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
@@ -29,22 +28,22 @@ public class UpdateLakeDialog extends Dialog {
     private TextView tvNgayTao;
     private Button btnCapNhat, btnDong;
     private final Context context;
-    private final Ao ao;
+    private final Lake lake;
 
-    public UpdateLakeDialog(@NonNull Context context, Ao ao) {
+    public UpdateLakeDialog(@NonNull Context context, Lake lake) {
         super(context);
         this.context = context;
-        this.ao = ao;
+        this.lake = lake;
         initView();
         setDataDefault();
         setEvent();
     }
 
     private void setDataDefault() {
-        edtMaAo.setText(ao.getMaAo());
-        edtTenAo.setText(ao.getTenAo());
-        edtMoTa.setText(ao.getMoTaAo());
-        tvNgayTao.setText(ao.getNgayTao());
+        edtMaAo.setText(lake.getKey());
+        edtTenAo.setText(lake.getName());
+        edtMoTa.setText(lake.getDescription());
+        tvNgayTao.setText(lake.getCreationTime());
     }
 
     private void setEvent() {
@@ -60,12 +59,10 @@ public class UpdateLakeDialog extends Dialog {
             Toast.makeText(context, R.string.all_toast_lackofinformation, Toast.LENGTH_SHORT).show();
         } else {
             Map<String, Object> map = new HashMap<>();
-            map.put("maAo", strMaAo);
-            map.put("moTaAo", strMoTa);
-            map.put("tenAo", strTenAo);
-            FirebaseDatabase.getInstance().getReference("TaiKhoan").child(TaiKhoan.getInstance().getId())
-                    .child("aos")
-                    .child(ao.getId())
+            map.put("key", strMaAo);
+            map.put("description", strMoTa);
+            map.put("name", strTenAo);
+            FirebaseDatabase.getInstance().getReference("Lake").child(lake.getId())
                     .updateChildren(map);
             Toast.makeText(context, R.string.all_toast_updateinfomationsuccess, Toast.LENGTH_SHORT).show();
             this.dismiss();
@@ -106,6 +103,4 @@ public class UpdateLakeDialog extends Dialog {
         btnDong = findViewById(R.id.dialogupdatelake_btn_cancel);
         btnCapNhat = findViewById(R.id.dialogupdatelake_btn_update);
     }
-
-
 }

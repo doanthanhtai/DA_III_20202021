@@ -19,7 +19,7 @@
     <Spinner
         android:id="@+id/dialogenterquatity_spr_sanpham"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/height_30dp"
         android:layout_marginTop="@dimen/margin_30dp"
         android:padding="@dimen/pading_5dp" />
 

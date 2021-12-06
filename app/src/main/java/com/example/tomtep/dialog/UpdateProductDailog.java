@@ -19,8 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.tomtep.R;
-import com.example.tomtep.model.SanPham;
-import com.example.tomtep.model.TaiKhoan;
+import com.example.tomtep.model.Product;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
@@ -32,14 +31,14 @@ public class UpdateProductDailog extends Dialog {
     private Spinner sprDonVi;
     private Button btnDong, btnCapNhat;
     private final Context context;
-    private final List<String> donVis;
-    private final SanPham sanPham;
+    private final List<String> units;
+    private final Product product;
 
-    public UpdateProductDailog(@NonNull Context context, SanPham sanPham, List<String> donVis) {
+    public UpdateProductDailog(@NonNull Context context, Product product, List<String> units) {
         super(context);
         this.context = context;
-        this.donVis = donVis;
-        this.sanPham = sanPham;
+        this.units = units;
+        this.product = product;
         initView();
         setDataForSpiner();
         setDataOld();
@@ -47,14 +46,14 @@ public class UpdateProductDailog extends Dialog {
     }
 
     private void setDataOld() {
-        edtMaSP.setText(sanPham.getMaSP());
-        edtTenSP.setText(sanPham.getTenSP());
-        edtTenNCC.setText(sanPham.getTenNCC());
-        edtGiaNhap.setText(String.valueOf(sanPham.getGiaNhap()));
+        edtMaSP.setText(product.getKey());
+        edtTenSP.setText(product.getName());
+        edtTenNCC.setText(product.getSupplier());
+        edtGiaNhap.setText(String.valueOf(product.getImportPrice()));
     }
 
     private void setEvent() {
-        btnDong.setOnClickListener(v -> onClickCancelNewProdcut());
+        btnDong.setOnClickListener(v -> onClickCancel());
         btnCapNhat.setOnClickListener(v -> onClickUpdateProduct());
     }
 
@@ -87,22 +86,20 @@ public class UpdateProductDailog extends Dialog {
         }
 
         HashMap<String, Object> map = new HashMap<>();
-        map.put("maSP", strMaSP);
-        map.put("tenSP", strTenSP);
-        map.put("tenNCC", strTenNCC);
-        map.put("giaNhap", giaNhap);
-        map.put("donViDung", sanPham.getDonViDung());
+        map.put("key", strMaSP);
+        map.put("name", strTenSP);
+        map.put("supplier", strTenNCC);
+        map.put("importPrice", giaNhap);
+        map.put("measure", product.getMeasure());
 
-        FirebaseDatabase.getInstance().getReference("TaiKhoan")
-                .child(TaiKhoan.getInstance().getId())
-                .child("sanPhams")
-                .child(sanPham.getId())
+        FirebaseDatabase.getInstance().getReference("Product")
+                .child(product.getId())
                 .updateChildren(map);
         Toast.makeText(context, R.string.updateproduct_succesful, Toast.LENGTH_SHORT).show();
         this.dismiss();
     }
 
-    private void onClickCancelNewProdcut() {
+    private void onClickCancel() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setTitle(R.string.all_title_confirmaction)
                 .setMessage(R.string.all_message_confirmactioncancel)
@@ -137,7 +134,7 @@ public class UpdateProductDailog extends Dialog {
     }
 
     private void setDataForSpiner() {
-        if (donVis == null) {
+        if (units == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context)
                     .setTitle(R.string.all_title_annoucement)
                     .setMessage(R.string.updatedietdialog_message_notfounddonvi)
@@ -147,13 +144,13 @@ public class UpdateProductDailog extends Dialog {
         }
 
         //Cài đặt và đổ dữ liệu cho spiner
-        ArrayAdapter<String> spinerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, donVis);
+        ArrayAdapter<String> spinerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, units);
         spinerAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         sprDonVi.setAdapter(spinerAdapter);
         sprDonVi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                sanPham.setDonViDung(donVis.get(i));
+                product.setMeasure(units.get(i));
             }
 
             @Override
@@ -161,6 +158,6 @@ public class UpdateProductDailog extends Dialog {
             }
         });
 
-        sprDonVi.setSelection(spinerAdapter.getPosition(sanPham.getDonViDung()));
+        sprDonVi.setSelection(spinerAdapter.getPosition(product.getMeasure()));
     }
 }

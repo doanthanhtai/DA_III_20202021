@@ -11,6 +11,7 @@ import com.example.tomtep.fragment.ProductFragment;
 import com.example.tomtep.fragment.StatisticsFragment;
 
 public class MainViewPagerAdapter extends FragmentStateAdapter {
+
     public MainViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
@@ -18,15 +19,15 @@ public class MainViewPagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        switch (position) {
+        switch (position){
+            case 0:
+                return new LakeFragment();
             case 1:
                 return new DietFragment();
             case 2:
                 return new ProductFragment();
-            case 3:
-                return new StatisticsFragment();
             default:
-                return new LakeFragment();
+                return new StatisticsFragment();
         }
     }
 

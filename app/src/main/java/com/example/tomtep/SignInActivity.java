@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -94,8 +95,9 @@ public class SignInActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Toast.makeText(SignInActivity.this, getResources().getText(R.string.all_toast_invaled), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getText(R.string.all_toast_invaled), Toast.LENGTH_SHORT).show();
         }
+        Log.e("Tai","start in");
     }
 
     private void onClickToSignUpActivity() {
