@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="?dialogPreferredPadding"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="?dialogPreferredPadding">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/dialognew_environmenthistory_title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dialognew_environmenthistory_tv_lakeinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:gravity="start"
+        android:paddingStart="@dimen/pading_10dp"
+        android:paddingEnd="@dimen/pading_10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dialognew_environmenthistory_tv_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:paddingStart="@dimen/pading_10dp"
+        android:paddingEnd="@dimen/pading_10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_14sp"
+        android:textStyle="italic" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/dialognew_environmenthistory_edt_ph"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_5dp"
+            android:layout_weight="1"
+            android:autofillHints="@null"
+            android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+            android:hint="@string/dialognew_environmenthistory_hint_ph"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/pading_10dp" />
+
+        <EditText
+            android:id="@+id/dialognew_environmenthistory_edt_oxy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_5dp"
+            android:layout_weight="1"
+            android:autofillHints="@null"
+            android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+            android:hint="@string/dialognew_environmenthistory_hint_oxy"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/pading_10dp" />
+
+        <EditText
+            android:id="@+id/dialognew_environmenthistory_edt_salinity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:autofillHints="@null"
+            android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
+            android:hint="@string/dialognew_environmenthistory_hint_salinity"
+            android:inputType="numberDecimal"
+            android:padding="@dimen/pading_10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialognew_environmenthistory_btn_cancel"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@color/teal_700"
+            android:text="@string/all_button_cancel_text"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/dialognew_environmenthistory_btn_insert"
+            style="?android:attr/buttonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/pading_10dp"
+            android:layout_weight="2"
+            android:background="@color/teal_700"
+            android:text="@string/all_button_update_text"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

@@ -83,6 +83,7 @@
             android:layout_height="wrap_content"
             android:background="@color/teal_700"
             style="?android:attr/buttonBarStyle"
+            android:textColor="@color/white"
             android:text="@string/all_button_cancel_text"/>
         <Button
             android:id="@+id/dialogupdatelake_btn_update"
@@ -92,6 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:attr/buttonStyle"
+            android:textColor="@color/white"
             android:text="@string/all_button_update_text"/>
     </LinearLayout>
 </LinearLayout>

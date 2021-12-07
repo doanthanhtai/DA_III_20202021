@@ -48,10 +48,10 @@ public class NewProductHistoryDailog extends Dialog {
         this.context = context;
         this.products = products;
         this.lake = lake;
+        removeProductIsDeleted();
         productSeleted = new Product();
         listProductInfo = new ArrayList<>();
         initView();
-        removeProductIsDeleted();
         setDataForSpiner();
         setEvent();
     }
@@ -108,7 +108,7 @@ public class NewProductHistoryDailog extends Dialog {
                 .setMessage(R.string.all_message_confirmactioncancel)
                 .setPositiveButton(R.string.all_button_agree_text, (dialogInterface, i) -> {
                     dialogInterface.dismiss();
-                    Toast.makeText(context, R.string.newlake_toast_canceled, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.newproducthistory_toast_canceled, Toast.LENGTH_SHORT).show();
                     this.dismiss();
                 })
                 .setNegativeButton(R.string.all_button_cancel_text, (dialogInterface, i) -> dialogInterface.dismiss());
@@ -150,7 +150,7 @@ public class NewProductHistoryDailog extends Dialog {
             return;
         }
 
-        for (int i = products.size() - 1; i >= 0; i--) {
+        for (int i = 0; i < products.size(); i++) {
             listProductInfo.add(products.get(i).getKey() + "-" + products.get(i).getName());
         }
 

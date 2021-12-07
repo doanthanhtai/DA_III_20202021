@@ -39,7 +39,7 @@ public class ProductHistoryAdapter extends RecyclerView.Adapter<ProductHistoryAd
         ProductHistory productHistory = productHistories.get(position);
         if (productHistory == null) return;
         Product product = getProductById(productHistory.getProductId());
-        assert product != null;
+        if (product == null) return;
         String productInfo = product.getKey() + "\n" + product.getName();
         holder.tvProductInfo.setText(productInfo);
         holder.tvTime.setText(productHistory.getUseTime());

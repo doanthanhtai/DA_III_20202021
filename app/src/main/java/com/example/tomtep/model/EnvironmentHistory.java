@@ -5,7 +5,7 @@ public class EnvironmentHistory {
     private String lakeId;
     private float pH;
     private float oXy;
-    private int salinity;
+    private float salinity;
     private String updateTime;
 
     public String getId() {
@@ -40,11 +40,11 @@ public class EnvironmentHistory {
         this.oXy = oXy;
     }
 
-    public int getSalinity() {
+    public float getSalinity() {
         return salinity;
     }
 
-    public void setSalinity(int salinity) {
+    public void setSalinity(float salinity) {
         this.salinity = salinity;
     }
 

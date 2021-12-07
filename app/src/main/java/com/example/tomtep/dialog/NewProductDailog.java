@@ -116,7 +116,7 @@ public class NewProductDailog extends Dialog {
 
         float giaNhap = Float.parseFloat(strGiaNhap);
         if (giaNhap < 0) {
-            Toast.makeText(context, R.string.dialognewproduct_toast_gianhapinvalid, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.dialognew_product_toast_importpriceinvalid, Toast.LENGTH_SHORT).show();
             return;
         }
         if (sprDonVi.getSelectedItemPosition() == 0) {

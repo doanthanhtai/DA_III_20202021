@@ -31,7 +31,6 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.sa90.materialarcmenu.ArcMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,11 +80,11 @@ public class ProductHistoryFragment extends Fragment implements IClickItemProduc
             }
         });
 
-        floatingProductHistory.setOnClickListener(v->onClickAddNewProductHistory());
+        floatingProductHistory.setOnClickListener(v -> onClickAddNewProductHistory());
     }
 
     private void onClickAddNewProductHistory() {
-        new NewProductHistoryDailog(context,products,lake).show();
+        new NewProductHistoryDailog(context, products, lake).show();
     }
 
     private void initView(View view) {
@@ -141,7 +140,7 @@ public class ProductHistoryFragment extends Fragment implements IClickItemProduc
 
                     }
                 });
-        FirebaseDatabase.getInstance().getReference("FeedingHistory").orderByChild("lakeId").equalTo(lake.getId())
+        FirebaseDatabase.getInstance().getReference("FeedingHistory").orderByChild("lakeId").equalTo(lake.getId()).limitToLast(100)
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -188,15 +187,14 @@ public class ProductHistoryFragment extends Fragment implements IClickItemProduc
 
                     }
                 });
-        FirebaseDatabase.getInstance().getReference("ProductHistory").orderByChild("lakeId").equalTo(lake.getId())
+        FirebaseDatabase.getInstance().getReference("ProductHistory").orderByChild("lakeId").equalTo(lake.getId()).limitToLast(100)
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                         productHistory = snapshot.getValue(ProductHistory.class);
                         if (productHistory == null || productHistory.isDeleted()) return;
                         productHistories.add(0,productHistory);
-                        productHistoryAdapter.notifyItemChanged(productHistories.size());
-
+                        productHistoryAdapter.notifyItemInserted(0);
                     }
 
                     @Override
@@ -268,7 +266,6 @@ public class ProductHistoryFragment extends Fragment implements IClickItemProduc
                         .setNegativeButton(R.string.all_button_agree_text, (dialog, which) -> {
                             deleteProductHistory(productHistory);
                             Toast.makeText(getContext(), R.string.producthistoryfragmemt_toast_deletesuccess, Toast.LENGTH_SHORT).show();
-                            productHistoryAdapter.notifyItemRemoved(position);
                             dialog.dismiss();
                         })
                         .setPositiveButton(R.string.all_button_cancel_text, (dialogInterface, i) -> {

@@ -115,7 +115,7 @@
     <string name="updatedietdialog_message_notfounddonvi">Không tìm thấy Đơn vị tính cho sản phẩm.\nHãy liên hệ : dttai1800732@student.ctuet.edu.vn để đươc hỗ trợ.</string>
     <string name="dialognewproduct_text_donvidung">Chọn vị dùng cho sản phẩm.</string>
     <string name="dialognewproduct_toast_donvidunginvalid">Đơn vị dùng không hợp lệ</string>
-    <string name="dialognewproduct_toast_gianhapinvalid">Vui lòng nhập giá nhập của sản phẩm hợp lệ</string>
+    <string name="dialognew_product_toast_importpriceinvalid">Vui lòng nhập giá nhập của sản phẩm hợp lệ</string>
     <string name="newproduct_succesful">Thêm sản phẩm thành công</string>
     <string name="dialogenterquatity_title">NHẬP HÀNG</string>
     <string name="dialogenterquantity_tv_quantity">Số lượng nhập: </string>
@@ -154,13 +154,38 @@
     <string name="expandlake_toolbar_menu_delete">Xóa ao</string>
     <string name="producthistoryfragmemt_toast_deletesuccess">Xóa lịch sử sử dụng thành công</string>
     <string name="itemproducthistory_tv_deleted">Lịch sử dùng sản phẩm sẽ được xóa</string>
-    <string name="all_message_confirmactiondeleteproducthistory">\nSẽ bị xóa khỏi lịch sử dùng sản phẩm của </string>
+    <string name="all_message_confirmactiondeleteproducthistory">\nSẽ bị xóa khỏi lịch sử dùng sản phẩm của:\t</string>
     <string name="dialogupdateproducthistory_title">CẬP NHẬT LỊCH SỬ DÙNG SẢN PHẨM</string>
     <string name="all_amount_usingproduct">Lượng sử dụng</string>
     <string name="all_toast_amountvalid">Lượng dùng không hợp lệ</string>
     <string name="dialognewproducthistory_title">DÙNG SẢN PHẨM</string>
     <string name="all_message_notfoundproduct">Không tìm thấy sản phẩm khả dùng.Vui lòng thêm sản phẩm cần dùng vào ứng dụng.</string>
     <string name="insertproducthistory_success">Sử dụng sản phẩm thành công</string>
+    <string name="dialognew_otherusehistory_title">THÊM CHI DÙNG KHÁC</string>
+    <string name="dialognew_otherusehistory_name_hint">Tên chi dùng</string>
+    <string name="dialognew_cost_hint">Số tiền chi</string>
+    <string name="dialognew_otherusehistory_description_hint">Mô tả</string>
+    <string name="dialognew_otherusehistory_costinvalid">Số tiền chi không hợp lệ</string>
+    <string name="dialognew_otherusehistory_toast_success">Thêm chi dùng thành công</string>
+    <string name="dialognew_otherusehistory_toast_canceled">Bạn đã hủy thao tác Thêm chi dùng khác</string>
+    <string name="itemotherusehistory_tv_deleted">Lịch sử chi dùng sẽ được xóa</string>
+    <string name="newproduct_toast_canceled">Bạn đã hủy bỏ thao tác Thêm sản phẩm</string>
+    <string name="otherusehistoryfragment_message_confirmactiondelete">\nSẽ bị xóa khỏi lịch sử chi dùng của:\t</string>
+    <string name="otherusehistoryfragment_toast_success">Xóa lịch sử chi dùng thành công</string>
+    <string name="newproducthistory_toast_canceled">Bạn đã hủy thao tác Sử dụng sản phẩm cho ao</string>
+    <string name="dialogupdate_otherusehistory_title">CẬP NHẬT CHI DÙNG</string>
+    <string name="dialogupdate_otherusehistory_toast_canceled">Bạn đã hủy thao tác Cập nhật lịch sử chi dùng</string>
+    <string name="dialogupdate_otherusehistory_toast_success">Cập nhật lịch sử chi dùng thành công</string>
+    <string name="dialogupdate_producthistory_success">Cập nhật thành công</string>
+    <string name="dialognew_environmenthistory_title">CẬP NHẬT MÔI TRƯỜNG</string>
+    <string name="dialognew_environmenthistory_hint_ph">pH</string>
+    <string name="dialognew_environmenthistory_hint_oxy">Oxy</string>
+    <string name="dialognew_environmenthistory_hint_salinity">Độ mặn</string>
+    <string name="newenvironmenthistory_toast_canceled">Bạn đã hủy thao tác Cập nhật môi trường của ao</string>
+    <string name="dialognew_environmenthistory_toast_phinvalid">Chỉ số pH vừa nhập không hợp lệ</string>
+    <string name="dialognew_environmenthistory_toast_oxyinvalid">Chỉ số Oxy vừa nhập không hợp lệ</string>
+    <string name="dialognew_environmenthistory_toast_salinityinvalid">Chỉ số độ mặn vừa nhập không hợp lệ</string>
+    <string name="dialognew_environmenthistory_toast_success">Cập nhật môi trường thành công</string>
 
 
 </resources>
