@@ -28,12 +28,12 @@ import java.util.Map;
 
 public class UpdateOtherUseHistoryDailog extends Dialog {
 
-    private EditText edtName, edtCost, edtDescription;
-    private TextView tvTime;
-    private Button btnCancel, btnInsert;
     private final Context context;
     private final OtherUseHistory otherUseHistory;
     private final String timeUpdate = DateFormat.getInstance().format(Calendar.getInstance().getTime());
+    private EditText edtName, edtCost, edtDescription;
+    private TextView tvTime;
+    private Button btnCancel, btnInsert;
 
     public UpdateOtherUseHistoryDailog(@NonNull Context context, OtherUseHistory otherUseHistory) {
         super(context);
@@ -86,7 +86,7 @@ public class UpdateOtherUseHistoryDailog extends Dialog {
                 dismiss();
             });
 
-            Log.e("Tai","co");
+            Log.e("Tai", "co");
 
 
         } catch (Exception e) {

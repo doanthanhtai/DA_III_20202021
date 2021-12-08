@@ -26,12 +26,12 @@ import java.util.Calendar;
 
 public class NewOtherUseHistoryDailog extends Dialog {
 
-    private EditText edtName, edtCost, edtDescription;
-    private TextView tvTime;
-    private Button btnCancel, btnInsert;
     private final Context context;
     private final Lake lake;
     private final String timeUse = DateFormat.getInstance().format(Calendar.getInstance().getTime());
+    private EditText edtName, edtCost, edtDescription;
+    private TextView tvTime;
+    private Button btnCancel, btnInsert;
 
     public NewOtherUseHistoryDailog(@NonNull Context context, Lake lake) {
         super(context);
@@ -77,11 +77,8 @@ public class NewOtherUseHistoryDailog extends Dialog {
             otherUseHistory.setUpdateTime(String.valueOf(tvTime.getText()));
             otherUseHistory.setDeleted(false);
 
-            databaseReference.child(otherUseHistory.getId()).setValue(otherUseHistory).addOnCompleteListener(task -> {
-                Toast.makeText(context, R.string.dialognew_otherusehistory_toast_success, Toast.LENGTH_SHORT).show();
-                dismiss();
-            });
-
+            databaseReference.child(otherUseHistory.getId()).setValue(otherUseHistory).addOnCompleteListener(task -> Toast.makeText(context, R.string.dialognew_otherusehistory_toast_success, Toast.LENGTH_SHORT).show());
+            dismiss();
 
         } catch (Exception e) {
             Toast.makeText(context, R.string.dialognew_otherusehistory_costinvalid, Toast.LENGTH_SHORT).show();

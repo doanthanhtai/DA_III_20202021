@@ -33,14 +33,14 @@ import java.util.List;
 
 public class NewProductHistoryDailog extends Dialog {
 
-    private TextView tvTime;
-    private EditText edtAmount;
-    private Spinner sprProduct;
-    private Button btnCancel, btnInsert;
     private final List<String> listProductInfo;
     private final Context context;
     private final List<Product> products;
     private final Lake lake;
+    private TextView tvTime;
+    private EditText edtAmount;
+    private Spinner sprProduct;
+    private Button btnCancel, btnInsert;
     private Product productSeleted;
 
     public NewProductHistoryDailog(@NonNull Context context, List<Product> products, Lake lake) {
@@ -89,6 +89,7 @@ public class NewProductHistoryDailog extends Dialog {
             productHistory.setProductId(productSeleted.getId());
             productHistory.setAmount(amount);
             productHistory.setUseTime(String.valueOf(tvTime.getText()));
+            productHistory.setUpdateTime(String.valueOf(tvTime.getText()));
             productHistory.setDeleted(false);
 
             databaseReference.child("ProductHistory").child(productHistoryId).setValue(productHistory).addOnCompleteListener(task -> {

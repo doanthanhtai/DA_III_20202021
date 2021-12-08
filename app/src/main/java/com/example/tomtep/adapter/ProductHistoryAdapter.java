@@ -40,9 +40,10 @@ public class ProductHistoryAdapter extends RecyclerView.Adapter<ProductHistoryAd
         if (productHistory == null) return;
         Product product = getProductById(productHistory.getProductId());
         if (product == null) return;
-        String productInfo = product.getKey() + "\n" + product.getName();
-        holder.tvProductInfo.setText(productInfo);
-        holder.tvTime.setText(productHistory.getUseTime());
+        holder.tvProductName.setText(product.getName());
+        holder.tvProductKey.setText(product.getKey());
+        holder.tvUseTime.setText(productHistory.getUseTime());
+        holder.tvUpdateTime.setText(productHistory.getUpdateTime());
         holder.tvAmount.setText(String.valueOf(productHistory.getAmount()));
         holder.itemProductHistoryForeGround.setOnLongClickListener(v -> iClickItemProductHistoryListener.onLongClick(productHistory));
     }
@@ -55,13 +56,15 @@ public class ProductHistoryAdapter extends RecyclerView.Adapter<ProductHistoryAd
 
     public static class ProductHistoryViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView tvProductInfo, tvTime, tvAmount;
+        private final TextView tvProductName, tvProductKey, tvUseTime, tvUpdateTime, tvAmount;
         public final LinearLayout itemProductHistoryForeGround;
 
         public ProductHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvProductInfo = itemView.findViewById(R.id.item_producthistory_tv_productinfo);
-            tvTime = itemView.findViewById(R.id.item_producthistory_tv_time);
+            tvProductName = itemView.findViewById(R.id.item_producthistory_tv_productname);
+            tvProductKey = itemView.findViewById(R.id.item_producthistory_tv_productkey);
+            tvUseTime = itemView.findViewById(R.id.item_producthistory_tv_usetime);
+            tvUpdateTime = itemView.findViewById(R.id.item_producthistory_tv_updatetime);
             tvAmount = itemView.findViewById(R.id.item_producthistory_tv_amount);
             itemProductHistoryForeGround = itemView.findViewById(R.id.item_producthistory_foreground);
         }

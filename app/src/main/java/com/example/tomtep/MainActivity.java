@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawerLayout;
     private ViewPager2 viewPager2;
-    private BottomNavigationView bottomNavigationView;
+    public static BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
     private Toolbar toolbar;
     public static Account MY_ACCOUNT;

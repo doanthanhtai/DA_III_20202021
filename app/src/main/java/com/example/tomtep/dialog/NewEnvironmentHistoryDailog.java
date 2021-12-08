@@ -28,12 +28,12 @@ import java.util.Calendar;
 
 public class NewEnvironmentHistoryDailog extends Dialog {
 
-    private TextView tvTime, tvLakeInfo;
-    private EditText edtPH, edtOxy, edtSalinity;
-    private Button btnCancel, btnInsert;
     private final Context context;
     private final Lake lake;
     private final EnvironmentHistory environmentHistoryOld;
+    private TextView tvTime, tvLakeInfo;
+    private EditText edtPH, edtOxy, edtSalinity;
+    private Button btnCancel, btnInsert;
 
     public NewEnvironmentHistoryDailog(@NonNull Context context, Lake lake, EnvironmentHistory environmentHistory) {
         super(context);

@@ -29,10 +29,10 @@ import java.util.List;
 
 public class NewLakeDialog extends Dialog {
 
+    private final Context context;
     private EditText edtMaAo, edtTenAo, edtMoTa;
     private TextView tvNgayTao;
     private Button btnThem, btnDong;
-    private final Context context;
 
     public NewLakeDialog(@NonNull Context context) {
         super(context);
@@ -86,7 +86,7 @@ public class NewLakeDialog extends Dialog {
         diet.setLakeId(lake.getId());
         diet.setFrame(initDefaultTimeFrameForDiet());
         diet.setTime(0);
-        diet.setAmount(-1);
+        diet.setAmount(0);
         diet.setProductId("default_product");
         diet.setProductName("Sản phẩm cho ăn mặt định");
         diet.setCondition(false);

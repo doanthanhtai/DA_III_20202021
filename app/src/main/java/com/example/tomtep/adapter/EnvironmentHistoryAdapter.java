@@ -33,9 +33,11 @@ public class EnvironmentHistoryAdapter extends RecyclerView.Adapter<EnvironmentH
     public void onBindViewHolder(@NonNull EnvironmentHistoryViewHolder holder, int position) {
         EnvironmentHistory environmentHistory = environmentHistories.get(position);
         if (environmentHistory == null) return;
+        String strOxy = environmentHistory.getoXy() + " mg/l";
+        String strSalinity = environmentHistory.getSalinity() + " ‰";
         holder.tvPH.setText(String.valueOf(environmentHistory.getpH()));
-        holder.tvOxy.setText(String.valueOf(environmentHistory.getoXy()));
-        holder.tvSalinity.setText(String.valueOf(environmentHistory.getSalinity()));
+        holder.tvOxy.setText(strOxy);
+        holder.tvSalinity.setText(strSalinity);
         holder.tvUpdateTime.setText(environmentHistory.getUpdateTime());
     }
 

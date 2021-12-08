@@ -4,7 +4,7 @@ public class OtherUseHistory {
     private String id;
     private String lakeId;
     private String name;
-    private float cost;
+    private double cost;
     private String description;
     private String useTime;
     private String updateTime;
@@ -34,11 +34,11 @@ public class OtherUseHistory {
         this.name = name;
     }
 
-    public float getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost(float cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 

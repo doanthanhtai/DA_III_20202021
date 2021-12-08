@@ -21,7 +21,8 @@
         <receiver
             android:name=".service.DietReceiver"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"
+            android:permission="android.permission.SCHEDULE_EXACT_ALARM" />
 
         <activity
             android:name=".ExpandProductActivity"
@@ -31,7 +32,8 @@
             android:exported="false" />
         <activity
             android:name=".ChangePasswordActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -43,13 +45,16 @@
         </activity>
         <activity
             android:name=".SignUpAcitivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".SignInActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ResetPasswordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

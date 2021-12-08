@@ -186,6 +186,8 @@
     <string name="dialognew_environmenthistory_toast_oxyinvalid">Chỉ số Oxy vừa nhập không hợp lệ</string>
     <string name="dialognew_environmenthistory_toast_salinityinvalid">Chỉ số độ mặn vừa nhập không hợp lệ</string>
     <string name="dialognew_environmenthistory_toast_success">Cập nhật môi trường thành công</string>
+    <string name="expandlake_title_confirmdetelake">Xác nhận xóa ao.</string>
+    <string name="expandlake_toast_deletelakesuccess">Xóa ao thành công</string>
 
 
 </resources>

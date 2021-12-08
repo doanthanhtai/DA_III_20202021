@@ -19,10 +19,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class UpdateFeedingHistoryDialog extends Dialog {
 
-    private Button btnCancel, btnUpdate;
-    private Spinner sprTinhTrang;
     private final FeedingHistory feedingHistory;
     private final Context context;
+    private Button btnCancel, btnUpdate;
+    private Spinner sprTinhTrang;
 
     public UpdateFeedingHistoryDialog(@NonNull Context context, FeedingHistory feedingHistory) {
         super(context);

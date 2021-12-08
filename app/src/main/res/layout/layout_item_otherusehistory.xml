@@ -43,7 +43,7 @@
                 android:layout_marginStart="@dimen/margin_10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:gravity="start"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_18sp" />
 
@@ -52,7 +52,7 @@
                 android:layout_marginStart="@dimen/margin_10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:gravity="start"
                 android:textSize="@dimen/text_size_10sp" />
 
         </LinearLayout>
@@ -79,7 +79,7 @@
             android:layout_weight="2.5"
             android:gravity="center"
             android:textSize="@dimen/text_size_14sp"
-            app:drawableStartCompat="@drawable/final_state_24px_yellow" />
+            app:drawableStartCompat="@drawable/ic_dollar_24px" />
     </LinearLayout>
 
 </FrameLayout>

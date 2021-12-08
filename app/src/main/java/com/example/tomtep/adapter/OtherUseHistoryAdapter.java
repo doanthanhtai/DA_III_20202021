@@ -12,13 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tomtep.Interface.IClickItemOtherUseHistoryListener;
 import com.example.tomtep.R;
 import com.example.tomtep.model.OtherUseHistory;
-import com.example.tomtep.model.Product;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class OtherUseHistoryAdapter extends RecyclerView.Adapter<OtherUseHistoryAdapter.OtherUseHistoryViewHolder> {
     private final List<OtherUseHistory> otherUseHistories;
     private final IClickItemOtherUseHistoryListener iClickItemOtherUseHistoryListener;
+    private final DecimalFormat decimalFormat = new DecimalFormat("# VND");
 
     public OtherUseHistoryAdapter(List<OtherUseHistory> otherUseHistories, IClickItemOtherUseHistoryListener iClickItemOtherUseHistoryListener) {
         this.otherUseHistories = otherUseHistories;
@@ -40,7 +41,7 @@ public class OtherUseHistoryAdapter extends RecyclerView.Adapter<OtherUseHistory
         holder.tvDescription.setText(otherUseHistory.getDescription());
         holder.tvUseTime.setText(otherUseHistory.getUseTime());
         holder.tvUpdateTime.setText(otherUseHistory.getUpdateTime());
-        holder.tvCost.setText(String.valueOf(otherUseHistory.getCost()));
+        holder.tvCost.setText(decimalFormat.format(otherUseHistory.getCost()));
         holder.itemOtherUseHistoryForeGround.setOnLongClickListener(v -> iClickItemOtherUseHistoryListener.onLongClick(otherUseHistory));
     }
 
@@ -52,7 +53,7 @@ public class OtherUseHistoryAdapter extends RecyclerView.Adapter<OtherUseHistory
 
     public static class OtherUseHistoryViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView tvName,tvDescription, tvUseTime,tvUpdateTime, tvCost;
+        private final TextView tvName, tvDescription, tvUseTime, tvUpdateTime, tvCost;
         public final LinearLayout itemOtherUseHistoryForeGround;
 
         public OtherUseHistoryViewHolder(@NonNull View itemView) {

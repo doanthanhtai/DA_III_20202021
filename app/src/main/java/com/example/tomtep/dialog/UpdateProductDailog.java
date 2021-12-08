@@ -27,12 +27,12 @@ import java.util.List;
 
 public class UpdateProductDailog extends Dialog {
 
-    private EditText edtMaSP, edtTenSP, edtTenNCC, edtGiaNhap;
-    private Spinner sprDonVi;
-    private Button btnDong, btnCapNhat;
     private final Context context;
     private final List<String> units;
     private final Product product;
+    private EditText edtMaSP, edtTenSP, edtTenNCC, edtGiaNhap;
+    private Spinner sprDonVi;
+    private Button btnDong, btnCapNhat;
 
     public UpdateProductDailog(@NonNull Context context, Product product, List<String> units) {
         super(context);

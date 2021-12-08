@@ -24,11 +24,11 @@ import java.util.Map;
 
 public class UpdateLakeDialog extends Dialog {
 
+    private final Context context;
+    private final Lake lake;
     private EditText edtMaAo, edtTenAo, edtMoTa;
     private TextView tvNgayTao;
     private Button btnCapNhat, btnDong;
-    private final Context context;
-    private final Lake lake;
 
     public UpdateLakeDialog(@NonNull Context context, Lake lake) {
         super(context);

@@ -33,14 +33,14 @@ import java.util.Calendar;
 import java.util.List;
 
 public class UpdateDietDialog extends Dialog {
-    private EditText edtSoLuong, edtLongTime;
-    private ImageButton imgThemGio;
-    private Spinner sprSanPham;
-    private Button btnLuu, btnDong;
     private final Context context;
     private final TimeAdapter timeAdapter;
     private final List<Product> products;
     private final Diet diet;
+    private EditText edtSoLuong, edtLongTime;
+    private ImageButton imgThemGio;
+    private Spinner sprSanPham;
+    private Button btnLuu, btnDong;
     private List<String> frameTime;
 
     public UpdateDietDialog(@NonNull Context context, Diet diet, List<Product> products) {

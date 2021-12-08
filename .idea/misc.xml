@@ -59,6 +59,7 @@
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/drawable/abc.xml" value="0.22552083333333334" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/drawable/bc_rectangle_white_radius10dp_1dp_black.xml" value="0.15555555555555556" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/drawable/bc_rectangle_white_radius5dp.xml" value="0.15555555555555556" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/activity_change_password.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/activity_expand_diet.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/activity_expand_lake.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/activity_expanded_product.xml" value="0.209375" />
@@ -87,7 +88,7 @@
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_environmenthistory.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_feetinghistory.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_import_history.xml" value="0.209375" />
-        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_lake.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_lake.xml" value="0.5" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_otherusehistory.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_product.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/layout_item_producthistory.xml" value="0.25" />

@@ -29,12 +29,12 @@ import java.util.List;
 
 public class EnterQuantityProductDialog extends Dialog {
 
+    private final Context context;
+    private final List<Product> products;
     private Spinner sprSanPham;
     private EditText edtSoLuong;
     private Button btnDong, btnNhap;
-    private final Context context;
     private Product product;
-    private final List<Product> products;
 
     public EnterQuantityProductDialog(@NonNull Context context, Product product, List<Product> products) {
         super(context);

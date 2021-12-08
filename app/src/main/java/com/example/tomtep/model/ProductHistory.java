@@ -6,6 +6,7 @@ public class ProductHistory {
     private String productId;
     private float amount;
     private String useTime;
+    private String updateTime;
     private boolean deleted;
 
     public String getId() {
@@ -48,6 +49,13 @@ public class ProductHistory {
         this.useTime = useTime;
     }
 
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
 
     public boolean isDeleted() {
         return deleted;
@@ -57,15 +65,16 @@ public class ProductHistory {
         this.deleted = deleted;
     }
 
-    public ProductHistory(String id, String lakeId, String productId, float amount, String useTime, boolean deleted) {
+    public ProductHistory() {
+    }
+
+    public ProductHistory(String id, String lakeId, String productId, float amount, String useTime, String updateTime, boolean deleted) {
         this.id = id;
         this.lakeId = lakeId;
         this.productId = productId;
         this.amount = amount;
         this.useTime = useTime;
+        this.updateTime = updateTime;
         this.deleted = deleted;
-    }
-
-    public ProductHistory() {
     }
 }

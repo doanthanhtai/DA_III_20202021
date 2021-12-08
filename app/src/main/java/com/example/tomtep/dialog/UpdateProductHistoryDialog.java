@@ -20,15 +20,20 @@ import com.example.tomtep.model.Product;
 import com.example.tomtep.model.ProductHistory;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
 public class UpdateProductHistoryDialog extends Dialog {
 
     private final ProductHistory productHistory;
     private final Product product;
     private final FeedingHistory feedingHistory;
-    private TextView tvProductInfo, tvTime;
+    private final Context context;
+    private TextView tvProductInfo, tvUseTime, tvUpdateTime;
     private EditText edtAmount;
     private Button btnCancel, btnSave;
-    private final Context context;
 
 
     public UpdateProductHistoryDialog(@NonNull Context context, ProductHistory productHistory, Product product, FeedingHistory feedingHistory) {
@@ -46,7 +51,8 @@ public class UpdateProductHistoryDialog extends Dialog {
         if (product == null) return;
         String productInfo = product.getKey() + " - " + product.getName();
         tvProductInfo.setText(productInfo);
-        tvTime.setText(productHistory.getUseTime());
+        tvUseTime.setText(productHistory.getUseTime());
+        tvUpdateTime.setText(DateFormat.getInstance().format(Calendar.getInstance().getTime()));
         edtAmount.setText(String.valueOf(productHistory.getAmount()));
         edtAmount.setHint(product.getMeasure());
     }
@@ -77,10 +83,14 @@ public class UpdateProductHistoryDialog extends Dialog {
         FirebaseDatabase.getInstance().getReference("ProductHistory").child(productHistory.getId()).child("amount").setValue(amount);
         FirebaseDatabase.getInstance().getReference("Product").child(productHistory.getProductId()).child("amount").setValue(product.getAmount() + productHistory.getAmount() - amount);
         if (feedingHistory != null) {
-            FirebaseDatabase.getInstance().getReference("FeedingHistory").child(feedingHistory.getId()).child("amount").setValue(amount);
+            Map<String, Object> map = new HashMap<>();
+            map.put("amount", amount);
+            map.put("updateTime", String.valueOf(tvUpdateTime.getText()));
+            FirebaseDatabase.getInstance().getReference("FeedingHistory").child(feedingHistory.getId()).updateChildren(map).addOnCompleteListener(task -> {
+                Toast.makeText(context, R.string.dialogupdate_producthistory_success, Toast.LENGTH_SHORT).show();
+                dismiss();
+            });
         }
-        Toast.makeText(context,R.string.dialogupdate_producthistory_success,Toast.LENGTH_SHORT).show();
-        dismiss();
     }
 
     private void initView() {
@@ -96,7 +106,8 @@ public class UpdateProductHistoryDialog extends Dialog {
         setCancelable(false);
 
         tvProductInfo = findViewById(R.id.dialogupdate_producthistory_tv_productinfo);
-        tvTime = findViewById(R.id.dialogupdate_producthistory_tv_time);
+        tvUseTime = findViewById(R.id.dialogupdate_producthistory_tv_usetime);
+        tvUpdateTime = findViewById(R.id.dialogupdate_producthistory_tv_updatetime);
         edtAmount = findViewById(R.id.dialogupdate_producthistory_edt_amount);
         btnCancel = findViewById(R.id.dialogupdate_producthistory_btn_cancel);
         btnSave = findViewById(R.id.dialogupdate_producthistory_btn_save);

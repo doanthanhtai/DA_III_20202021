@@ -167,6 +167,7 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
         productHistory.setLakeId(diet.getLakeId());
         productHistory.setProductId(diet.getProductId());
         productHistory.setUseTime(useTime);
+        productHistory.setUpdateTime(useTime);
         productHistory.setAmount(diet.getAmount());
         productHistory.setDeleted(false);
         databaseReference.child(productHistory.getId()).setValue(productHistory).addOnCompleteListener(task -> {

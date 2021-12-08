@@ -18,9 +18,6 @@ import androidx.annotation.NonNull;
 import com.example.tomtep.R;
 import com.example.tomtep.model.ImportHistory;
 import com.example.tomtep.model.Product;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
@@ -29,12 +26,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateImportHistoryDialog extends Dialog {
-    private TextView tvMaSPM, tvTenSP, tvNgayTao, tvNgayCapNhat;
-    private EditText edtSoLuong;
-    private Button btnLuu, btnDong;
     private final Context context;
     private final ImportHistory importHistory;
     private final Product product;
+    private TextView tvMaSPM, tvTenSP, tvNgayTao, tvNgayCapNhat;
+    private EditText edtSoLuong;
+    private Button btnLuu, btnDong;
+
     public UpdateImportHistoryDialog(@NonNull Context context, Product product, ImportHistory importHistory) {
         super(context);
         this.context = context;
@@ -74,16 +72,16 @@ public class UpdateImportHistoryDialog extends Dialog {
             product.setAmount(product.getAmount() + quantity - importHistory.getAmount());
             importHistory.setAmount(quantity);
 
-            Map<String,Object> map = new HashMap<>();
-            map.put("amount",importHistory.getAmount());
-            map.put("updateTime",DateFormat.getInstance().format(Calendar.getInstance().getTime()));
+            Map<String, Object> map = new HashMap<>();
+            map.put("amount", importHistory.getAmount());
+            map.put("updateTime", DateFormat.getInstance().format(Calendar.getInstance().getTime()));
 
             FirebaseDatabase.getInstance().getReference("ImportHistory").child(importHistory.getId()).updateChildren(map)
                     .addOnCompleteListener(task -> FirebaseDatabase.getInstance().getReference("Product").child(product.getId()).child("amount").setValue(product.getAmount())
                             .addOnCompleteListener(task1 -> {
-                Toast.makeText(context, R.string.updateimporthistory_toast_succesful, Toast.LENGTH_SHORT).show();
-                dismiss();
-            }));
+                                Toast.makeText(context, R.string.updateimporthistory_toast_succesful, Toast.LENGTH_SHORT).show();
+                                dismiss();
+                            }));
         } else {
             Toast.makeText(context, R.string.enterquantityproduct_toast_quantityinvalid, Toast.LENGTH_SHORT).show();
         }
