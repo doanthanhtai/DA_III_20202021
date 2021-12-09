@@ -369,6 +369,5 @@ public class LakeFragmentTwo extends Fragment implements IClickItemLakeListener 
         RecyclerView.ItemDecoration decoration = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
         rcvLake.addItemDecoration(decoration);
         rcvLake.setAdapter(lakeAdapterTwo);
-
     }
 }

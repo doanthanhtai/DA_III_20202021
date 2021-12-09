@@ -246,7 +246,7 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                         Lake lake = snapshot.getValue(Lake.class);
-                        if (lake == null || lake.isDeleted()) return;
+                        if (lake == null || lake.isDeleted() || lake.isCondition()) return;
                         lakes.add(lake);
                         dietAdapter.notifyItemChanged(lakes.size());
                     }
@@ -258,7 +258,7 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
                         for (int i = lakes.size() - 1; i >= 0; i--) {
                             if (lakes.get(i).getId().equals(lake.getId())) {
                                 lakes.set(i, lake);
-                                if (lake.isDeleted()) {
+                                if (lake.isDeleted() || lake.isCondition()) {
                                     lakes.remove(i);
                                 }
                                 dietAdapter.notifyItemChanged(i);

@@ -60,8 +60,11 @@ public class ExpandLakeActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (lake.isCondition()) return false;
-        getMenuInflater().inflate(R.menu.expandlake_toolbar_menu, menu);
+        if (lake.isCondition()){
+            getMenuInflater().inflate(R.menu.expandlake_toolbar_menu_two, menu);
+            return super.onCreateOptionsMenu(menu);
+        }
+        getMenuInflater().inflate(R.menu.expandlake_toolbar_menu_one, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
