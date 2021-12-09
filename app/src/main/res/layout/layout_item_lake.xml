@@ -28,14 +28,6 @@
                 android:textColor="@color/teal_700"
                 android:textSize="@dimen/text_size_26sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/itemlake_tv_trangthai"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_14sp" />
         </LinearLayout>
 
         <LinearLayout

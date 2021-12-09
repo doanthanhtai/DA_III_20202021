@@ -94,6 +94,7 @@ public class ProductHistoryFragment extends Fragment implements IClickItemProduc
         rcvProductHistory.setLayoutManager(linearLayoutManager);
         rcvProductHistory.setAdapter(productHistoryAdapter);
         floatingProductHistory = view.findViewById(R.id.producthistory_floating);
+        if (lake.isCondition()) floatingProductHistory.setVisibility(View.GONE);
     }
 
     private void addChildEventListener() {
@@ -242,11 +243,13 @@ public class ProductHistoryFragment extends Fragment implements IClickItemProduc
 
     @Override
     public boolean onLongClick(ProductHistory productHistory) {
+        if (lake.isCondition()) return false;
         new UpdateProductHistoryDialog(context, productHistory, getProductById(productHistory.getProductId()), getFeedingHistoryByProductHistoryId(productHistory.getId())).show();
         return true;
     }
 
     private void setSwipeDeleteProductHistory() {
+        if (lake.isCondition()) return;
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {

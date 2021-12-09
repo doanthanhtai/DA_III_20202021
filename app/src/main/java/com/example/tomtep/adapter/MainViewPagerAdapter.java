@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.tomtep.fragment.DietFragment;
-import com.example.tomtep.fragment.LakeFragment;
+import com.example.tomtep.fragment.LakeFragmentMain;
 import com.example.tomtep.fragment.ProductFragment;
 import com.example.tomtep.fragment.StatisticsFragment;
 
@@ -21,7 +21,7 @@ public class MainViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return new LakeFragment();
+                return new LakeFragmentMain();
             case 1:
                 return new DietFragment();
             case 2:

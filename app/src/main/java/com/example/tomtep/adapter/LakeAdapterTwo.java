@@ -20,7 +20,7 @@ import com.example.tomtep.model.ProductHistory;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class LakeAdapter extends RecyclerView.Adapter<LakeAdapter.LakeViewHolder> {
+public class LakeAdapterTwo extends RecyclerView.Adapter<LakeAdapterTwo.LakeViewHolder> {
     private final List<Lake> lakes;
     private final List<EnvironmentHistory> environmentHistories;
     private final List<OtherUseHistory> otherUseHistories;
@@ -30,7 +30,7 @@ public class LakeAdapter extends RecyclerView.Adapter<LakeAdapter.LakeViewHolder
     private final String[] listCS = new String[3];
     private final DecimalFormat decimalFormat = new DecimalFormat("# đ");
 
-    public LakeAdapter(List<Lake> lakes, List<EnvironmentHistory> environmentHistories, List<OtherUseHistory> otherUseHistories, List<ProductHistory> productHistories, List<Product> products, IClickItemLakeListener iClickItemLakeListener) {
+    public LakeAdapterTwo(List<Lake> lakes, List<EnvironmentHistory> environmentHistories, List<OtherUseHistory> otherUseHistories, List<ProductHistory> productHistories, List<Product> products, IClickItemLakeListener iClickItemLakeListener) {
         this.lakes = lakes;
         this.iClickItemLakeListener = iClickItemLakeListener;
         this.otherUseHistories = otherUseHistories;
@@ -56,7 +56,6 @@ public class LakeAdapter extends RecyclerView.Adapter<LakeAdapter.LakeViewHolder
         holder.tvMaAo.setText(lake.getKey());
         holder.tvTenAo.setText(lake.getName());
         holder.tvNgayTao.setText(lake.getCreationTime());
-        holder.tvTrangThai.setText(getTrangThaiAo(lake.isCondition()));
         holder.tvChiPhi.setText(getChiPhiCuaAo(lake));
         holder.tvPH.setText(listCS[0]);
         holder.tvOxy.setText(listCS[1]);
@@ -111,15 +110,6 @@ public class LakeAdapter extends RecyclerView.Adapter<LakeAdapter.LakeViewHolder
         return 0.0f;
     }
 
-
-    //Nếu ao có trạng thái là true thì ao hiện tại đang còn nuôi và ngược lại thì đã thu hoạch
-    private String getTrangThaiAo(boolean trangThai) {
-        if (trangThai) {
-            return "Đã thu hoạch";
-        }
-        return "Đang nuôi";
-    }
-
     @Override
     public int getItemCount() {
         if (lakes != null) {
@@ -129,7 +119,7 @@ public class LakeAdapter extends RecyclerView.Adapter<LakeAdapter.LakeViewHolder
     }
 
     public static class LakeViewHolder extends RecyclerView.ViewHolder {
-        private final TextView tvMaAo, tvTenAo, tvNgayTao, tvTrangThai, tvChiPhi, tvDoMan, tvPH, tvOxy;
+        private final TextView tvMaAo, tvTenAo, tvNgayTao, tvChiPhi, tvDoMan, tvPH, tvOxy;
         private final RelativeLayout relativeLayout;
 
         public LakeViewHolder(@NonNull View itemView) {
@@ -138,7 +128,6 @@ public class LakeAdapter extends RecyclerView.Adapter<LakeAdapter.LakeViewHolder
             tvMaAo = itemView.findViewById(R.id.itemlake_tv_ma);
             tvTenAo = itemView.findViewById(R.id.itemlake_tv_ten);
             tvNgayTao = itemView.findViewById(R.id.itemlake_tv_ngaytao);
-            tvTrangThai = itemView.findViewById(R.id.itemlake_tv_trangthai);
             tvChiPhi = itemView.findViewById(R.id.itemlake_tv_chiphi);
             tvDoMan = itemView.findViewById(R.id.itemlake_tv_doman);
             tvPH = itemView.findViewById(R.id.itemlake_tv_ph);

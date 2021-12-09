@@ -152,7 +152,7 @@
     <string name="dialognewproduct_toast_unitinvalid">Vui lòng chọn đơn vị dùng hợp lệ</string>
     <string name="expandlake_toolbar_menu_harvest">Thu hoạch ao</string>
     <string name="expandlake_toolbar_menu_delete">Xóa ao</string>
-    <string name="producthistoryfragmemt_toast_deletesuccess">Xóa lịch sử sử dụng thành công</string>
+    <string name="producthistoryfragmemt_toast_deletesuccess">Xóa lịch dùng thành công</string>
     <string name="itemproducthistory_tv_deleted">Lịch sử dùng sản phẩm sẽ được xóa</string>
     <string name="all_message_confirmactiondeleteproducthistory">\nSẽ bị xóa khỏi lịch sử dùng sản phẩm của:\t</string>
     <string name="dialogupdateproducthistory_title">CẬP NHẬT LỊCH SỬ DÙNG SẢN PHẨM</string>
@@ -188,6 +188,10 @@
     <string name="dialognew_environmenthistory_toast_success">Cập nhật môi trường thành công</string>
     <string name="expandlake_title_confirmdetelake">Xác nhận xóa ao.</string>
     <string name="expandlake_toast_deletelakesuccess">Xóa ao thành công</string>
+    <string name="expandlake_title_confirmharvest">Xác nhận thu hoạch ao</string>
+    <string name="expandlake_toast_harvestsuccess">Thu hoạch thành công</string>
+    <string name="lake_tab_producthistory">Đang nuôi</string>
+    <string name="lake_tab_environmenthistory">Đã thu hoạch</string>
 
 
 </resources>

@@ -122,5 +122,6 @@ public class EnvironmentHistoryFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         rcvEnvironmentHistory.setLayoutManager(linearLayoutManager);
         rcvEnvironmentHistory.setAdapter(environmentHistoryAdapter);
+        if (lake.isCondition()) floatingEnvironmentHistory.setVisibility(View.GONE);
     }
 }

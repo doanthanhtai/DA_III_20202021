@@ -79,6 +79,9 @@
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_diet.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_environment_history.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_lake.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_lake_main.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_lake_one.xml" value="0.209375" />
+        <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_lake_two.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_otherusehistory.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_product.xml" value="0.209375" />
         <entry key="..\:/PROJECT_DA_THAYDOI_CSDL/TOMTEP/app/src/main/res/layout/fragment_producthistory.xml" value="0.209375" />
@@ -97,7 +100,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

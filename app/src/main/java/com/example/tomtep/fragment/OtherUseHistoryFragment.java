@@ -63,6 +63,7 @@ public class OtherUseHistoryFragment extends Fragment implements IClickItemOther
     }
 
     private void setSwipeDeleteProductHistory() {
+        if (lake.isCondition()) return;
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -191,10 +192,12 @@ public class OtherUseHistoryFragment extends Fragment implements IClickItemOther
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         rcvOtherUseHistory.setLayoutManager(linearLayoutManager);
         rcvOtherUseHistory.setAdapter(otherUseHistoryAdapter);
+        if (lake.isCondition()) floatingOtherUseHistory.setVisibility(View.GONE);
     }
 
     @Override
     public boolean onLongClick(OtherUseHistory otherUseHistory) {
+        if (lake.isCondition()) return false;
         new UpdateOtherUseHistoryDailog(context, otherUseHistory).show();
         return true;
     }
