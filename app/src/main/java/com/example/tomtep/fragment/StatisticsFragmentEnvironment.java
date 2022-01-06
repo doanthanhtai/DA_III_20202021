@@ -123,25 +123,28 @@ public class StatisticsFragmentEnvironment extends Fragment {
         getEntries();
         //env
         lineDataSetPH = new LineDataSet(lineEntriesPH, getString(R.string.statistics_tab_environment_label_ph));
-        lineDataPH = new LineData(lineDataSetPH);
-        lcPH.setData(lineDataPH);
         lineDataSetPH.setColors(ColorTemplate.rgb("#00CCFF"));
         lineDataSetPH.setValueTextColor(Color.BLACK);
         lineDataSetPH.setValueTextSize(8f);
+        lineDataPH = new LineData(lineDataSetPH);
+        lcPH.setData(lineDataPH);
+        lcPH.getDescription().setEnabled(false);
         //oxy
         lineDataSetOxy = new LineDataSet(lineEntriesOxy, getString(R.string.statistics_tab_environment_label_oxy));
-        lineDataOxy = new LineData(lineDataSetOxy);
-        lcOxy.setData(lineDataOxy);
         lineDataSetOxy.setColors(ColorTemplate.rgb("#FF3366"));
         lineDataSetOxy.setValueTextColor(Color.BLACK);
         lineDataSetOxy.setValueTextSize(8f);
+        lineDataOxy = new LineData(lineDataSetOxy);
+        lcOxy.setData(lineDataOxy);
+        lcOxy.getDescription().setEnabled(false);
         //doman
         lineDataSetDoMan = new LineDataSet(lineEntriesDoMan, getString(R.string.statistics_tab_environment_label_doman));
-        lineDataDoMan = new LineData(lineDataSetDoMan);
-        lcDoMan.setData(lineDataDoMan);
         lineDataSetDoMan.setColors(ColorTemplate.rgb("#0000FF"));
         lineDataSetDoMan.setValueTextColor(Color.BLACK);
         lineDataSetDoMan.setValueTextSize(8f);
+        lineDataDoMan = new LineData(lineDataSetDoMan);
+        lcDoMan.setData(lineDataDoMan);
+        lcDoMan.getDescription().setEnabled(false);
         //notify
         lcPH.notifyDataSetChanged();
         lcOxy.notifyDataSetChanged();
@@ -162,7 +165,6 @@ public class StatisticsFragmentEnvironment extends Fragment {
             }
         }
     }
-
 
     private void setDataForSpiner() {
         if (lakes == null) return;
@@ -195,7 +197,7 @@ public class StatisticsFragmentEnvironment extends Fragment {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                         Lake lake = snapshot.getValue(Lake.class);
-                        if (lake == null || lake.isDeleted() || lake.isCondition()) return;
+                        if (lake == null || lake.isDeleted()) return;
                         lakes.add(lake);
                         addChildEventListenerForLake(lake);
                         lcPH.notifyDataSetChanged();
@@ -210,7 +212,7 @@ public class StatisticsFragmentEnvironment extends Fragment {
                         for (int i = lakes.size() - 1; i >= 0; i--) {
                             if (lakes.get(i).getId().equals(lake.getId())) {
                                 lakes.set(i, lake);
-                                if (lake.isDeleted() || lake.isCondition()) {
+                                if (lake.isDeleted()) {
                                     lakes.remove(i);
                                     lcPH.notifyDataSetChanged();
                                     lcDoMan.notifyDataSetChanged();
@@ -264,7 +266,7 @@ public class StatisticsFragmentEnvironment extends Fragment {
     }
 
     private void initView(View view) {
-        sprLake = view.findViewById(R.id.statisticsenvironment_spr_lake);
+        sprLake = view.findViewById(R.id.statisticsenvironment_spr_chonao);
         lcPH = view.findViewById(R.id.statisticsenvironment_lc_ph);
         lcOxy = view.findViewById(R.id.statisticsenvironment_lc_oxy);
         lcDoMan = view.findViewById(R.id.statisticsenvironment_lc_doman);

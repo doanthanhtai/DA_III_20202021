@@ -203,7 +203,7 @@
     <string name="statistics_tab_environment_label_ph">Biến động PH</string>
     <string name="statistics_tab_environment_label_oxy">Biến động Oxy trong nước</string>
     <string name="statistics_tab_environment_label_doman">Biến động Độ mặn</string>
-    <string name="statistics_tab_environment_tv_chonao">Chọn ao xem TK: </string>
+    <string name="statistics_tv_chonao">Chọn ao xem TK: </string>
 
 
 </resources>
