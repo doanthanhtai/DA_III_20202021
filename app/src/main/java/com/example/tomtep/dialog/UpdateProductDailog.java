@@ -79,24 +79,29 @@ public class UpdateProductDailog extends Dialog {
             return;
         }
 
-        float giaNhap = Float.parseFloat(strGiaNhap);
-        if (giaNhap < 0) {
+        try {
+            float giaNhap = Float.parseFloat(strGiaNhap);
+            if (giaNhap < 0) {
+                Toast.makeText(context, R.string.dialognew_product_toast_importpriceinvalid, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("key", strMaSP);
+            map.put("name", strTenSP);
+            map.put("supplier", strTenNCC);
+            map.put("importPrice", giaNhap);
+            map.put("measure", product.getMeasure());
+
+            FirebaseDatabase.getInstance().getReference("Product")
+                    .child(product.getId())
+                    .updateChildren(map);
+            Toast.makeText(context, R.string.updateproduct_succesful, Toast.LENGTH_SHORT).show();
+            this.dismiss();
+
+        } catch (Exception e) {
             Toast.makeText(context, R.string.dialognew_product_toast_importpriceinvalid, Toast.LENGTH_SHORT).show();
-            return;
         }
 
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("key", strMaSP);
-        map.put("name", strTenSP);
-        map.put("supplier", strTenNCC);
-        map.put("importPrice", giaNhap);
-        map.put("measure", product.getMeasure());
-
-        FirebaseDatabase.getInstance().getReference("Product")
-                .child(product.getId())
-                .updateChildren(map);
-        Toast.makeText(context, R.string.updateproduct_succesful, Toast.LENGTH_SHORT).show();
-        this.dismiss();
     }
 
     private void onClickCancel() {
@@ -105,7 +110,7 @@ public class UpdateProductDailog extends Dialog {
                 .setMessage(R.string.all_message_confirmactioncancel)
                 .setPositiveButton(R.string.all_button_agree_text, (dialogInterface, i) -> {
                     dialogInterface.dismiss();
-                    Toast.makeText(context, R.string.newproduct_toast_canceled, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.updateproduct_toast_canceled, Toast.LENGTH_SHORT).show();
                     this.dismiss();
                 })
                 .setNegativeButton(R.string.all_button_cancel_text, (dialogInterface, i) -> dialogInterface.dismiss());

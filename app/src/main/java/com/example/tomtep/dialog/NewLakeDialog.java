@@ -113,7 +113,6 @@ public class NewLakeDialog extends Dialog {
                 })
                 .setNegativeButton(R.string.all_button_cancel_text, (dialogInterface, i) -> dialogInterface.dismiss());
         builder.create().show();
-
     }
 
     private void initView() {

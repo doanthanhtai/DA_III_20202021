@@ -64,7 +64,7 @@ public class NewOtherUseHistoryDailog extends Dialog {
         }
 
         try {
-            float cost = Float.parseFloat(strCost);
+            double cost = Double.parseDouble(strCost);
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("OtherUseHistory");
             String otherUseHistoryId = databaseReference.push().getKey();
             OtherUseHistory otherUseHistory = new OtherUseHistory();

@@ -38,7 +38,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     Toast.makeText(ResetPasswordActivity.this, R.string.resetpassword_toast_sendemailcomplete, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(ResetPasswordActivity.this,SignInActivity.class));
                 }else {
-                    Toast.makeText(ResetPasswordActivity.this, R.string.all_toast_invaled, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResetPasswordActivity.this, R.string.resetpassword_toast_emailinexist, Toast.LENGTH_SHORT).show();
                 }
             });
         }else {

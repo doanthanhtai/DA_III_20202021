@@ -38,16 +38,28 @@ public class ProductFragment extends Fragment implements IClickItemProductListen
     private RecyclerView rcvProduct;
     private List<Product> products;
     private List<String> units;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_product, container, false);
+        view = inflater.inflate(R.layout.fragment_product, container, false);
         products = new ArrayList<>();
         units = new ArrayList<>();
         addChildEventListener();
-        initView(view);
+        initView();
         setSwipeDeleteProduct();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (products.size() <= 0) {
+            view.findViewById(R.id.product_tv_empty).setVisibility(View.VISIBLE);
+        }
+        if (products.size() > 0) {
+            view.findViewById(R.id.product_tv_empty).setVisibility(View.GONE);
+        }
     }
 
     private void setSwipeDeleteProduct() {
@@ -105,7 +117,7 @@ public class ProductFragment extends Fragment implements IClickItemProductListen
         itemTouchHelper.attachToRecyclerView(rcvProduct);
     }
 
-    private void initView(View view) {
+    private void initView() {
         rcvProduct = view.findViewById(R.id.product_rcv);
         productAdapter = new ProductAdapter(products, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

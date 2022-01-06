@@ -18,7 +18,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/dialogupdatelake_edt_ma_ao"
+        android:id="@+id/dialogupdatelake_edt_maao"
         android:layout_marginTop="@dimen/margin_30dp"
         android:padding="@dimen/pading_10dp"
         android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"
@@ -29,7 +29,7 @@
         android:hint="@string/all_maao_hint" />
 
     <EditText
-        android:id="@+id/dialogupdatelake_edt_ten_ao"
+        android:id="@+id/dialogupdatelake_edt_tenao"
         android:layout_marginTop="@dimen/margin_10dp"
         android:padding="@dimen/pading_10dp"
         android:background="@drawable/bc_rectangle_white_1dp_black_orange_focused"

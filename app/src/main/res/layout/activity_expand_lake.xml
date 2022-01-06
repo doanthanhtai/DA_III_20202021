@@ -21,16 +21,17 @@
             android:background="@color/cyan"
             android:theme="@style/ThemeOverlay.AppCompat.Light" />
     </com.google.android.material.appbar.AppBarLayout>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/expandlake_tablayout"
-        android:background="@color/white"
-        app:tabIndicatorHeight="@dimen/height_1dp"
-        app:tabIndicatorColor="@color/teal_700"
-        app:tabTextColor="@color/black"
-        app:tabSelectedTextColor="@color/teal_700"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/expandlake_appbar"/>
+        android:layout_below="@+id/expandlake_appbar"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/teal_700"
+        app:tabIndicatorHeight="@dimen/height_1dp"
+        app:tabSelectedTextColor="@color/teal_700"
+        app:tabTextColor="@color/black" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/expandlake_viewpager2"

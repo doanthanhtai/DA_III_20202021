@@ -1,82 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     android:padding="@dimen/pading_10dp"
     tools:context=".SignUpAcitivity">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_26sp"
-        android:textStyle="bold"
+        android:text="@string/signup_textview_title"
         android:textColor="@color/teal_700"
-        android:text="@string/signup_textview_title"/>
+        android:textSize="@dimen/text_size_26sp"
+        android:textStyle="bold" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signup_til_email"
-        android:layout_marginTop="@dimen/margin_30dp"
-        app:hintEnabled="false"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_30dp"
+        app:hintEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/signup_edt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_30dp"
-            android:hint="@string/all_email_hint"
-            android:padding="@dimen/pading_20dp"
-            android:drawablePadding="@dimen/pading_10dp"
-            android:drawableStart="@drawable/all_custom_email_icon_24"
-            android:background="@drawable/bc_rectangle_white_radius50dp_1dp_black_orange_focused"
-            android:inputType="textEmailAddress"
             android:autofillHints="emailAddress"
-            android:minHeight="48dp"/>
+            android:background="@drawable/bc_rectangle_white_radius50dp_1dp_black_orange_focused"
+            android:drawableStart="@drawable/all_custom_email_icon_24"
+            android:drawablePadding="@dimen/pading_10dp"
+            android:hint="@string/all_email_hint"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:padding="@dimen/pading_20dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signup_til_password"
-        android:layout_marginTop="@dimen/margin_10dp"
-        app:hintEnabled="false"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10dp"
+        app:hintEnabled="false">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/signup_edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_10dp"
             android:autofillHints="password"
-            android:hint="@string/all_password_hint"
-            android:padding="@dimen/pading_20dp"
-            android:drawablePadding="@dimen/pading_10dp"
-            android:drawableStart="@drawable/all_custom_lock_icon_24"
             android:background="@drawable/bc_rectangle_white_radius50dp_1dp_black_orange_focused"
+            android:drawableStart="@drawable/all_custom_lock_icon_24"
+            android:drawablePadding="@dimen/pading_10dp"
+            android:hint="@string/all_password_hint"
             android:inputType="numberPassword"
-            android:minHeight="48dp"/>
+            android:minHeight="48dp"
+            android:padding="@dimen/pading_20dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signup_til_confirm_password"
-        app:hintEnabled="false"
-        android:layout_marginTop="@dimen/margin_10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10dp"
+        app:hintEnabled="false">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/signup_edt_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_10dp"
             android:autofillHints="password"
-            android:hint="@string/all_confirm_password_hint"
-            android:padding="@dimen/pading_20dp"
-            android:drawablePadding="@dimen/pading_10dp"
-            android:drawableStart="@drawable/all_custom_lock_icon_24"
             android:background="@drawable/bc_rectangle_white_radius50dp_1dp_black_orange_focused"
+            android:drawableStart="@drawable/all_custom_lock_icon_24"
+            android:drawablePadding="@dimen/pading_10dp"
+            android:hint="@string/all_confirm_password_hint"
             android:inputType="numberPassword"
-            android:minHeight="48dp"/>
+            android:minHeight="48dp"
+            android:padding="@dimen/pading_20dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -87,16 +91,16 @@
         android:background="@drawable/bc_rectangle_teal700_radius50dp_1dp_teal700"
         android:text="@string/signup_button_signup_text"
         android:textColor="@color/white"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/signup_layout_signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/pading_10dp"
         android:layout_marginTop="@dimen/margin_10dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/pading_10dp">
 
         <TextView
             android:layout_width="wrap_content"

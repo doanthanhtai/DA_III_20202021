@@ -1,5 +1,6 @@
 package com.example.tomtep;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
@@ -82,7 +85,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private void onClickChangePassword() {
         String strNewPassword = String.valueOf(edtPassword.getText()).trim();
         if (tilPassword.getError() == null && tilConfirmPassword.getError() == null && !strNewPassword.isEmpty()) {
-//            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance().pas
+            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (firebaseUser == null){
+                return;
+            }
+
+            FirebaseAuth.getInstance().getCurrentUser().updatePassword(strNewPassword);
+            Toast.makeText(ChangePasswordActivity.this, getResources().getText(R.string.changepassword_toast_successful), Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this,SignInActivity.class));
+            finishAffinity();
         } else {
             Toast.makeText(ChangePasswordActivity.this, getResources().getText(R.string.all_toast_invaled), Toast.LENGTH_SHORT).show();
         }

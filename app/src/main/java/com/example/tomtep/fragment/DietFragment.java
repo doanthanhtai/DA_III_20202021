@@ -86,10 +86,6 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
             Toast.makeText(context, R.string.dietfragment_toast_nonproduct, Toast.LENGTH_SHORT).show();
             return;
         }
-        if (product.getAmount() < diet.getAmount()) {
-            Toast.makeText(context, "Sản phẩm hiện tại không còn đủ cho một lần ăn.", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         if (diet.getProductId().equals("default_product")) {
             Toast.makeText(context, getText(R.string.dietfragment_toast_dietinvalid), Toast.LENGTH_SHORT).show();
@@ -106,6 +102,10 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
 
         AlertDialog.Builder builder;
         if (isChecked) {
+            if (product.getAmount() < diet.getAmount()) {
+                Toast.makeText(context, "Sản phẩm hiện tại không còn đủ cho một lần ăn.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             builder = new AlertDialog.Builder(context)
                     .setTitle(R.string.all_title_dialogconfirm)
                     .setMessage(getText(R.string.dietfragment_message_confirm_turnon) + lakeName)
@@ -215,6 +215,7 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
         intent.putExtra("lake_id", diet.getLakeId());
         intent.putExtra("title", strTitle);
         intent.putExtra("content", strContent);
+        intent.putExtra("account_id",MainActivity.MY_ACCOUNT.getId());
         intent.setAction("EATED");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, getPositionLakeById(diet.getLakeId()), intent, PendingIntent.FLAG_IMMUTABLE);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

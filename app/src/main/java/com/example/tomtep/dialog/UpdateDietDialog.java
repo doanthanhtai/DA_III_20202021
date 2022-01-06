@@ -135,19 +135,30 @@ public class UpdateDietDialog extends Dialog {
             Toast.makeText(getContext(), R.string.dialogupdatediet_toast_longtimeempty, Toast.LENGTH_SHORT).show();
             return;
         }
-        float amount = Float.parseFloat(strSoLuong.trim());
-        if (amount == 0.0 || amount < 0) {
-            Toast.makeText(getContext(), R.string.dialogupdatediet_toast_quantityempty, Toast.LENGTH_SHORT).show();
-            return;
+        try {
+            float amount = Float.parseFloat(strSoLuong.trim());
+            if (amount == 0.0 || amount < 0) {
+                Toast.makeText(getContext(), R.string.dialogupdatediet_toast_quantityempty, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            try {
+
+                int time = Integer.parseInt(strThoiGianAn);
+                diet.setAmount(amount);
+                diet.setFrame(frameTime);
+                diet.setTime(time);
+
+                FirebaseDatabase.getInstance().getReference("Lake").child(diet.getLakeId()).child("diet").setValue(diet);
+                Toast.makeText(context, R.string.all_toast_updateinfomationsuccess, Toast.LENGTH_SHORT).show();
+                this.dismiss();
+
+            } catch (Exception exception) {
+                Toast.makeText(context,R.string.updatediet_toast_timeinvalid,Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            Toast.makeText(context,R.string.updatediet_toast_timeinvalid,Toast.LENGTH_SHORT).show();
         }
-
-        diet.setAmount(amount);
-        diet.setFrame(frameTime);
-        diet.setTime(Integer.parseInt(strThoiGianAn));
-
-        FirebaseDatabase.getInstance().getReference("Lake").child(diet.getLakeId()).child("diet").setValue(diet);
-        Toast.makeText(context, R.string.all_toast_updateinfomationsuccess, Toast.LENGTH_SHORT).show();
-        this.dismiss();
     }
 
     private void onClickCancelDialog() {

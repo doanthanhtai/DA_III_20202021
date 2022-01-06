@@ -114,33 +114,38 @@ public class NewProductDailog extends Dialog {
             return;
         }
 
-        float giaNhap = Float.parseFloat(strGiaNhap);
-        if (giaNhap < 0) {
-            Toast.makeText(context, R.string.dialognew_product_toast_importpriceinvalid, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (sprDonVi.getSelectedItemPosition() == 0) {
-            Toast.makeText(context, R.string.dialognewproduct_toast_unitinvalid, Toast.LENGTH_SHORT).show();
-            return;
-        }
+        try {
+            float giaNhap = Float.parseFloat(strGiaNhap);
+            if (giaNhap < 0) {
+                Toast.makeText(context, R.string.dialognew_product_toast_importpriceinvalid, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (sprDonVi.getSelectedItemPosition() == 0) {
+                Toast.makeText(context, R.string.dialognewproduct_toast_unitinvalid, Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Product");
-        String productId = databaseReference.push().getKey();
-        if (productId == null) {
-            return;
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Product");
+            String productId = databaseReference.push().getKey();
+            if (productId == null) {
+                return;
+            }
+            product.setId(productId);
+            product.setAccountId(MainActivity.MY_ACCOUNT.getId());
+            product.setKey(maSP);
+            product.setName(tenSP);
+            product.setSupplier(tenNCC);
+            product.setImportPrice(giaNhap);
+            product.setAmount(0);
+            product.setDeleted(false);
+            FirebaseDatabase.getInstance().getReference("Product").child(productId).setValue(product).addOnCompleteListener(task -> {
+                Toast.makeText(context, R.string.newproduct_succesful, Toast.LENGTH_SHORT).show();
+                dismiss();
+            });
+
+        }catch (Exception e){
+            Toast.makeText(context, R.string.dialognew_product_toast_importpriceinvalid, Toast.LENGTH_SHORT).show();
         }
-        product.setId(productId);
-        product.setAccountId(MainActivity.MY_ACCOUNT.getId());
-        product.setKey(maSP);
-        product.setName(tenSP);
-        product.setSupplier(tenNCC);
-        product.setImportPrice(giaNhap);
-        product.setAmount(0);
-        product.setDeleted(false);
-        FirebaseDatabase.getInstance().getReference("Product").child(productId).setValue(product).addOnCompleteListener(task -> {
-            Toast.makeText(context, R.string.newproduct_succesful, Toast.LENGTH_SHORT).show();
-            dismiss();
-        });
 
     }
 
@@ -150,7 +155,7 @@ public class NewProductDailog extends Dialog {
                 .setMessage(R.string.all_message_confirmactioncancel)
                 .setPositiveButton(R.string.all_button_agree_text, (dialogInterface, i) -> {
                     dialogInterface.dismiss();
-                    Toast.makeText(context, R.string.newlake_toast_canceled, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.newproduct_toast_canceled, Toast.LENGTH_SHORT).show();
                     this.dismiss();
                 })
                 .setNegativeButton(R.string.all_button_cancel_text, (dialogInterface, i) -> dialogInterface.dismiss());

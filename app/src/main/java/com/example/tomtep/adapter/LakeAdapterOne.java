@@ -49,7 +49,7 @@ public class LakeAdapterOne extends RecyclerView.Adapter<LakeAdapterOne.LakeView
     @Override
     public void onBindViewHolder(@NonNull LakeViewHolder holder, int position) {
         Lake lake = lakes.get(position);
-        if (lake == null) return;
+        if (lake == null || lake.isCondition()) return;
 
         getEnvironmentHistoryLast(lake);
 

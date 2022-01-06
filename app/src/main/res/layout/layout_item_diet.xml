@@ -24,11 +24,11 @@
                 android:id="@+id/itemdiet_tv_ma"
                 android:layout_width="@dimen/width_80dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ic_lake_72px"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_24sp"
-                android:background="@drawable/ic_lake_72px"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
 
         </LinearLayout>
@@ -53,6 +53,14 @@
                 app:drawableStartCompat="@drawable/ic_used_product_14px" />
 
             <TextView
+                android:id="@+id/itemdiet_tv_trangthai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <TextView
                 android:id="@+id/itemdiet_tv_khunggioan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,23 +70,16 @@
                 android:textStyle="italic"
                 app:drawableStartCompat="@drawable/ic_present_14px" />
 
-            <TextView
-                android:id="@+id/itemdiet_tv_trangthai"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_10dp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_14sp" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/itemdiet_tv_time"
-            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/margin_10dp"
             android:layout_toStartOf="@+id/itemdiet_switch_feed"
+            android:gravity="center"
             app:drawableEndCompat="@drawable/ic_sand_watch_24px" />
 
         <androidx.appcompat.widget.SwitchCompat

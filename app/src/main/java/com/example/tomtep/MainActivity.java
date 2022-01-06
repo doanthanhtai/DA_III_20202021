@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_signout) {
             singOut();
-        } else if (item.getItemId() == R.id.nav_change_password) {
+        } else if (item.getItemId() == R.id.nav_reset_password) {
             clickToChangePassword();
         } else if (item.getItemId() == R.id.nav_delete_account) {
             deleteAccount();

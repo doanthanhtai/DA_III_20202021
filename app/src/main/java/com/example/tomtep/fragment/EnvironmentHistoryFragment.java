@@ -61,7 +61,7 @@ public class EnvironmentHistoryFragment extends Fragment {
     private void insertEnvironmentHistory() {
         EnvironmentHistory environmentHistory = null;
         if (environmentHistories.size() > 0){
-            environmentHistory = environmentHistories.get(environmentHistories.size() - 1);
+            environmentHistory = environmentHistories.get(0);
         }
         new NewEnvironmentHistoryDailog(context, lake,environmentHistory).show();
     }

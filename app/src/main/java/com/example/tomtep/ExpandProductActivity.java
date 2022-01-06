@@ -41,7 +41,7 @@ public class ExpandProductActivity extends AppCompatActivity implements IClickIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_expanded_product);
+        setContentView(R.layout.activity_expand_product);
         importHistories = new ArrayList<>();
         this.context = this;
         product = (Product) getIntent().getSerializableExtra("product_from_productfragment");

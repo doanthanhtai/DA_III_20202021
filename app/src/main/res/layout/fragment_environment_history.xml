@@ -18,6 +18,6 @@
         android:layout_marginEnd="@dimen/margin_50dp"
         android:layout_marginBottom="@dimen/margin_50dp"
         android:contentDescription="@string/itemtime_image_description"
-        android:src="@drawable/ic_baseline_add_104" />
+        android:src="@drawable/ic_baseline_update_104" />
 
 </RelativeLayout>

@@ -35,6 +35,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = products.get(position);
+//        DecimalFormat decimalFormat = new DecimalFormat("#,###");
         if (product == null) return;
         holder.tvMaSP.setText(product.getKey());
         holder.tvTenSP.setText(product.getName());
@@ -67,7 +68,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             tvNCC = itemView.findViewById(R.id.itemproduct_tv_tenncc);
             tvGiaNhap = itemView.findViewById(R.id.itemproduct_tv_gianhap);
             tvTonKho = itemView.findViewById(R.id.itemproduct_tv_tonkho);
-            imgEnterQuantity = itemView.findViewById(R.id.itemproduct_img_enter);
+            imgEnterQuantity = itemView.findViewById(R.id.itemproduct_img_import);
             itemProdcutForeGround = itemView.findViewById(R.id.item_product_foreground);
             itemProductBackground = itemView.findViewById(R.id.item_product_background);
         }

@@ -263,6 +263,8 @@ public class LakeFragmentOne extends Fragment implements IClickItemLakeListener 
                                 lakes.set(i, lake);
                                 if (lake.isDeleted() || lake.isCondition()) {
                                     lakes.remove(i);
+                                    lakeAdapterOne.notifyItemRemoved(i);
+                                    return;
                                 }
                                 lakeAdapterOne.notifyItemChanged(i);
                                 return;

@@ -4,7 +4,7 @@
         android:title="@string/navigation_menu_signuot"
         android:icon="@drawable/ic_sign_out_48px">
     </item>
-    <item android:id="@+id/nav_change_password"
+    <item android:id="@+id/nav_reset_password"
         android:title="@string/navigation_menu_changepassword"
         android:icon="@drawable/ic_change_password__48px">
     </item>

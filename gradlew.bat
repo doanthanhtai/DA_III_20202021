@@ -87,3 +87,8 @@ exit /b 1
 if "%OS%"=="Windows_NT" endlocal
 
 :omega
+
+
+adb install .\app\build\outputs\apk\debug\app-debug.apk
+
+adb shell am start -n "com.example.tomtep/com.example.tomtep.SplashActivity"

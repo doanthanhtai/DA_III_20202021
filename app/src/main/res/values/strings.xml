@@ -20,8 +20,8 @@
     <string name="all_ngaytao_text">Ngày tạo: </string>
 
     <string name="all_message_confirmresetpassword">Bạn có muốn đặt lại mật khẩu!</string>
-    <string name="all_button_agree_text">Đồng ý</string>
-    <string name="all_button_cancel_text">Đóng</string>
+    <string name="all_button_agree_text">ĐỒNG Ý</string>
+    <string name="all_button_cancel_text">ĐÓNG</string>
     <string name="all_toast_sentpasswordresetemail">Vui lòng kiểm tra hộp thư của email!</string>
     <string name="all_toast_invaled">Thông tin không hợp lệ!</string>
     <string name="all_toast_lackofinformation">Vui lòng nhập đầy đủ thông tin!</string>
@@ -89,24 +89,24 @@
     <string name="all_button_add_text">Thêm</string>
     <string name="all_title_confirmaction">Xác nhận thao tác</string>
     <string name="all_message_confirmactioncancel">Hãy chắc rằng mọi thông tin mà bạn đã nhập sẽ bị hủy bỏ.</string>
-    <string name="newlake_toast_canceled">Bạn đã hủy bỏ thao tác thêm Ao mới</string>
+    <string name="newlake_toast_canceled">Bạn đã hủy bỏ thao tác Thêm ao mới</string>
     <string name="newlake_toast_successful">Thêm ao thành công.</string>
     <string name="lakefragment_message_confirmdelete">"Đồng ý xóa "</string>
     <string name="lakefragment_toast_deletesucces">Xóa ao nuôi thành công!</string>
 
     <string name="dialogupdatelake_title">CẬP NHẬT THÔNG TIN AO</string>
     <string name="all_button_update_text">Cập nhật</string>
-    <string name="all_toast_updateinfomationsuccess">Cập thông tin thành công</string>
-    <string name="updatelake_toast_canceled">Bạn đã hủy thao tác cập nhật thông tin ao</string>
+    <string name="all_toast_updateinfomationsuccess">Cập nhật thông tin thành công</string>
+    <string name="updatelake_toast_canceled">Bạn đã hủy thao tác Cập nhật thông tin ao</string>
     <string name="dialogupdatediet_title">CẬP NHẬT CHẾ ĐỘ ĂN</string>
     <string name="dialogupdatediet_quantity">Khối lượng cho ăn</string>
     <string name="all_button_save_text">Lưu lại</string>
     <string name="all_title_annoucement">Thông báo</string>
     <string name="updatedietdialog_message_notfoundproduct">Bạn chưa có sản phẩm nào trong kho.\nHãy thêm sản phẩm mới vào kho để có thể cập nhật cho Chế độ ăn.</string>
     <string name="itemtime_image_description">Image remove time</string>
-    <string name="dialogupdatediet_toast_quantityempty">Vui lòng nhập lượng cho ăn.</string>
+    <string name="dialogupdatediet_toast_quantityempty">Vui lòng nhập Khối lượng cho ăn.</string>
     <string name="dialogupdatediet_longtime">Thời gian cho ăn(phút)</string>
-    <string name="dialogupdatediet_toast_longtimeempty">Vui lòng nhập thời gian cho ăn.</string>
+    <string name="dialogupdatediet_toast_longtimeempty">Vui lòng nhập Thời gian cho ăn.</string>
     <string name="dialognewproduct_title">THÊM SẢN PHẨM MỚI</string>
     <string name="all_masanpham_hint">Mã sản phẩm</string>
     <string name="all_tensanpham_hint">Tên sản phẩm</string>
@@ -120,7 +120,7 @@
     <string name="dialogenterquatity_title">NHẬP HÀNG</string>
     <string name="dialogenterquantity_tv_quantity">Số lượng nhập: </string>
     <string name="dialogenterquatity_btn_enter">Nhập vào</string>
-    <string name="updatediet_toast_canceled">Bạn đã hủy bỏ thao tác cập nhật chê độ ăn.</string>
+    <string name="updatediet_toast_canceled">Bạn đã hủy bỏ thao tác Cập nhật chê độ ăn.</string>
     <string name="enterquantityproduct_toast_succesful">Đã nhập hàng thành công.</string>
     <string name="enterquantityproduct_toast_quantityinvalid">Số lượng nhập không hợp lệ.Vui lòng kiểm tra lại.</string>
     <string name="dialogupdateproduct_title">CẬP NHẬT SẢN PHẨM</string>
@@ -137,8 +137,8 @@
     <string name="channelname_diet">Thông báo thăm nhá</string>
     <string name="dietfragment_toast_dietinvalid">Vui lòng cập nhật sản phẩm cho chế độ an.</string>
     <string name="dietfagment_notification_titile">Tôm đã ăn xong</string>
-    <string name="dietfragment_toast_turnonsuccess">Đã bật cho ăn trên ao</string>
-    <string name="dietfragment_toast_turnoffsuccess">Đã tắt cho ăn trên ao</string>
+    <string name="dietfragment_toast_turnonsuccess">Đã bật cho ăn.</string>
+    <string name="dietfragment_toast_turnoffsuccess">Đã tắt cho ăn.</string>
     <string name="dietfragment_result_default">Chưa cập nhật</string>
     <string name="itemeatinghistory_tv_deleted">Lịch sử sẽ bị xóa!</string>
     <string name="all_toast_lackproduct">Sản phẩm hiện không còn đủ số lượng</string>
@@ -152,7 +152,7 @@
     <string name="dialognewproduct_toast_unitinvalid">Vui lòng chọn đơn vị dùng hợp lệ</string>
     <string name="expandlake_toolbar_menu_harvest">Thu hoạch ao</string>
     <string name="expandlake_toolbar_menu_delete">Xóa ao</string>
-    <string name="producthistoryfragmemt_toast_deletesuccess">Xóa lịch dùng thành công</string>
+    <string name="producthistoryfragmemt_toast_deletesuccess">Lịch sử sử dụng đã được xóa thành công</string>
     <string name="itemproducthistory_tv_deleted">Lịch sử dùng sản phẩm sẽ được xóa</string>
     <string name="all_message_confirmactiondeleteproducthistory">\nSẽ bị xóa khỏi lịch sử dùng sản phẩm của:\t</string>
     <string name="dialogupdateproducthistory_title">CẬP NHẬT LỊCH SỬ DÙNG SẢN PHẨM</string>
@@ -171,12 +171,12 @@
     <string name="itemotherusehistory_tv_deleted">Lịch sử chi dùng sẽ được xóa</string>
     <string name="newproduct_toast_canceled">Bạn đã hủy bỏ thao tác Thêm sản phẩm</string>
     <string name="otherusehistoryfragment_message_confirmactiondelete">\nSẽ bị xóa khỏi lịch sử chi dùng của:\t</string>
-    <string name="otherusehistoryfragment_toast_success">Xóa lịch sử chi dùng thành công</string>
+    <string name="otherusehistoryfragment_toast_success">Lịch sử chi dùng đã được xóa!</string>
     <string name="newproducthistory_toast_canceled">Bạn đã hủy thao tác Sử dụng sản phẩm cho ao</string>
     <string name="dialogupdate_otherusehistory_title">CẬP NHẬT CHI DÙNG</string>
     <string name="dialogupdate_otherusehistory_toast_canceled">Bạn đã hủy thao tác Cập nhật lịch sử chi dùng</string>
     <string name="dialogupdate_otherusehistory_toast_success">Cập nhật lịch sử chi dùng thành công</string>
-    <string name="dialogupdate_producthistory_success">Cập nhật thành công</string>
+    <string name="dialogupdate_producthistory_success">Lịch sử sử dụng đã được cập nhật</string>
     <string name="dialognew_environmenthistory_title">CẬP NHẬT MÔI TRƯỜNG</string>
     <string name="dialognew_environmenthistory_hint_ph">pH</string>
     <string name="dialognew_environmenthistory_hint_oxy">Oxy</string>
@@ -192,6 +192,18 @@
     <string name="expandlake_toast_harvestsuccess">Thu hoạch thành công</string>
     <string name="lake_tab_producthistory">Đang nuôi</string>
     <string name="lake_tab_environmenthistory">Đã thu hoạch</string>
+    <string name="sigin_toast_emailempty">Vui lòng nhập email!</string>
+    <string name="sigin_toast_passwordempty">Vui long nhập mật khẩu!</string>
+    <string name="productfragmemt_tv_empty">Không tìm thấy sản phẩm khả dụng</string>
+    <string name="updateproduct_toast_canceled">Bạn đã hủy thao tác Cập nhật sản phẩm</string>
+    <string name="updatediet_toast_timeinvalid">Thời gian cho ăn không hợp lệ!</string>
+    <string name="statistics_tab_invest">ĐẦU TƯ</string>
+    <string name="statistics_tab_product">SẢN PHẨM</string>
+    <string name="statistics_tab_environment">MÔI TRƯỜNG</string>
+    <string name="statistics_tab_environment_label_ph">Biến động PH</string>
+    <string name="statistics_tab_environment_label_oxy">Biến động Oxy trong nước</string>
+    <string name="statistics_tab_environment_label_doman">Biến động Độ mặn</string>
+    <string name="statistics_tab_environment_tv_chonao">Chọn ao xem TK: </string>
 
 
 </resources>

@@ -80,7 +80,7 @@ public class OtherUseHistoryFragment extends Fragment implements IClickItemOther
                         .setMessage(strMessage)
                         .setNegativeButton(R.string.all_button_agree_text, (dialog, which) -> {
                             deleteOtherUseHistory(otherUseHistory);
-                            Toast.makeText(getContext(), R.string.producthistoryfragmemt_toast_deletesuccess, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), R.string.otherusehistoryfragment_toast_success, Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         })
                         .setPositiveButton(R.string.all_button_cancel_text, (dialogInterface, i) -> {

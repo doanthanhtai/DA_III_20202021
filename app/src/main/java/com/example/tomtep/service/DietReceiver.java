@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -22,12 +23,14 @@ public class DietReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("EATED")) {
+            Log.e("TOMTEP","onReceive");
+            String accountId = intent.getStringExtra("account_id");
             String lakeId = intent.getStringExtra("lake_id");
             String strTitle = intent.getStringExtra("title");
             String strContent = intent.getStringExtra("content");
             Intent i = new Intent(context, ExpandDietActivity.class);
             i.setAction(lakeId);
-            i.putExtra("accountId", MainActivity.MY_ACCOUNT.getId());
+            i.putExtra("accountId", accountId);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_IMMUTABLE);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID_1)

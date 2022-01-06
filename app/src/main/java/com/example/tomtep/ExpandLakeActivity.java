@@ -70,7 +70,7 @@ public class ExpandLakeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.harvest_lake) {
+        if (item.getItemId() == R.id.lake_harvest) {
             String strMassage = "Hãy chắc rằng bạn muốn Thu hoạch ao: " + lake.getKey() + "-" + lake.getName() + "\nSau khi hoàn tất thu hoạch,ao sẽ chuyển sang tab \"Đã thu hoạch\" và bạn chỉ có thể xem lại dữ liệu của ao mà không thao tác ghi dữ liệu mới với ao được nũa!";
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
                     .setTitle(R.string.expandlake_title_confirmharvest)
@@ -92,7 +92,7 @@ public class ExpandLakeActivity extends AppCompatActivity {
             builder.create().show();
 
             Toast.makeText(this, "Chưa configure chức năng này", Toast.LENGTH_SHORT).show();
-        } else if (item.getItemId() == R.id.delete_lake) {
+        } else if (item.getItemId() == R.id.lake_delete) {
             String strMessage = "Hãy chắc rằng bạn muốn xóa ao " + lake.getKey() + "-" + lake.getName() + "\nMọi thông tin liên quan của ao sẽ bị xóa khỏi giao diện nhìn thấy của bạn.\nVà sẽ không thể khôi phục lại được.";
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
                     .setTitle(R.string.expandlake_title_confirmdetelake)

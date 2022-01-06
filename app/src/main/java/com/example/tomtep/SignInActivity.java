@@ -36,7 +36,9 @@ public class SignInActivity extends AppCompatActivity {
         edtEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                if (charSequence.length() == 0) {
+                    tilEmail.setError(SignInActivity.this.getString(R.string.all_error_emailempty));
+                }
             }
 
             @Override
@@ -87,17 +89,30 @@ public class SignInActivity extends AppCompatActivity {
     private void onClickSigin() {
         String strEmail = String.valueOf(edtEmail.getText()).trim();
         String strPassword = String.valueOf(edtPassword.getText()).trim();
-        if (tilEmail.getError() == null && tilPassword.getError() == null && !strEmail.isEmpty() && !strPassword.isEmpty()) {
+        if (strEmail.isEmpty()) {
+            Toast.makeText(this, getResources().getText(R.string.sigin_toast_emailempty), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (strPassword.isEmpty()) {
+            Toast.makeText(this, getResources().getText(R.string.sigin_toast_passwordempty), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (tilEmail.getError() == null && tilPassword.getError() == null) {
+            Log.e("TOMTEP", "Start sigin");
             FirebaseAuth.getInstance().signInWithEmailAndPassword(strEmail, strPassword).addOnCompleteListener(this, task -> {
+                Log.e("TOMTEP", "Sigining");
                 if (task.isSuccessful()) {
+                    Log.e("TOMTEP", "Sigin success!");
                     startActivity(new Intent(SignInActivity.this, MainActivity.class));
                     finishAffinity();
+                } else {
+                    Toast.makeText(this, getResources().getText(R.string.signin_toast_fail), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
+            Log.e("TOMTEP", "Sigin fail!");
             Toast.makeText(this, getResources().getText(R.string.all_toast_invaled), Toast.LENGTH_SHORT).show();
         }
-        Log.e("Tai","start in");
     }
 
     private void onClickToSignUpActivity() {
@@ -114,7 +129,7 @@ public class SignInActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.signin_edt_email);
         edtPassword = findViewById(R.id.signin_edt_password);
         btnLogin = findViewById(R.id.signin_btn_signin);
-        lnrLayoutResetPassword = findViewById(R.id.signin_layout_forgetpassword);
+        lnrLayoutResetPassword = findViewById(R.id.signin_layout_resetpassword);
         lnrLayoutSignUp = findViewById(R.id.signin_layout_signup);
 
     }

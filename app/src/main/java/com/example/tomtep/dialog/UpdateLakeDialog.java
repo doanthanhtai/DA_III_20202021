@@ -96,8 +96,8 @@ public class UpdateLakeDialog extends Dialog {
         window.setAttributes(layoutParams);
         this.setCancelable(false);
 
-        edtMaAo = findViewById(R.id.dialogupdatelake_edt_ma_ao);
-        edtTenAo = findViewById(R.id.dialogupdatelake_edt_ten_ao);
+        edtMaAo = findViewById(R.id.dialogupdatelake_edt_maao);
+        edtTenAo = findViewById(R.id.dialogupdatelake_edt_tenao);
         edtMoTa = findViewById(R.id.dialogupdatelake_edt_mota);
         tvNgayTao = findViewById(R.id.dialogupdatelake_tv_ngaytao);
         btnDong = findViewById(R.id.dialogupdatelake_btn_cancel);

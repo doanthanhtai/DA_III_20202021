@@ -69,27 +69,30 @@ public class UpdateProductHistoryDialog extends Dialog {
             edtAmount.setHintTextColor(context.getColor(R.color.red));
             return;
         }
-        float amount = Float.parseFloat(strAmount);
-        if (amount <= 0.0) {
+        try {
+            float amount = Float.parseFloat(strAmount);
+            if (amount <= 0.0) {
+                Toast.makeText(context, R.string.all_toast_amountvalid, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (product.getAmount() + productHistory.getAmount() - amount < 0.0) {
+                Toast.makeText(context, R.string.all_toast_lackproduct, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            FirebaseDatabase.getInstance().getReference("ProductHistory").child(productHistory.getId()).child("amount").setValue(amount);
+            FirebaseDatabase.getInstance().getReference("Product").child(productHistory.getProductId()).child("amount").setValue(product.getAmount() + productHistory.getAmount() - amount);
+            if (feedingHistory != null) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("amount", amount);
+                map.put("updateTime", String.valueOf(tvUpdateTime.getText()));
+                FirebaseDatabase.getInstance().getReference("FeedingHistory").child(feedingHistory.getId()).updateChildren(map);
+            }
+            Toast.makeText(context, R.string.dialogupdate_producthistory_success, Toast.LENGTH_SHORT).show();
+            dismiss();
+        } catch (Exception e) {
             Toast.makeText(context, R.string.all_toast_amountvalid, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (product.getAmount() + productHistory.getAmount() - amount < 0.0) {
-            Toast.makeText(context, R.string.all_toast_lackproduct, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        FirebaseDatabase.getInstance().getReference("ProductHistory").child(productHistory.getId()).child("amount").setValue(amount);
-        FirebaseDatabase.getInstance().getReference("Product").child(productHistory.getProductId()).child("amount").setValue(product.getAmount() + productHistory.getAmount() - amount);
-        if (feedingHistory != null) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("amount", amount);
-            map.put("updateTime", String.valueOf(tvUpdateTime.getText()));
-            FirebaseDatabase.getInstance().getReference("FeedingHistory").child(feedingHistory.getId()).updateChildren(map).addOnCompleteListener(task -> {
-                Toast.makeText(context, R.string.dialogupdate_producthistory_success, Toast.LENGTH_SHORT).show();
-                dismiss();
-            });
         }
     }
 
