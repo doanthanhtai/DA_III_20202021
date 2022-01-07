@@ -53,21 +53,32 @@ public class UpdateLakeDialog extends Dialog {
 
     private void onClickUpdateLake() {
         String strMaAo = String.valueOf(edtMaAo.getText()).trim();
-        String strTenAo = String.valueOf(edtTenAo.getText()).trim();
-        String strMoTa = String.valueOf(edtMoTa.getText()).trim();
-        if (strMoTa.isEmpty() || strTenAo.isEmpty() || strMaAo.isEmpty()) {
+        if (strMaAo.isEmpty()) {
+            edtMaAo.setHintTextColor(Color.RED);
             Toast.makeText(context, R.string.all_toast_lackofinformation, Toast.LENGTH_SHORT).show();
-        } else {
-            Map<String, Object> map = new HashMap<>();
-            map.put("key", strMaAo);
-            map.put("description", strMoTa);
-            map.put("name", strTenAo);
-            FirebaseDatabase.getInstance().getReference("Lake").child(lake.getId())
-                    .updateChildren(map);
-            Toast.makeText(context, R.string.all_toast_updateinfomationsuccess, Toast.LENGTH_SHORT).show();
-            this.dismiss();
+            return;
+        }
+        String strTenAo = String.valueOf(edtTenAo.getText()).trim();
+        if (strTenAo.isEmpty()) {
+            edtTenAo.setHintTextColor(Color.RED);
+            Toast.makeText(context, R.string.all_toast_lackofinformation, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String strMoTa = String.valueOf(edtMoTa.getText()).trim();
+        if (strMoTa.isEmpty()) {
+            edtMoTa.setHintTextColor(Color.RED);
+            Toast.makeText(context, R.string.all_toast_lackofinformation, Toast.LENGTH_SHORT).show();
+            return;
         }
 
+        Map<String, Object> map = new HashMap<>();
+        map.put("key", strMaAo);
+        map.put("description", strMoTa);
+        map.put("name", strTenAo);
+        FirebaseDatabase.getInstance().getReference("Lake").child(lake.getId())
+                .updateChildren(map);
+        Toast.makeText(context, R.string.all_toast_updateinfomationsuccess, Toast.LENGTH_SHORT).show();
+        this.dismiss();
     }
 
     private void onClickCancelDialog() {

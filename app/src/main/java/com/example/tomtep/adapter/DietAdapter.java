@@ -41,7 +41,8 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder
         holder.tvMaAo.setText(lake.getKey());
         holder.tvTrangThai.setText(getTrangThaiCheDoAn(diet.isCondition()));
         holder.tvTenSanPham.setText(diet.getProductName());
-        holder.tvDemThoiGian.setText(String.valueOf(diet.getTime()));
+        holder.tvThoiGian.setText(String.valueOf(diet.getTime()));
+        holder.tvLuongAn.setText(String.valueOf(diet.getAmount()));
         if (diet.getFrame() != null) {
             holder.tvKhungGioAn.setText(diet.getFrame().toString());
         } else {
@@ -73,7 +74,8 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder
         private final TextView tvTrangThai;
         private final TextView tvTenSanPham;
         private final TextView tvKhungGioAn;
-        private final TextView tvDemThoiGian;
+        private final TextView tvThoiGian;
+        private final TextView tvLuongAn;
         private final RelativeLayout relativeLayout;
         private final SwitchCompat switchFeed;
 
@@ -84,7 +86,8 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder
             tvTrangThai = itemView.findViewById(R.id.itemdiet_tv_trangthai);
             tvTenSanPham = itemView.findViewById(R.id.itemdiet_tv_tensanpham);
             tvKhungGioAn = itemView.findViewById(R.id.itemdiet_tv_khunggioan);
-            tvDemThoiGian = itemView.findViewById(R.id.itemdiet_tv_time);
+            tvLuongAn = itemView.findViewById(R.id.itemdiet_tv_luongan);
+            tvThoiGian = itemView.findViewById(R.id.itemdiet_tv_thoigian);
             switchFeed = itemView.findViewById(R.id.itemdiet_switch_feed);
         }
     }

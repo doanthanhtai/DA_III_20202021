@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemF
     private List<Product> products;
     private FeedingHistoryAdapter feedingHistoryAdapter;
     private RecyclerView rcvFeedingHistory;
+    private TextView tvEmpty;
     private Toolbar toolbar;
     private Context context;
 
@@ -61,6 +63,21 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemF
         setSwipeDeleteItemEatingHistory();
         addChildEventListener();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showTextViewEmpty();
+    }
+
+    private void showTextViewEmpty() {
+        if (feedingHistories.size() <= 0) {
+            tvEmpty.setVisibility(View.VISIBLE);
+        }
+        if (feedingHistories.size() > 0) {
+            tvEmpty.setVisibility(View.GONE);
+        }
     }
 
     private Product getProductKeyById(String productId) {
@@ -91,6 +108,7 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemF
                             updateProductAmount(feedingHistory.getProductId(), feedingHistory.getAmount());
                             deleteProductHistory(feedingHistory);
                             feedingHistoryAdapter.notifyItemChanged(position);
+                            showTextViewEmpty();
                             dialogInterface.dismiss();
                         }))
                         .setPositiveButton(R.string.all_button_cancel_text, (dialogInterface, i) -> {
@@ -152,6 +170,7 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemF
 
     private void initView() {
         toolbar = findViewById(R.id.expanddiet_toolbar);
+        tvEmpty = findViewById(R.id.expanddiet_tv_empty);
         rcvFeedingHistory = findViewById(R.id.expanddiet_rcv);
         products = new ArrayList<>();
         feedingHistories = new ArrayList<>();
@@ -218,6 +237,7 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemF
                         if (feedingHistory == null || feedingHistory.isDeleted()) return;
                         feedingHistories.add(0, feedingHistory);
                         feedingHistoryAdapter.notifyItemChanged(feedingHistories.size());
+                        showTextViewEmpty();
                     }
 
                     @Override
@@ -229,10 +249,12 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemF
                                 if (feedingHistory.isDeleted()) {
                                     feedingHistories.remove(i);
                                     feedingHistoryAdapter.notifyItemRemoved(i);
+                                    showTextViewEmpty();
                                     return;
                                 }
                                 feedingHistories.set(i, feedingHistory);
                                 feedingHistoryAdapter.notifyItemChanged(i);
+                                showTextViewEmpty();
                             }
                         }
                     }
@@ -245,6 +267,7 @@ public class ExpandDietActivity extends AppCompatActivity implements IClickItemF
                             if (feedingHistory.getId().equals(feedingHistories.get(i).getId())) {
                                 feedingHistories.remove(i);
                                 feedingHistoryAdapter.notifyItemRemoved(i);
+                                showTextViewEmpty();
                             }
                         }
                     }

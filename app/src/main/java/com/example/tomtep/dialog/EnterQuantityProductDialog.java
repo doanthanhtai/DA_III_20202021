@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -91,28 +92,31 @@ public class EnterQuantityProductDialog extends Dialog {
             Toast.makeText(context, R.string.enterquantityproduct_toast_quantityinvalid, Toast.LENGTH_SHORT).show();
             return;
         }
-        int quantity = Integer.parseInt(edtSoLuong.getText().toString().trim());
-        if (quantity > 0) {
-            String importTime = DateFormat.getInstance().format(Calendar.getInstance().getTime());
-            product.setAmount(product.getAmount() + quantity);
-            FirebaseDatabase.getInstance().getReference("Product").child(product.getId()).child("amount").setValue(product.getAmount());
+        try {
+            int quantity = Integer.parseInt(edtSoLuong.getText().toString().trim());
+            if (quantity > 0) {
+                String importTime = DateFormat.getInstance().format(Calendar.getInstance().getTime());
+                product.setAmount(product.getAmount() + quantity);
+                FirebaseDatabase.getInstance().getReference("Product").child(product.getId()).child("amount").setValue(product.getAmount());
 
-            ImportHistory importHistory = new ImportHistory();
-            importHistory.setId(FirebaseDatabase.getInstance().getReference("ImportHistory").push().getKey());
-            importHistory.setProductId(product.getId());
-            importHistory.setAmount(quantity);
-            importHistory.setImportTime(importTime);
-            importHistory.setUpdateTime(importTime);
-            importHistory.setDeleted(false);
+                ImportHistory importHistory = new ImportHistory();
+                importHistory.setId(FirebaseDatabase.getInstance().getReference("ImportHistory").push().getKey());
+                importHistory.setProductId(product.getId());
+                importHistory.setAmount(quantity);
+                importHistory.setImportTime(importTime);
+                importHistory.setUpdateTime(importTime);
+                importHistory.setDeleted(false);
 
-            FirebaseDatabase.getInstance().getReference("ImportHistory").child(importHistory.getId()).setValue(importHistory).addOnCompleteListener(task -> {
-                Toast.makeText(context, R.string.enterquantityproduct_toast_succesful, Toast.LENGTH_SHORT).show();
-                dismiss();
-            });
-        } else {
+                FirebaseDatabase.getInstance().getReference("ImportHistory").child(importHistory.getId()).setValue(importHistory).addOnCompleteListener(task -> {
+                    Toast.makeText(context, R.string.enterquantityproduct_toast_succesful, Toast.LENGTH_SHORT).show();
+                    dismiss();
+                });
+            } else {
+                Toast.makeText(context, R.string.enterquantityproduct_toast_quantityinvalid, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
             Toast.makeText(context, R.string.enterquantityproduct_toast_quantityinvalid, Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void onClickCancel() {

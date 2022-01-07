@@ -33,6 +33,7 @@ public class EnvironmentHistoryFragment extends Fragment {
     private EnvironmentHistoryAdapter environmentHistoryAdapter;
     private FloatingActionButton floatingEnvironmentHistory;
     private List<EnvironmentHistory> environmentHistories;
+    private View view;
 
     public EnvironmentHistoryFragment(Lake lake) {
         this.lake = lake;
@@ -46,12 +47,27 @@ public class EnvironmentHistoryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_environment_history, container, false);
+        view = inflater.inflate(R.layout.fragment_environmenthistory, container, false);
         environmentHistories = new ArrayList<>();
         initView(view);
         addChildEventListener();
         setEvent();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        showTextViewEmpty();
+    }
+
+    private void showTextViewEmpty() {
+        if (environmentHistories.size() <= 0) {
+            view.findViewById(R.id.environmenthistory_tv_empty).setVisibility(View.VISIBLE);
+        }
+        if (environmentHistories.size() > 0) {
+            view.findViewById(R.id.environmenthistory_tv_empty).setVisibility(View.GONE);
+        }
     }
 
     private void setEvent() {
@@ -60,10 +76,10 @@ public class EnvironmentHistoryFragment extends Fragment {
 
     private void insertEnvironmentHistory() {
         EnvironmentHistory environmentHistory = null;
-        if (environmentHistories.size() > 0){
+        if (environmentHistories.size() > 0) {
             environmentHistory = environmentHistories.get(0);
         }
-        new NewEnvironmentHistoryDailog(context, lake,environmentHistory).show();
+        new NewEnvironmentHistoryDailog(context, lake, environmentHistory).show();
     }
 
     private void addChildEventListener() {
@@ -75,6 +91,7 @@ public class EnvironmentHistoryFragment extends Fragment {
                         if (environmentHistory == null) return;
                         environmentHistories.add(0, environmentHistory);
                         environmentHistoryAdapter.notifyItemInserted(0);
+                        showTextViewEmpty();
                     }
 
                     @Override
@@ -85,6 +102,7 @@ public class EnvironmentHistoryFragment extends Fragment {
                             if (environmentHistory.getId().equals(environmentHistories.get(i).getId())) {
                                 environmentHistories.set(i, environmentHistory);
                                 environmentHistoryAdapter.notifyItemChanged(i);
+                                showTextViewEmpty();
                                 return;
                             }
                         }
@@ -98,6 +116,7 @@ public class EnvironmentHistoryFragment extends Fragment {
                             if (environmentHistory.getId().equals(environmentHistories.get(i).getId())) {
                                 environmentHistories.remove(i);
                                 environmentHistoryAdapter.notifyItemRemoved(i);
+                                showTextViewEmpty();
                                 return;
                             }
                         }

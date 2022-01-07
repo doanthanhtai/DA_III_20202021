@@ -39,6 +39,7 @@ public class OtherUseHistoryFragment extends Fragment implements IClickItemOther
     private FloatingActionButton floatingOtherUseHistory;
     private OtherUseHistoryAdapter otherUseHistoryAdapter;
     private RecyclerView rcvOtherUseHistory;
+    private View view;
 
     public OtherUseHistoryFragment(Lake lake) {
         this.lake = lake;
@@ -50,10 +51,25 @@ public class OtherUseHistoryFragment extends Fragment implements IClickItemOther
         this.context = context;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        showTextViewEmpty();
+    }
+
+    private void showTextViewEmpty(){
+        if (otherUseHistories.size() <= 0) {
+            view.findViewById(R.id.otherusehistory_tv_empty).setVisibility(View.VISIBLE);
+        }
+        if (otherUseHistories.size() > 0) {
+            view.findViewById(R.id.otherusehistory_tv_empty).setVisibility(View.GONE);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_otherusehistory, container, false);
+        view = inflater.inflate(R.layout.fragment_otherusehistory, container, false);
         otherUseHistories = new ArrayList<>();
         addChildEventListener();
         initView(view);
@@ -81,6 +97,7 @@ public class OtherUseHistoryFragment extends Fragment implements IClickItemOther
                         .setNegativeButton(R.string.all_button_agree_text, (dialog, which) -> {
                             deleteOtherUseHistory(otherUseHistory);
                             Toast.makeText(getContext(), R.string.otherusehistoryfragment_toast_success, Toast.LENGTH_SHORT).show();
+                            showTextViewEmpty();
                             dialog.dismiss();
                         })
                         .setPositiveButton(R.string.all_button_cancel_text, (dialogInterface, i) -> {
@@ -132,6 +149,7 @@ public class OtherUseHistoryFragment extends Fragment implements IClickItemOther
                         if (otherUseHistory == null || otherUseHistory.isDeleted()) return;
                         otherUseHistories.add(0, otherUseHistory);
                         otherUseHistoryAdapter.notifyItemInserted(0);
+                        showTextViewEmpty();
                     }
 
                     @Override
@@ -143,10 +161,12 @@ public class OtherUseHistoryFragment extends Fragment implements IClickItemOther
                                 if (otherUseHistory.isDeleted()) {
                                     otherUseHistories.remove(i);
                                     otherUseHistoryAdapter.notifyItemRemoved(i);
+                                    showTextViewEmpty();
                                     return;
                                 }
                                 otherUseHistories.set(i, otherUseHistory);
                                 otherUseHistoryAdapter.notifyItemChanged(i);
+                                showTextViewEmpty();
                                 return;
                             }
                         }
@@ -160,6 +180,7 @@ public class OtherUseHistoryFragment extends Fragment implements IClickItemOther
                             if (otherUseHistories.get(i).getId().equals(otherUseHistory.getId())) {
                                 otherUseHistories.remove(i);
                                 otherUseHistoryAdapter.notifyItemRemoved(i);
+                                showTextViewEmpty();
                                 return;
                             }
                         }

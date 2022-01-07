@@ -54,31 +54,42 @@ public class NewLakeDialog extends Dialog {
 
     private void onClickAddNewLake() {
         String strMaAo = String.valueOf(edtMaAo.getText()).trim();
-        String strTenAo = String.valueOf(edtTenAo.getText()).trim();
-        String strMoTa = String.valueOf(edtMoTa.getText()).trim();
-        String strNgayTao = String.valueOf(tvNgayTao.getText()).trim();
-        String strNgayThu = "";
-        if (strMoTa.isEmpty() || strTenAo.isEmpty() || strMaAo.isEmpty()) {
+        if (strMaAo.isEmpty()) {
+            edtMaAo.setHintTextColor(Color.RED);
             Toast.makeText(context, R.string.all_toast_lackofinformation, Toast.LENGTH_SHORT).show();
-        } else {
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Lake");
-            String lakeId = databaseReference.push().getKey();
-            Lake lake = new Lake();
-            lake.setId(lakeId);
-            lake.setKey(strMaAo);
-            lake.setName(strTenAo);
-            lake.setAccountId(MainActivity.MY_ACCOUNT.getId());
-            lake.setDescription(strMoTa);
-            lake.setCreationTime(strNgayTao);
-            lake.setHarvestTime(strNgayThu);
-            lake.setCondition(false);
-            lake.setDiet(createDietForLake(lake));
-            lake.setDeleted(false);
-            databaseReference.child(lake.getId()).setValue(lake);
-            this.dismiss();
+            return;
+        }
+        String strTenAo = String.valueOf(edtTenAo.getText()).trim();
+        if (strTenAo.isEmpty()) {
+            edtTenAo.setHintTextColor(Color.RED);
+            Toast.makeText(context, R.string.all_toast_lackofinformation, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String strMoTa = String.valueOf(edtMoTa.getText()).trim();
+        if (strMoTa.isEmpty()) {
+            edtMoTa.setHintTextColor(Color.RED);
+            Toast.makeText(context, R.string.all_toast_lackofinformation, Toast.LENGTH_SHORT).show();
+            return;
         }
 
+        String strNgayTao = String.valueOf(tvNgayTao.getText()).trim();
+        String strNgayThu = "";
 
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Lake");
+        String lakeId = databaseReference.push().getKey();
+        Lake lake = new Lake();
+        lake.setId(lakeId);
+        lake.setKey(strMaAo);
+        lake.setName(strTenAo);
+        lake.setAccountId(MainActivity.MY_ACCOUNT.getId());
+        lake.setDescription(strMoTa);
+        lake.setCreationTime(strNgayTao);
+        lake.setHarvestTime(strNgayThu);
+        lake.setCondition(false);
+        lake.setDiet(createDietForLake(lake));
+        lake.setDeleted(false);
+        databaseReference.child(lake.getId()).setValue(lake);
+        this.dismiss();
     }
 
     private Diet createDietForLake(Lake lake) {

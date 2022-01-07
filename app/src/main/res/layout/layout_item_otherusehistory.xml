@@ -4,7 +4,7 @@
     android:id="@+id/item_producthistory"
     android:layout_width="match_parent"
     android:layout_marginTop="@dimen/margin_5dp"
-    android:layout_height="@dimen/min_height_48dp">
+    android:layout_height="@dimen/min_height_57dp">
 
     <LinearLayout
         android:layout_width="match_parent"

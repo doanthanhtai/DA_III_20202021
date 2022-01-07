@@ -47,6 +47,7 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
     private List<Lake> lakes;
     private List<Product> products;
     private Context context;
+    private View view;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -56,12 +57,27 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_diet, container, false);
+        view = inflater.inflate(R.layout.fragment_diet, container, false);
         lakes = new ArrayList<>();
         products = new ArrayList<>();
         initView(view);
         addChildEventListener();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        showTextViewEmpty();
+    }
+
+    private void showTextViewEmpty() {
+        if (lakes.size() <= 0) {
+            view.findViewById(R.id.diet_tv_empty).setVisibility(View.VISIBLE);
+        }
+        if (lakes.size() > 0) {
+            view.findViewById(R.id.diet_tv_empty).setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -250,6 +266,7 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
                         if (lake == null || lake.isDeleted() || lake.isCondition()) return;
                         lakes.add(lake);
                         dietAdapter.notifyItemChanged(lakes.size());
+                        showTextViewEmpty();
                     }
 
                     @Override
@@ -263,6 +280,7 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
                                     lakes.remove(i);
                                 }
                                 dietAdapter.notifyItemChanged(i);
+                                showTextViewEmpty();
                                 return;
                             }
                         }
@@ -276,6 +294,7 @@ public class DietFragment extends Fragment implements IClickItemDietListener {
                             if (lakes.get(i).getId().equals(lake.getId())) {
                                 lakes.remove(i);
                                 dietAdapter.notifyItemRemoved(i);
+                                showTextViewEmpty();
                                 return;
                             }
                         }

@@ -66,25 +66,30 @@ public class UpdateImportHistoryDialog extends Dialog {
             Toast.makeText(context, R.string.enterquantityproduct_toast_quantityinvalid, Toast.LENGTH_SHORT).show();
             return;
         }
-        int quantity = Integer.parseInt(edtSoLuong.getText().toString().trim());
-        if (quantity > 0) {
+        try {
+            float quantity = Float.parseFloat(edtSoLuong.getText().toString().trim());
+            if (quantity > 0) {
 
-            product.setAmount(product.getAmount() + quantity - importHistory.getAmount());
-            importHistory.setAmount(quantity);
+                product.setAmount(product.getAmount() + quantity - importHistory.getAmount());
+                importHistory.setAmount(quantity);
 
-            Map<String, Object> map = new HashMap<>();
-            map.put("amount", importHistory.getAmount());
-            map.put("updateTime", DateFormat.getInstance().format(Calendar.getInstance().getTime()));
+                Map<String, Object> map = new HashMap<>();
+                map.put("amount", importHistory.getAmount());
+                map.put("updateTime", DateFormat.getInstance().format(Calendar.getInstance().getTime()));
 
-            FirebaseDatabase.getInstance().getReference("ImportHistory").child(importHistory.getId()).updateChildren(map)
-                    .addOnCompleteListener(task -> FirebaseDatabase.getInstance().getReference("Product").child(product.getId()).child("amount").setValue(product.getAmount())
-                            .addOnCompleteListener(task1 -> {
-                                Toast.makeText(context, R.string.updateimporthistory_toast_succesful, Toast.LENGTH_SHORT).show();
-                                dismiss();
-                            }));
-        } else {
+                FirebaseDatabase.getInstance().getReference("ImportHistory").child(importHistory.getId()).updateChildren(map)
+                        .addOnCompleteListener(task -> FirebaseDatabase.getInstance().getReference("Product").child(product.getId()).child("amount").setValue(product.getAmount())
+                                .addOnCompleteListener(task1 -> {
+                                    Toast.makeText(context, R.string.updateimporthistory_toast_succesful, Toast.LENGTH_SHORT).show();
+                                    dismiss();
+                                }));
+            } else {
+                Toast.makeText(context, R.string.enterquantityproduct_toast_quantityinvalid, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception exception) {
             Toast.makeText(context, R.string.enterquantityproduct_toast_quantityinvalid, Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private void onClickCancelDialog() {

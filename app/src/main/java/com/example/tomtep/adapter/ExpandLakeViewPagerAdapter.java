@@ -12,7 +12,7 @@ import com.example.tomtep.model.Lake;
 
 public class ExpandLakeViewPagerAdapter extends FragmentStateAdapter {
 
-    private Lake lake;
+    private final Lake lake;
     public ExpandLakeViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, Lake lake) {
         super(fragmentActivity);
         this.lake = lake;

@@ -46,6 +46,7 @@ public class ProductHistoryFragment extends Fragment implements IClickItemProduc
     private ProductHistoryAdapter productHistoryAdapter;
     private Context context;
     private FloatingActionButton floatingProductHistory;
+    private View view;
 
     public ProductHistoryFragment(Lake lake) {
         this.lake = lake;
@@ -60,7 +61,7 @@ public class ProductHistoryFragment extends Fragment implements IClickItemProduc
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_producthistory, container, false);
+        view = inflater.inflate(R.layout.fragment_producthistory, container, false);
         productHistories = new ArrayList<>();
         products = new ArrayList<>();
         feedingHistories = new ArrayList<>();
@@ -69,6 +70,21 @@ public class ProductHistoryFragment extends Fragment implements IClickItemProduc
         addChildEventListener();
         setSwipeDeleteProductHistory();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        showTextViewEmpty();
+    }
+
+    private void showTextViewEmpty(){
+        if (productHistories.size() <= 0) {
+            view.findViewById(R.id.producthistory_tv_empty).setVisibility(View.VISIBLE);
+        }
+        if (productHistories.size() > 0) {
+            view.findViewById(R.id.producthistory_tv_empty).setVisibility(View.GONE);
+        }
     }
 
     private void setEvent() {
@@ -196,6 +212,7 @@ public class ProductHistoryFragment extends Fragment implements IClickItemProduc
                         if (productHistory == null || productHistory.isDeleted()) return;
                         productHistories.add(0,productHistory);
                         productHistoryAdapter.notifyItemInserted(0);
+                        showTextViewEmpty();
                     }
 
                     @Override
@@ -207,10 +224,12 @@ public class ProductHistoryFragment extends Fragment implements IClickItemProduc
                                 if (productHistory.isDeleted()) {
                                     productHistories.remove(i);
                                     productHistoryAdapter.notifyItemRemoved(i);
+                                    showTextViewEmpty();
                                     return;
                                 }
                                 productHistories.set(i, productHistory);
                                 productHistoryAdapter.notifyItemChanged(i);
+                                showTextViewEmpty();
                                 return;
                             }
                         }
@@ -224,6 +243,7 @@ public class ProductHistoryFragment extends Fragment implements IClickItemProduc
                             if (productHistory.getId().equals(productHistories.get(i).getId())) {
                                 productHistories.remove(i);
                                 productHistoryAdapter.notifyItemRemoved(i);
+                                showTextViewEmpty();
                                 return;
                             }
                         }
@@ -269,6 +289,7 @@ public class ProductHistoryFragment extends Fragment implements IClickItemProduc
                         .setNegativeButton(R.string.all_button_agree_text, (dialog, which) -> {
                             deleteProductHistory(productHistory);
                             Toast.makeText(getContext(), R.string.producthistoryfragmemt_toast_deletesuccess, Toast.LENGTH_SHORT).show();
+                            showTextViewEmpty();
                             dialog.dismiss();
                         })
                         .setPositiveButton(R.string.all_button_cancel_text, (dialogInterface, i) -> {

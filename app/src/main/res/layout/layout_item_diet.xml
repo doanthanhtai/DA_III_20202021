@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/itemdiet_tv_time"
+            android:layout_toStartOf="@+id/layout_timeamount"
             android:layout_toEndOf="@+id/itemdiet_layout_ma"
             android:orientation="vertical">
 
@@ -49,8 +49,7 @@
                 android:layout_marginStart="@dimen/margin_10dp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16sp"
-                android:textStyle="bold"
-                app:drawableStartCompat="@drawable/ic_used_product_14px" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/itemdiet_tv_trangthai"
@@ -72,15 +71,27 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/itemdiet_tv_time"
+        <LinearLayout
+            android:id="@+id/layout_timeamount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:layout_marginEnd="@dimen/margin_10dp"
             android:layout_toStartOf="@+id/itemdiet_switch_feed"
-            android:gravity="center"
-            app:drawableEndCompat="@drawable/ic_sand_watch_24px" />
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/itemdiet_tv_thoigian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                app:drawableEndCompat="@drawable/ic_sand_watch_24px" />
+            <TextView
+                android:id="@+id/itemdiet_tv_luongan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                app:drawableEndCompat="@drawable/ic_registry_editor_24px" />
+        </LinearLayout>
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/itemdiet_switch_feed"

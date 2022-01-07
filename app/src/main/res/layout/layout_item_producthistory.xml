@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item_producthistory"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/min_height_48dp"
+    android:layout_height="@dimen/min_height_57dp"
     android:layout_marginTop="@dimen/margin_5dp">
 
     <LinearLayout
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="2"
+            android:layout_weight="2.3"
             android:orientation="vertical">
 
             <TextView
@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginEnd="@dimen/margin_10dp"
-            android:layout_weight="2.5"
+            android:layout_weight="2.7"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_14sp"

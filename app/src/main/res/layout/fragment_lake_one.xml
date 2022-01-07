@@ -8,4 +8,13 @@
         android:id="@+id/lake_rcv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/lakeone_tv_empty"
+        android:layout_gravity="center"
+        android:textSize="@dimen/text_size_24sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lakeonefragmemt_tv_empty"/>
 </FrameLayout>

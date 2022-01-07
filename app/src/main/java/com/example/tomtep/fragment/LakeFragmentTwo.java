@@ -3,7 +3,6 @@ package com.example.tomtep.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +43,8 @@ public class LakeFragmentTwo extends Fragment implements IClickItemLakeListener 
     private LakeAdapterTwo lakeAdapterTwo;
     private Context context;
     private ChildEventListener childEventListenerOttherUseHistory, childEventListenerProductHistory, childEventListenerEnvironment;
+    private View view;
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -52,17 +53,8 @@ public class LakeFragmentTwo extends Fragment implements IClickItemLakeListener 
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        Log.e("TOMTEP", "Lake: " + lakes.size());
-        Log.e("TOMTEP", "Env: " + environmentHistories.size());
-        Log.e("TOMTEP", "ProH: " + productHistories.size());
-        Log.e("TOMTEP", "OtH: " + otherUseHistories.size());
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_lake_two, container, false);
+        view = inflater.inflate(R.layout.fragment_lake_two, container, false);
         lakes = new ArrayList<>();
         environmentHistories = new ArrayList<>();
         otherUseHistories = new ArrayList<>();
@@ -72,6 +64,21 @@ public class LakeFragmentTwo extends Fragment implements IClickItemLakeListener 
         initView(view);
         addChildEventListener();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        showTextViewEmpty();
+    }
+
+    private void showTextViewEmpty() {
+        if (lakes.size() <= 0) {
+            view.findViewById(R.id.laketwo_tv_empty).setVisibility(View.VISIBLE);
+        }
+        if (lakes.size() > 0) {
+            view.findViewById(R.id.laketwo_tv_empty).setVisibility(View.GONE);
+        }
     }
 
     private void intitChildEventListener() {
@@ -252,6 +259,7 @@ public class LakeFragmentTwo extends Fragment implements IClickItemLakeListener 
                         lakes.add(lake);
                         addChildEventListenerForLake(lake);
                         lakeAdapterTwo.notifyItemChanged(lakes.size());
+                        showTextViewEmpty();
                     }
 
                     @Override
@@ -265,6 +273,7 @@ public class LakeFragmentTwo extends Fragment implements IClickItemLakeListener 
                                     lakes.remove(i);
                                 }
                                 lakeAdapterTwo.notifyItemChanged(i);
+                                showTextViewEmpty();
                                 return;
                             }
                         }
@@ -281,6 +290,7 @@ public class LakeFragmentTwo extends Fragment implements IClickItemLakeListener 
                                 lakes.remove(i);
                                 removeChildEventListenerOfLake(lake);
                                 lakeAdapterTwo.notifyItemRemoved(i);
+                                showTextViewEmpty();
                                 return;
                             }
                         }

@@ -204,6 +204,13 @@
     <string name="statistics_tab_environment_label_oxy">Biến động Oxy trong nước</string>
     <string name="statistics_tab_environment_label_doman">Biến động Độ mặn</string>
     <string name="statistics_tv_chonao">Chọn ao xem TK: </string>
+    <string name="producthistoryfragmemt_tv_empty">Ao chưa có lịch sử dùng sản phẩm</string>
+    <string name="otherusehistoryfragmemt_tv_empty">Ao chưa có lịch sử chi dùng khác</string>
+    <string name="environmenthistoryfragmemt_tv_empty">Ao chưa có lịch sử môi trường</string>
+    <string name="dietfragmemt_tv_empty">Không tìm thấy chế độ ăn khả dụng</string>
+    <string name="lakeonefragmemt_tv_empty">Không tìm thấy ao đang nuôi</string>
+    <string name="laketwofragmemt_tv_empty">Không tìm thấy ao đã thu hoạch</string>
+    <string name="dietexpandfragment_tv_empty">Chế độ ăn chưa có lịch sử cho ăn</string>
 
 
 </resources>

@@ -19,5 +19,15 @@
         android:layout_marginBottom="@dimen/margin_50dp"
         android:contentDescription="@string/itemtime_image_description"
         android:src="@drawable/ic_baseline_add_104" />
+    <TextView
+        android:id="@+id/otherusehistory_tv_empty"
+        android:layout_gravity="center"
+        android:textSize="@dimen/text_size_24sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/otherusehistoryfragmemt_tv_empty"/>
 
 </RelativeLayout>

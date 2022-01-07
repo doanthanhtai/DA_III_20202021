@@ -54,6 +54,10 @@ public class ProductFragment extends Fragment implements IClickItemProductListen
     @Override
     public void onResume() {
         super.onResume();
+        showTextViewEmpty();
+    }
+
+    private void showTextViewEmpty(){
         if (products.size() <= 0) {
             view.findViewById(R.id.product_tv_empty).setVisibility(View.VISIBLE);
         }
@@ -80,6 +84,7 @@ public class ProductFragment extends Fragment implements IClickItemProductListen
                             Toast.makeText(getContext(), R.string.productfragmemt_toast_deletesuccess, Toast.LENGTH_SHORT).show();
                             productAdapter.notifyItemRemoved(position);
                             dialogInterface.dismiss();
+                            showTextViewEmpty();
                         }))
                         .setPositiveButton(R.string.all_button_cancel_text, (dialogInterface, i) -> {
                             productAdapter.notifyItemChanged(position);
@@ -187,6 +192,7 @@ public class ProductFragment extends Fragment implements IClickItemProductListen
                         if (product == null || product.isDeleted()) return;
                         products.add(product);
                         productAdapter.notifyItemChanged(products.size());
+                        showTextViewEmpty();
                     }
 
                     @Override
@@ -197,10 +203,12 @@ public class ProductFragment extends Fragment implements IClickItemProductListen
                             if (products.get(i).getId().equals(product.getId())) {
                                 if (product.isDeleted()) {
                                     products.remove(i);
+                                    showTextViewEmpty();
                                     return;
                                 }
                                 products.set(i, product);
                                 productAdapter.notifyItemChanged(i);
+                                showTextViewEmpty();
                                 return;
                             }
                         }
@@ -214,6 +222,7 @@ public class ProductFragment extends Fragment implements IClickItemProductListen
                             if (products.get(i).getId().equals(product.getId())) {
                                 products.remove(i);
                                 productAdapter.notifyItemChanged(i);
+                                showTextViewEmpty();
                                 return;
                             }
                         }
