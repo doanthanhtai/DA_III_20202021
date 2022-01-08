@@ -3,6 +3,7 @@ package com.example.tomtep;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -165,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (item.getItemId() == R.id.nav_reset_password) {
             clickToChangePassword();
         } else if (item.getItemId() == R.id.nav_delete_account) {
+            Log.e("TAG", "deleteAccount: ",null );
             deleteAccount();
         }
 
@@ -182,20 +184,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void deleteAccount() {
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser == null) {
             Toast.makeText(MainActivity.this, getResources().getText(R.string.main_toast_deleteaccountsuccess), Toast.LENGTH_SHORT).show();
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
             finishAffinity();
             return;
         }
+        Log.e("TOMTEP","1");
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle(R.string.all_title_dialogconfirmdelete)
                 .setMessage(getResources().getText(R.string.main_message_confirmdeleteaccount) + firebaseUser.getEmail())
                 .setPositiveButton(getResources().getText(R.string.all_button_agree_text), (dialogInterface, i) -> {
+                    Log.e("TOMTEP","2");
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Account/" + MY_ACCOUNT.getId());
+                    Log.e("TOMTEP","3");
                     firebaseUser.delete().addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
+                            Log.e("TOMTEP","4");
                             MY_ACCOUNT.setDeleted(true);
                             databaseReference.child("deleted").setValue(MY_ACCOUNT.isDeleted());
                             Toast.makeText(MainActivity.this, getResources().getText(R.string.main_toast_deleteaccountsuccess), Toast.LENGTH_SHORT).show();
