@@ -211,6 +211,8 @@
     <string name="lakeonefragmemt_tv_empty">Không tìm thấy ao đang nuôi</string>
     <string name="laketwofragmemt_tv_empty">Không tìm thấy ao đã thu hoạch</string>
     <string name="dietexpandfragment_tv_empty">Chế độ ăn chưa có lịch sử cho ăn</string>
+    <string name="splash_title_notinternet">Thiết bị không có mạng</string>
+    <string name="splash_message_notinternet">Vui lòng kết nối mạng cho điện thoại để có thể truy cập và tải được dữ liệu cần thiết cho ứng dụng.</string>
 
 
 </resources>

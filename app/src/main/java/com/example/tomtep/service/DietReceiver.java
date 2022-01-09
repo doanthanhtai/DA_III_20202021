@@ -12,7 +12,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.tomtep.ExpandDietActivity;
-import com.example.tomtep.MainActivity;
 import com.example.tomtep.R;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,7 +22,7 @@ public class DietReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("EATED")) {
-            Log.e("TOMTEP","onReceive");
+            Log.e("TOMTEP", "onReceive");
             String accountId = intent.getStringExtra("account_id");
             String lakeId = intent.getStringExtra("lake_id");
             String strTitle = intent.getStringExtra("title");

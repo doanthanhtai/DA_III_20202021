@@ -6,11 +6,14 @@ import android.app.NotificationManager;
 
 public class MyApplication extends Application {
     public static final String CHANNEL_ID_1 = "TOMTEP CHENNEL";
+    private static MyApplication myApplication;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
         createNotificationChannel();
+        myApplication = this;
     }
 
     private void createNotificationChannel() {
@@ -20,4 +23,9 @@ public class MyApplication extends Application {
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(notificationChannelDiet);
     }
+
+    public static synchronized MyApplication getInstance(){
+        return myApplication;
+    }
+
 }
