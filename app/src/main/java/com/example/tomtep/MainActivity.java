@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     public static Account MY_ACCOUNT;
     private List<Product> products;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void initAccount() {
         MY_ACCOUNT = new Account();
-        if (FirebaseAuth.getInstance().getCurrentUser() == null)
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser == null)
             startActivity(new Intent(this, SignUpAcitivity.class));
         MY_ACCOUNT.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
         MY_ACCOUNT.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
@@ -184,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void deleteAccount() {
-        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser == null) {
             Toast.makeText(MainActivity.this, getResources().getText(R.string.main_toast_deleteaccountsuccess), Toast.LENGTH_SHORT).show();
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
